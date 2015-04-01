@@ -36,10 +36,10 @@ public class ProjetoGen {
     
     public ProjetoGen(ProjetoInfo info){
         this.info = info;
-        this.caminho_dir = "src/../ProjetosGerados[GEN]/";
+        this.caminho_dir = "src/../../ProjetosGerados[GEN]/";
         new File(caminho_dir).mkdir();
         
-        this.caminho_dir = "src/../ProjetosGerados[GEN]/"+this.info.nome_projeto+"/";
+        this.caminho_dir = "src/../../ProjetosGerados[GEN]/"+this.info.nome_projeto+"/";
         new File(caminho_dir).mkdir();
         
         bancoGen = new BancoGen(this.modelor, caminho_dir);
