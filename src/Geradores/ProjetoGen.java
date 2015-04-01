@@ -69,7 +69,6 @@ public class ProjetoGen {
     public void gerarProjeto() throws IOException{
         
         new File(caminho_dir).mkdir();
-        System.out.println(caminho_dir);
         this.bancoGen.gerarSQL();
         
         new File(caminho_dir+"PageNav").mkdir();
