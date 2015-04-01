@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Arthur
+ * @author Arthur Flôr
  */
 
 public class CadFormGen {
