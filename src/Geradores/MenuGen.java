@@ -28,7 +28,7 @@ public class MenuGen {
     
     int gerarCss() throws IOException{
         
-        File arquivo = new File (caminho_dir+"Menu/style_menu.css");
+        File arquivo = new File (caminho_dir+"menu/style_menu.css");
         
         if (!arquivo.exists()) {
           arquivo.createNewFile();  
@@ -365,7 +365,7 @@ public class MenuGen {
     }
     int gerarMenuJs() throws IOException{
     
-        File arquivo = new File (caminho_dir+"Menu/script.js");
+        File arquivo = new File (caminho_dir+"menu/script.js");
         
         if (!arquivo.exists()) {
           arquivo.createNewFile();  
@@ -394,7 +394,7 @@ public class MenuGen {
     return 0;
     }
     int gerarMenuBar() throws IOException{
-    File arquivo = new File (caminho_dir+"Menu/menu.js");
+    File arquivo = new File (caminho_dir+"menu/menu.js");
         
         if (!arquivo.exists()) {
           arquivo.createNewFile();  
@@ -423,7 +423,7 @@ public class MenuGen {
     
     int gerarMenuDropCad() throws IOException{
     
-        File arquivo = new File (caminho_dir+"Menu/menu_DropCad.js");
+        File arquivo = new File (caminho_dir+"menu/menu_DropCad.js");
         FixString label = new FixString();
         
         if (!arquivo.exists()) {
@@ -476,7 +476,7 @@ public class MenuGen {
     }
     
     int gerarAddMenu() throws IOException{
-    File arquivo = new File (caminho_dir+"Menu/add_menu.php");
+    File arquivo = new File (caminho_dir+"menu/add_menu.php");
         
         if (!arquivo.exists()) {
           arquivo.createNewFile();  
@@ -501,7 +501,7 @@ public class MenuGen {
         return 0;
     }
     int gerarAddDropCad() throws IOException{
-         File arquivo = new File (caminho_dir+"Menu/add_menu_drop_cad.php");
+         File arquivo = new File (caminho_dir+"menu/add_menu_drop_cad.php");
         
         if (!arquivo.exists()) {
           arquivo.createNewFile();  
