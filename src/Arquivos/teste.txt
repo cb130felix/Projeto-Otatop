@@ -1,0 +1,37 @@
+e equipe forte
+a equipe nome normal string 50 true false false
+
+e piloto forte
+a piloto num_federacao normal int 0 true false false
+a piloto data_nasc normal date 0 false false false
+a piloto nome normal string 50 false false false
+
+e campeonato forte 
+a campeonato ano normal int 0 true false false
+a campeonato diretor normal string 50 false true false
+
+e prova forte 
+a prova data normal date 0 true false false
+a prova pais normal string 10 false true false
+a prova nome normal string 20 false true false
+
+e circuito forte
+a circuito nome normal string 20 true false false
+a circuito recorde normal float 0 false false false 
+a circuito comprimento normal float 0 false false false
+a circuito localizacao normal string 50 false false false
+a circuito pais normal string 50 false false false
+
+e resultado forte
+a resultado volta normal int 0 true false false
+a resultado lugar normal int 0 false false false
+a resultado pontos normal int 0 false false false
+
+R2 pertence piloto n equipe n
+R2 classificacao campeonato n piloto n 
+R2 constituir prova n campeonato 1
+R2 disputar prova n circuito 1
+R3 corre piloto n prova n resultado 1
+
+ar pertence data_entrada normal date 0 false
+ar classificacao lugar normal int 0 false

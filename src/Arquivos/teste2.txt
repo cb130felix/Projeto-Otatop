@@ -1,0 +1,31 @@
+e funcionario forte
+a funcionario nome normal string 50 false false false
+a funcionario dataNascimento normal date 0 false true false
+a funcionario cpf normal int 0 true false false
+a funcionario endereco normal string 50 false false false
+a funcionario sexo normal string 50 false false false
+a funcionario salario normal int 0 false false false
+
+e departamento forte
+a departamento localizacoes multivalorado string 50 false true false
+a departamento nome normal string 50 false false false
+a departamento numero normal int 0 true false true
+
+e projeto forte
+a projeto nome normal string 50 false false false
+a projeto numero normal int 0 true false true
+a projeto localizacao normal string 50 false true false
+
+e dependente fraca
+a dependente nome normal string 50 false false false
+a dependente sexo normal string 50 false false false
+a dependente parentecos normal string 50 false false false
+a dependente datanasc normal date 0 false true false
+
+R2 supervisao funcionario 1 funcionario n
+R2 dependentes funcionario 1 dependente n
+R2 trabalhaem funcionario n projeto n
+ar trabalhaem horas normal float 0 false
+R2 gerencia funcionario 1 departamento 1
+ar gerencia datainicio normal date 0 false
+R2 trabalhapara funcionario n departamento 1

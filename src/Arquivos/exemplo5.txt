@@ -1,0 +1,40 @@
+e cliente forte
+a cliente id normal int 0 true false true
+a cliente nome normal string 30 false false false
+a cliente email normal string 30 false true false
+a cliente telefone multivalorado string 10 false true false 
+
+e produto forte
+a produto id normal int 0 true false true
+a produto nome normal string 30 false false false
+
+e conta fraca
+a conta numero normal string 10 false false false
+
+e tacho forte
+a tacho id normal int 0 true false true
+a tacho nome normal string 20 false false false
+
+e ingrediente forte 
+a ingrediente id normal int 0 true false true 
+a ingrediente nome normal string 30 false false false
+
+e fornecedor forte
+a fornecedor id normal int 0 true false true
+a fornecedor nome normal string 30 false false false 
+
+
+
+R2 Eingrediente tacho n ingrediente n
+R2 venda cliente n produto n
+R2 possui cliente 1 conta n
+R2 producao produto 1 tacho 1
+R2 compra fornecedor n ingrediente n
+R3 pirok tacho 1 ingrediente n fornecedor n
+
+ar producao quantidade_produzida normal int 0 false
+ar producao data normal date 0 true
+ar Eingrediente quantidade normal int 0 false
+ar compra data normal date 0 false 
+ar pirok nome normal string 90 false
+ar pirok tamanho normal string 90 false
