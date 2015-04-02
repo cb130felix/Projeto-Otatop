@@ -114,8 +114,12 @@ public class CadInsertGen {
                 
             }//fim do primeiro if que verifica se é multivalorado ou não
            
+            
+            
+            //php Código para inserção de dados multivalorados
+            
             if(tab.campo_multi == 1){ 
-                
+            indices.clear();    
                 for (int i = 0; i < modelor.tabelas.size(); i++) {
                     
                     if(modelor.tabelas.get(i).campo_multi == 2){
@@ -127,6 +131,7 @@ public class CadInsertGen {
                                 if(tab.nome.equals(modelor.tabelas.get(i).colunas.get(j).fk_nome_tabela)){
                                         
                                     indices.add(i);// pegando o indice daquela tabela
+                                   
                                     
                                 }
                                 
@@ -137,10 +142,12 @@ public class CadInsertGen {
                     
                     
                     }
-                    
-                    //php
                 
-                    for (int z = 0; z < indices.size(); z++) {
+                }
+                
+                for (int z = 0; z < indices.size(); z++) {
+                       
+  
                         
                         bw.newLine();
                         bw.newLine();
@@ -149,7 +156,7 @@ public class CadInsertGen {
                             if(modelor.tabelas.get(indices.get(z)).colunas.get(j).fk == true){
                             
                                 String fk_nome_tabela = modelor.tabelas.get(indices.get(z)).colunas.get(j).fk_nome_tabela;
-                            String fk_nome_coluna = modelor.tabelas.get(indices.get(z)).colunas.get(j).fk_nome_coluna;
+                                String fk_nome_coluna = modelor.tabelas.get(indices.get(z)).colunas.get(j).fk_nome_coluna;
                                
                                 if(modelor.tabelas.get(modelor.idTabela(fk_nome_tabela)).colunas.get(modelor.idColuna(fk_nome_coluna, fk_nome_tabela)).auto_inc == true){ //Ok, isso foi uma obra de arte. Tô só checando se o campo dessa tabela multivalorada é gerada de um campo com auto_incremento
                                     String nomeCol = modelor.tabelas.get(indices.get(z)).colunas.get(j).nome;
@@ -262,9 +269,6 @@ public class CadInsertGen {
                        bw.newLine();
                        
                     }
-                
-                
-                }
                 
                 
             }// achando uma tabela que tem multivalorado
