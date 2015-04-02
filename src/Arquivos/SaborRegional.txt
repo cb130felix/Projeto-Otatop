@@ -61,7 +61,7 @@ R2 tem			      produto 1 tacho n
 R2 listaIngredientes	tacho 1 ingrediente n
 ar listaIngredientes	quantidade	normal	float	0	false
 
-R2 itensComprados	ingrediente n compra 1
+R2 itensComprados	ingrediente n compra n
 ar itensComprados	quantidade	  normal	int	  0	false
 ar itensComprados	valorUnitario	normal	float	0	false
 
