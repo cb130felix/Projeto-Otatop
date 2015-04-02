@@ -395,6 +395,7 @@ public class MenuGen {
     }
     int gerarMenuBar() throws IOException{
     File arquivo = new File (caminho_dir+"menu/menu.js");
+       
         
         if (!arquivo.exists()) {
           arquivo.createNewFile();  

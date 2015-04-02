@@ -24,7 +24,6 @@ public class POO {
         gen.lerArquivo("src/Arquivos/"+arquivo, true);
         
         
-        
         gen.gerarProjeto();
         
     }

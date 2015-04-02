@@ -72,7 +72,7 @@ public class ProjetoGen {
         this.bancoGen.gerarSQL();
         
         new File(caminho_dir+"PageNav").mkdir();
-        this.pagNavGen.gerarPagCad();
+        this.pagNavGen.gerarPagNav();
         
         
         new File(caminho_dir+"menu").mkdir();

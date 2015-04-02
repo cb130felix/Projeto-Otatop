@@ -261,7 +261,7 @@ public class ModeloR {
            //Adicionando atributos na relação
            if(!entidade_principal.equals("")){
            for(int j = 0; j < mer.relacoes2.get(i).atributos.size(); j++){
-                System.out.println("teste");
+                
                      Coluna coluna_temp = new Coluna();
                      coluna_temp.nome = mer.relacoes2.get(i).atributos.get(j).nome_atb;
                      coluna_temp.tipo = mer.relacoes2.get(i).atributos.get(j).tipo;
