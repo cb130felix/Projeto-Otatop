@@ -2,6 +2,7 @@
 package Geradores;
 
 import ModeloRel.ModeloR;
+import ProjetoInfo.ProjetoInfo;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -19,11 +20,11 @@ public class PageNavGen {
     String caminho_dir;
     String htmlInfo, titulo;
 
-    public PageNavGen(ModeloR modelor, String caminho_dir) {
+    public PageNavGen(ModeloR modelor, String caminho_dir, ProjetoInfo info) {
         this.modelor = modelor;
         this.caminho_dir = caminho_dir;
         htmlInfo = "echo \"<!DOCTYPE html><html><head>\"; //Inicio de Head\n";
-        titulo = "echo \"<title>Titulo da página</title>\"; //Inicio de Head\n";
+        titulo = "echo \"<title>"+info.nome_projeto+"</title>\"; //Inicio de Head\n";
     }
 
     
