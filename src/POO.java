@@ -17,7 +17,7 @@ public class POO {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         
         FixString fix = new FixString();
-        String arquivo = "Teste3.txt";
+        String arquivo = "Teste2.txt";
         String arquivoFix = arquivo.substring(0,arquivo.length()-4); //Tratando a String pra ficar bonitinha
         ProjetoInfo info = new ProjetoInfo(fix.Fix(arquivoFix), "DataBase");
         ProjetoGen gen = new ProjetoGen(info);
