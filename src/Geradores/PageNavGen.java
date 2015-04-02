@@ -71,9 +71,9 @@ titulo                +
      return 0;
      }
      
-     public int gerarPagIndex() throws IOException{
+     public int gerarPagHome() throws IOException{
         
-        File arquivo = new File (caminho_dir+"/index.php");
+        File arquivo = new File (caminho_dir+"PageNav/home.php");
               
         if (!arquivo.exists()) {       
             arquivo.createNewFile();  
@@ -87,11 +87,16 @@ titulo                +
 htmlInfo +
 titulo                +
 "\n" +
-"echo   '<link rel=\"stylesheet\" href=\"menu/style_menu.css\">';\n" +
-"echo   '<script src=\"http://code.jquery.com/jquery-latest.min.js\" type=\"text/javascript\"></script>';\n" +
-"echo   '<script src=\"menu/script.js\"></script>';\n" +
-"echo   '<script src=\"menu/menu.js\" type=\"text/javascript\"></script>';\n" +
-"echo '<link rel=\"stylesheet\" href=\"cadastro/forms/formCadStyle.css\">';"+
+//"echo   '<link rel=\"stylesheet\" href=\"menu/style_menu.css\">';\n" +
+//"echo   '<script src=\"http://code.jquery.com/jquery-latest.min.js\" type=\"text/javascript\"></script>';\n" +
+//"echo   '<script src=\"menu/script.js\"></script>';\n" +
+//"echo   '<script src=\"menu/menu.js\" type=\"text/javascript\"></script>';\n" +
+//"echo '<link rel=\"stylesheet\" href=\"cadastro/forms/formCadStyle.css\">';"+
+"include '../menu/add_menu.php';\n" +
+"echo '<script src=\"../cadastro/forms/formCad.js\" type=\"text/javascript\"></script>';\n"+
+"echo '<link rel=\"stylesheet\" href=\"../cadastro/forms/formCadStyle.css\">';"+
+                
+                
 "\n" +
 "echo \"</head>\"; // Fim do head\n" +
 "\n" +
@@ -115,11 +120,30 @@ titulo                +
      return 0;
      }
         
+     public int gerarPagIndex() throws IOException{
+     
+          File arquivo = new File (caminho_dir+"/index.php");
+              
+        if (!arquivo.exists()) {       
+            arquivo.createNewFile();  
+        }
+        
+        FileWriter fw = new FileWriter(arquivo);
+        BufferedWriter bw = new BufferedWriter(fw);
+        
+        bw.write("<meta http-equiv=\"refresh\" content=\"0;URL=PageNav/home.php\" />");
+         
+        bw.close();
+        fw.close();
+         
+     return 0;
+     }
      
      public int gerarPagNav() throws IOException{
      
-         this.gerarPagCad();
          this.gerarPagIndex();
+         this.gerarPagCad();
+         this.gerarPagHome();
          
          return 0;
      
