@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -98,7 +100,7 @@ public class CadInsertGen {
                     }
                     
                 }
-                bw.write("    echo $sql1.$sql2; ");
+                bw.write("\n\n  echo $sql1.$sql2; ");
                 bw.newLine();
                 bw.newLine();
                 bw.write("  $result = mysqli_query($link2,$sql1.$sql2);");
@@ -155,11 +157,11 @@ public class CadInsertGen {
                             
                             
                             if(o < modelor.tabelas.get(indices.get(z)).colunas.size() -1){
-                                bw.write(modelor.tabelas.get(indices.get(z)).colunas.get(o).nome+",");
-                            
+                                //bw.write(modelor.tabelas.get(indices.get(z)).colunas.get(o).nome+",");
+                                escreverColuna(bw,modelor.tabelas.get(indices.get(z)).colunas.get(o).nome+",");
                             }
                             
-                            else{bw.write(modelor.tabelas.get(indices.get(z)).colunas.get(o).nome+") VALUES (\"; \n");}
+                            else{escreverColuna(bw,modelor.tabelas.get(indices.get(z)).colunas.get(o).nome+") VALUES (\"; \n");}
                             
                             
                             }
@@ -226,6 +228,7 @@ public class CadInsertGen {
                             ////// coloca aqui
                         
                        bw.newLine();
+                       bw.newLine();
                        bw.write("    echo $sql; ");
                        bw.write("    $result = mysqli_query($link2,$sql);");
                        bw.newLine();
@@ -277,5 +280,16 @@ public class CadInsertGen {
                 
     
     }
+        
+        
+        public void escreverColuna(BufferedWriter bw,String s){
+            
+        try {
+            bw.write(s);
+        } catch (IOException ex) {
+            Logger.getLogger(CadInsertGen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }
     
 }
