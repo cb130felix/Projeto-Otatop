@@ -266,7 +266,7 @@ public class CadInsertGen {
 	/**
          * Método que escreve no arquivo o script que conect com o banco de dados.
          * @param construtor que recebe como argumento o objeto do tipo FileWriter
-         * @param string com o nome do banco de dados
+         * @param string com o nome do banco de dados.
          * @throws IOException 
          */
 	public void gerarConexao(BufferedWriter bw, String nome_banco) throws IOException{
