@@ -40,10 +40,10 @@ public class PageNavGen {
 "\n" +
 "echo \"<!DOCTYPE html><html><head>\"; //Inicio de Head\n" +
 "\n" +
-"include '..\\menu\\add_menu.php';\n" +
-"include '..\\menu\\add_menu_drop_cad.php';\n" +
-"echo '<script src=\"..\\cadastro\\forms\\formCad.js\" type=\"text/javascript\"></script>';\n"+
-"echo '<link rel=\"stylesheet\" href=\"..\\cadastro\\forms\\formCadStyle.css\">';"+
+"include '../menu/add_menu.php';\n" +
+"include '../menu/add_menu_drop_cad.php';\n" +
+"echo '<script src=\"../cadastro/forms/formCad.js\" type=\"text/javascript\"></script>';\n"+
+"echo '<link rel=\"stylesheet\" href=\"../cadastro/forms/formCadStyle.css\">';"+
 "\n" +
 "echo \"</head>\"; // Fim do head\n" +
 "\n" +

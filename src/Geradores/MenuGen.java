@@ -489,10 +489,10 @@ public class MenuGen {
 "   \n" +
 "   echo \"\n" +
 "   \n" +
-"   <link rel=\\\"stylesheet\\\" href=\\\"..\\menu\\style_menu.css\\\">\n" +
+"   <link rel=\\\"stylesheet\\\" href=\\\"../menu/style_menu.css\\\">\n" +
 "   <script src=\\\"http://code.jquery.com/jquery-latest.min.js\\\" type=\\\"text/javascript\\\"></script>\n" +
-"   <script src=\\\"..\\menu\\script.js\\\"></script>\n" +
-"   <script src=\\\"..\\menu\\menu.js\\\" type=\\\"text/javascript\\\"></script>\n" +
+"   <script src=\\\"../menu/script.js\\\"></script>\n" +
+"   <script src=\\\"../menu/menu.js\\\" type=\\\"text/javascript\\\"></script>\n" +
 "\n" +
 "   \";\n" +
 "?>");
@@ -513,7 +513,7 @@ public class MenuGen {
         bw.write("<?php\n" +
 "   \n" +
 "   echo \"\n" +
-"   <script src=\\\"..\\menu\\menu_DropCad.js\\\" type=\\\"text/javascript\\\"></script>\n" +
+"   <script src=\\\"../menu/menu_DropCad.js\\\" type=\\\"text/javascript\\\"></script>\n" +
 "   \";\n" +
 "?>");
         bw.close();
