@@ -16,7 +16,7 @@ public class ModeloR {
     * @param nome Nome da tabela a ser procurada
     * @return Indice de uma tabela no vetor "Tabelas" dessa classe.
     */
-   int idTabela(String nome){
+   public int idTabela(String nome){
        
        for(int i = 0 ; i < this.tabelas.size(); i++){
            
@@ -27,6 +27,19 @@ public class ModeloR {
                 
            }
        
+       }
+       
+       return -1;
+   
+   }
+   
+   public int idColuna(String nomeCol, String nomeTab){
+       
+       int index = this.idTabela(nomeTab);
+       
+       Tabela tabela = this.tabelas.get(index);
+       for (int i = 0; i < tabela.colunas.size(); i++) {
+           if(tabela.colunas.get(i).nome.equals(nomeCol)) return i;
        }
        
        return -1;
@@ -352,7 +365,7 @@ public class ModeloR {
                    
                     tabela_temp.nome = mer.entidades.get(i).atributos.get(j).nome + "_" + mer.entidades.get(i).atributos.get(j).nome_atb;
                     tabela_temp.colunas.add(new Coluna(
-                            false,      
+                            true,      
                             false,
                             mer.entidades.get(i).atributos.get(j).nullable,
                             mer.entidades.get(i).atributos.get(j).nome_atb ,

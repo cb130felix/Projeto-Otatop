@@ -92,22 +92,23 @@ public class CadInsertGen {
                 for (int i = 0; i < tab.colunas.size(); i++) {
                     
                     Coluna col = tab.colunas.get(i);
+                    char separador;
+                    if(i < tab.colunas.size()-1){separador = ',';}else{separador = ')'; }
                     
-                    if(i < tab.colunas.size()-1){
-                    bw.write("\n  if($"+col.nome+"!= ''){  $sql2 = $sql2.'\"'.$"+col.nome+".'\",'; }else{ $sql2 = $sql2.'NULL,'; }");
-                    }
                     
-                    else{
-                        
-                        bw.write("\n  if($"+col.nome+"!= ''){  $sql2 = $sql2.'\"'.$"+col.nome+".'\")'; }else{ $sql2 = $sql2.'NULL)'; }");
-                        
+                    if(col.auto_inc == false){
+                            bw.write("\n  if($"+col.nome+"!= ''){  $sql2 = $sql2.'\"'.$"+col.nome+".'\""+separador+"'; }else{ $sql2 = $sql2.'NULL"+separador+"'; }");
+                    }else{
+                        bw.write("\n  $sql2 = $sql2.'NULL"+separador+"';");
                     }
+                       
+                    
                     
                 }
-                bw.write("\n\n  echo $sql1.$sql2; ");
+             
                 bw.newLine();
                 bw.newLine();
-                bw.write("  $result = mysqli_query($link2,$sql1.$sql2);");
+                bw.write("  $result = mysqli_query($link2,$sql1.$sql2) or die(mysqli_error($link2)); ");
                 
                 
                 
@@ -144,34 +145,55 @@ public class CadInsertGen {
                         bw.newLine();
                         bw.newLine();
                         for (int j = 0; j < modelor.tabelas.get(indices.get(z)).colunas.size(); j++) {
-                           if(modelor.tabelas.get(indices.get(z)).colunas.get(j).pk == false){
+                           
+                            if(modelor.tabelas.get(indices.get(z)).colunas.get(j).fk == true){
+                            
+                                String fk_nome_tabela = modelor.tabelas.get(indices.get(z)).colunas.get(j).fk_nome_tabela;
+                            String fk_nome_coluna = modelor.tabelas.get(indices.get(z)).colunas.get(j).fk_nome_coluna;
+                               
+                                if(modelor.tabelas.get(modelor.idTabela(fk_nome_tabela)).colunas.get(modelor.idColuna(fk_nome_coluna, fk_nome_tabela)).auto_inc == true){ //Ok, isso foi uma obra de arte. Tô só checando se o campo dessa tabela multivalorada é gerada de um campo com auto_incremento
+                                    String nomeCol = modelor.tabelas.get(indices.get(z)).colunas.get(j).nome;
+                                    String nomeTab = modelor.tabelas.get(indices.get(z)).nome;
+                                    bw.write("$sqlConsulta = \"SELECT "+ fk_nome_coluna +" from "+ fk_nome_tabela +" ORDER BY "+ fk_nome_coluna +" DESC LIMIT 1\";\n" +
+                                    "	   $result = mysqli_query($link2, $sqlConsulta) or die(mysqli_error($link2)); ; //consulta\n" +
+                                    "	   if (mysqli_num_rows($result) > 0) {\n" +
+                                    "		while($row = mysqli_fetch_assoc($result)) { $"+fk_nome_coluna+" = $row[\""+fk_nome_coluna+"\"]; }\n" +
+                                    "	   }");
+
+                                }
+                            }
+                            if(modelor.tabelas.get(indices.get(z)).colunas.get(j).fk == false){
                              bw.write("   $"+modelor.tabelas.get(indices.get(z)).colunas.get(j).nome+" = $_POST['"+modelor.tabelas.get(indices.get(z)).colunas.get(j).nome+"'];\n");
+                           
+                             bw.write("   foreach($"+modelor.tabelas.get(indices.get(z)).colunas.get(j).nome+" as $item){");// TÁ MEIO BICHADO ESSE ITEM AÍ
+                             bw.newLine();
+                             bw.write("    $sql = \"INSERT INTO "+modelor.tabelas.get(indices.get(z)).nome+"(");
+
+
+                            for (int o = 0; o < modelor.tabelas.get(indices.get(z)).colunas.size(); o++) {
+
+                                if(modelor.tabelas.get(indices.get(z)).colunas.get(o).auto_inc == false){
+
+
+                                if(o < modelor.tabelas.get(indices.get(z)).colunas.size() -1){
+                                    //bw.write(modelor.tabelas.get(indices.get(z)).colunas.get(o).nome+",");
+                                    escreverColuna(bw,modelor.tabelas.get(indices.get(z)).colunas.get(o).nome+",");
+                                }
+
+                                else{escreverColuna(bw,modelor.tabelas.get(indices.get(z)).colunas.get(o).nome+") VALUES (\"; \n");}
+
+
+                                }
+
+
+                            }
+                           
+                             
                            } 
                         }
                         
                         
-                        bw.write("   foreach($"+modelor.tabelas.get(indices.get(z)).nome+" as $item){");// TÁ MEIO BICHADO ESSE ITEM AÍ
-                        bw.newLine();
-                        bw.write("    $sql = \"INSERT INTO "+modelor.tabelas.get(indices.get(z)).nome+"(");
                         
-                        
-                        for (int o = 0; o < modelor.tabelas.get(indices.get(z)).colunas.size(); o++) {
-                            
-                            if(modelor.tabelas.get(indices.get(z)).colunas.get(o).auto_inc == false){
-                            
-                            
-                            if(o < modelor.tabelas.get(indices.get(z)).colunas.size() -1){
-                                //bw.write(modelor.tabelas.get(indices.get(z)).colunas.get(o).nome+",");
-                                escreverColuna(bw,modelor.tabelas.get(indices.get(z)).colunas.get(o).nome+",");
-                            }
-                            
-                            else{escreverColuna(bw,modelor.tabelas.get(indices.get(z)).colunas.get(o).nome+") VALUES (\"; \n");}
-                            
-                            
-                            }
-                            
-                            
-                        }
                         
                         //bw.write("VALUES (");
                        
@@ -233,8 +255,8 @@ public class CadInsertGen {
                         
                        bw.newLine();
                        bw.newLine();
-                       bw.write("    echo $sql; ");
-                       bw.write("    $result = mysqli_query($link2,$sql);");
+                      
+                       bw.write("    $result = mysqli_query($link2,$sql) or die(mysqli_error($link2)); ;");
                        bw.newLine();
                        bw.write("    }");
                        bw.newLine();
