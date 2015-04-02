@@ -46,7 +46,7 @@ public class ProjetoGen {
         cadFormGen = new CadFormGen(this.modelor, caminho_dir);
         cadInsertGen = new CadInsertGen(this.modelor, caminho_dir);
         menuGen = new MenuGen(this.modelor, caminho_dir);
-        pagNavGen = new PageNavGen(this.modelor, caminho_dir);
+        pagNavGen = new PageNavGen(this.modelor, caminho_dir, info);
     }
     
     public ProjetoGen(){}
@@ -72,7 +72,7 @@ public class ProjetoGen {
         this.bancoGen.gerarSQL();
         
         new File(caminho_dir+"PageNav").mkdir();
-        this.pagNavGen.gerarPagCad();
+        this.pagNavGen.gerarPagNav();
         
         
         new File(caminho_dir+"menu").mkdir();

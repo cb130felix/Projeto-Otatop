@@ -395,6 +395,7 @@ public class MenuGen {
     }
     int gerarMenuBar() throws IOException{
     File arquivo = new File (caminho_dir+"menu/menu.js");
+       
         
         if (!arquivo.exists()) {
           arquivo.createNewFile();  
@@ -407,8 +408,8 @@ public class MenuGen {
 "\n" +
 "	document.getElementById(\"menu\").innerHTML = \"\\\n" +
 "			<ul>\\\n" +
-"			   <li><a href='#'><span>Home</span></a></li>\\\n" +
-"			   <li class='active has-sub'><a href='#'><span>Cadastro</span></a><ul id = 'cad_list'></ul></li>\\\n" +
+"			   <li><a href='home.php'><span>Home</span></a></li>\\\n" +
+"			   <li><a href='pag_cad.php'><span>Cadastro</span></a><ul id = 'cad_list'></ul></li>\\\n" +
 "			   <li><a href='#'><span>Listar</span></a></li>\\\n" +
 "			   <li class='last'><a href='#'><span>Sobre</span></a></li>\\\n" +
 "			</ul>\\\n" +
