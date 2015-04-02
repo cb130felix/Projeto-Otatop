@@ -280,7 +280,8 @@ public class CadInsertGen {
                 
                 bw.write("  $link2 = mysqli_connect($hostname, $usuario, $senha, $banco) or die (\"Erro ao conectar!<br>\");");
                 bw.newLine();
-    
+                
+                // teste
     
     }
     
