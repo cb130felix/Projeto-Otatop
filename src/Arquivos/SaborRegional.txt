@@ -1,0 +1,68 @@
+e cliente forte
+a cliente  id		    normal 		    int	    0	  true	false	true
+a cliente  registro	normal		    int	    0	  false	false	false
+a cliente  nome		  normal		    string	64	false	false	false
+a cliente  endereco	normal		    string	128	false	false	false
+a cliente  bairro	  normal		    string	64	false	false	false
+a cliente  cidade	  normal		    string	64	false	false	false
+a cliente  email	  normal		    string	128	false	true	false
+a cliente  telefone	multivalorado	int	    0	  false	true	false
+
+e venda	  forte
+a venda	    id		normal 		int	  0	true	false	true
+a venda	    data	normal		date	0	false false false
+
+e produto forte
+a produto   id		      normal 		int	    0	  true	false	true
+a produto   nome	      normal		string	64	false	false	false
+a produto   quantidade	normal		int	    0	  false	false	false
+
+e tacho forte
+a tacho     id		normal 		int	    0	  true	false	true
+a tacho	    nome	normal		string	64	false	false	false
+
+e producao forte
+a producao  id			            normal 		int	  0	true	false	true
+a producao  data		            normal		date	0	false false	false
+a producao  quantidadeProduzida normal		int	  0	false	false	false
+a producao  quantidadeDeTacho   normal		int	  0	false	false	false
+
+e ingrediente forte
+a ingrediente id  	      normal 	int	    0	  true	false	true
+a ingrediente nome	      normal	string	64	false	false	false
+a ingrediente medida	    normal	int	    0	  false	false	false
+a ingrediente quantidade  normal	float	  0	  false	false	false
+
+e compra forte
+a compra    id		normal 		int	  0	true	false	true
+a venda	    data	normal		date	0	false false 	false
+
+e fornecedor forte
+a fornecedor  id		    normal 		    int	    0	  true	false	true
+a fornecedor  registro	normal		    int	    0	  false	false	false
+a fornecedor  nome		  normal		    string	64	false	false	false
+a fornecedor  endereco	normal		    string	128	false	false	false
+a fornecedor  bairro	  normal		    string	64	false	false	false
+a fornecedor  cidade	  normal		    string	64	false	false	false
+a fornecedor  email	    normal		    string	128	false	true	false
+a fornecedor  telefone	multivalorado	int	    0	  false	true	false
+
+
+R2 fazDevolucao		cliente 1 venda n
+ar fazDevolucao		quantidade	  normal	int	  0	false
+ar fazDevolucao		valorUnitario	normal	float	0	false
+
+R2 itensVendidos	venda n produto n
+ar itensVendidos	quantidade	  normal	int	  0	false
+ar itensVendidos	valorUnitario	normal	float	0	false
+
+R2 tem			      produto 1 tacho n
+
+R2 listaIngredientes	tacho 1 ingrediente n
+ar listaIngredientes	quantidade	normal	float	0	false
+
+R2 itensComprados	ingrediente n compra 1
+ar itensComprados	quantidade	  normal	int	  0	false
+ar itensComprados	valorUnitario	normal	float	0	false
+
+R2 feita		      compra n fornecedor 1
