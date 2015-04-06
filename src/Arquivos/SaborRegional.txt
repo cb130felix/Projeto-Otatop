@@ -1,9 +1,9 @@
 e cliente forte
 a cliente  registro	normal		    int	    0	  false	false	false
 a cliente  nome		  normal		    string	64	false	false	false
-a cliente  endereco	multivalorado		    string	128	false	false	false
-a cliente  bairro	  multivalorado		    string	64	false	false	false
-a cliente  cidade	  multivalorado		    string	64	false	false	false
+a cliente  endereco	normal		    string	128	false	false	false
+a cliente  bairro	  normal		    string	64	false	false	false
+a cliente  cidade	  normal		    string	64	false	false	false
 a cliente  email	  multivalorado		    string	128	false	true	false
 a cliente  telefone	multivalorado	int	    0	  false	true	false
 a cliente  id		    normal 		    int	    0	  true	false	true
@@ -40,29 +40,29 @@ a compra    id		normal 		int	  0	true	false	true
 e fornecedor forte
 a fornecedor  registro	normal		    int	    0	  false	false	false
 a fornecedor  nome		  normal		    string	64	false	false	false
-a fornecedor  endereco	multivalorado		    string	128	false	false	false
-a fornecedor  bairro	  multivalorado		    string	64	false	false	false
-a fornecedor  cidade	  multivalorado		    string	64	false	false	false
+a fornecedor  endereco	normal		    string	128	false	false	false
+a fornecedor  bairro	  normal		    string	64	false	false	false
+a fornecedor  cidade	  normal		    string	64	false	false	false
 a fornecedor  email	    multivalorado		    string	128	false	true	false
 a fornecedor  telefone	multivalorado	int	    0	  false	true	false
 a fornecedor  id		    normal 		    int	    0	  true	false	true
 
 
 R2 fazDevolucao		cliente 1 venda n
-ar fazDevolucao		quantidade	  normal	int	  0	false
+ar fazDevolucao		quantidadeDevolvida	  normal	int	  0	false
 ar fazDevolucao		valorUnitario	normal	float	0	false
 
 R2 itensVendidos	venda n produto n
-ar itensVendidos	quantidade	  normal	int	  0	false
+ar itensVendidos	quantidadeVendida	  normal	int	  0	false
 ar itensVendidos	valorUnitario	normal	float	0	false
 
 R2 tem			      produto 1 tacho n
 
 R2 listaIngredientes	tacho 1 ingrediente n
-ar listaIngredientes	quantidade	normal	float	0	false
+ar listaIngredientes	quantidadeDeIngrediente	normal	float	0	false
 
 R2 itensComprados	ingrediente n compra n
-ar itensComprados	quantidade	  normal	int	  0	false
+ar itensComprados	quantidadeComprado	  normal	int	  0	false
 ar itensComprados	valorUnitario	normal	float	0	false
 
 R2 feita		      compra n fornecedor 1
