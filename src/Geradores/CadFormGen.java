@@ -149,7 +149,8 @@ public class CadFormGen {
         }
        
        for (Tabela tabela : modelor.tabelas) {
-          String aux="";
+          String mult_col=null;
+          String mult_tab=null;
           
           if (tabela.campo_multi!=2){  
              
@@ -175,26 +176,27 @@ public class CadFormGen {
                     }
                     
                     if (coluna.pk){
-                        aux = coluna.nome;             
+                        mult_col = coluna.nome; 
+                        mult_tab = tabela.nome;
                     }
                 }
                 
                 for (int i=0; i<multivalorados.size(); i++) {
+                    
                     for (int y=0; y<multivalorados.get(i).colunas.size(); y++) {
-                        if(aux.equals(multivalorados.get(i).colunas.get(y).fk_nome_coluna)){
-                                    
-                            for(int w=0; w<multivalorados.get(i).colunas.size(); w++){
-                                if(!multivalorados.get(i).colunas.get(w).auto_inc && !multivalorados.get(i).colunas.get(w).fk){
-                                    bw.write( "     <p> <label for=" + multivalorados.get(i).colunas.get(w).nome + ">" + label.Fix(multivalorados.get(i).colunas.get(w).nome) + "</label>\\n\\\n"
-                                        + "         <input id=" + multivalorados.get(i).colunas.get(w).nome + " type=text name=" + multivalorados.get(i).colunas.get(w).nome + "[] autofocus />\\n\\\n"
-                                        + "         <div id=mais_"+multivalorados.get(i).colunas.get(w).nome+"> </div> </p> \\n\\\n"
-                                        + "     <p> <input type=button class='button' value=+ onclick=adicionaCampo('"+multivalorados.get(i).colunas.get(w).nome+"','"+indice+"') />\\n\\\n"
-                                        + "         <input type=button class='button' value=- onclick=removeCampo('"+multivalorados.get(i).colunas.get(w).nome+"','"+indice+"') /></p>\\n\\\n"); 
+                        
+                        if(mult_col.equals(multivalorados.get(i).colunas.get(y).fk_nome_coluna) && 
+                           mult_tab.equals(multivalorados.get(i).colunas.get(y).fk_nome_tabela) &&
+                           !multivalorados.get(i).colunas.get(y).auto_inc){
+                            
+                                    bw.write( "     <p> <label for=" + multivalorados.get(i).colunas.get(y-1).nome + ">" + label.Fix(multivalorados.get(i).colunas.get(y-1).nome) + "</label>\\n\\\n"
+                                        + "         <input id=" + multivalorados.get(i).colunas.get(y-1).nome + " type=text name=" + multivalorados.get(i).colunas.get(y-1).nome + "[] autofocus />\\n\\\n"
+                                        + "         <div id=mais_"+multivalorados.get(i).colunas.get(y-1).nome+"> </div> </p> \\n\\\n"
+                                        + "     <p> <input type=button class='button' value=+ onclick=adicionaCampo('"+multivalorados.get(i).colunas.get(y-1).nome+"','"+indice+"') />\\n\\\n"
+                                        + "         <input type=button class='button' value=- onclick=removeCampo('"+multivalorados.get(i).colunas.get(y-1).nome+"','"+indice+"') /></p>\\n\\\n"); 
                                         indice++;
-                                }
-                            }
                         }
-                    }         
+                    }
                 }
             }
            
