@@ -8,6 +8,7 @@ a funcionario salario normal int 0 false false false
 
 e departamento forte
 a departamento localizacoes multivalorado string 50 false true false
+a departamento estados multivalorado string 50 false true false
 a departamento nome normal string 50 false false false
 a departamento numero normal int 0 true false true
 
