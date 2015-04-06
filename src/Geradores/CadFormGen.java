@@ -149,6 +149,8 @@ public class CadFormGen {
         }
        
        for (Tabela tabela : modelor.tabelas) {
+          String aux="";
+          
           if (tabela.campo_multi!=2){  
              
             bw.write( "\nfunction form_cad_" + tabela.nome + "(){\n"
@@ -173,27 +175,28 @@ public class CadFormGen {
                     }
                     
                     if (coluna.pk){
-                        for (int i=0; i<multivalorados.size(); i++) {
-                            for (int y=0; y<multivalorados.get(i).colunas.size(); y++) {
-                                if(coluna.nome.equals(multivalorados.get(i).colunas.get(y).fk_nome_coluna)){
+                        aux = coluna.nome;             
+                    }
+                }
+                
+                for (int i=0; i<multivalorados.size(); i++) {
+                    for (int y=0; y<multivalorados.get(i).colunas.size(); y++) {
+                        if(aux.equals(multivalorados.get(i).colunas.get(y).fk_nome_coluna)){
                                     
-                                    for(int w=0; w<multivalorados.get(i).colunas.size(); w++){
-                                        if(!multivalorados.get(i).colunas.get(w).auto_inc && !multivalorados.get(i).colunas.get(w).fk){
-                                                bw.write( "     <p> <label for=" + multivalorados.get(i).colunas.get(w).nome + ">" + label.Fix(multivalorados.get(i).colunas.get(w).nome) + "</label>\\n\\\n"
-                                                        + "         <input id=" + multivalorados.get(i).colunas.get(w).nome + " type=text name=" + multivalorados.get(i).colunas.get(w).nome + "[] autofocus />\\n\\\n"
-                                                        + "         <div id=mais_"+multivalorados.get(i).colunas.get(w).nome+"> </div> </p> \\n\\\n"
-                                                        + "     <p> <input type=button class='button' value=+ onclick=adicionaCampo('"+multivalorados.get(i).colunas.get(w).nome+"','"+indice+"') />\\n\\\n"
-                                                        + "         <input type=button class='button' value=- onclick=removeCampo('"+multivalorados.get(i).colunas.get(w).nome+"','"+indice+"') /></p>\\n\\\n"); 
-                                                indice++;
-                                        }
-                                    }
+                            for(int w=0; w<multivalorados.get(i).colunas.size(); w++){
+                                if(!multivalorados.get(i).colunas.get(w).auto_inc && !multivalorados.get(i).colunas.get(w).fk){
+                                    bw.write( "     <p> <label for=" + multivalorados.get(i).colunas.get(w).nome + ">" + label.Fix(multivalorados.get(i).colunas.get(w).nome) + "</label>\\n\\\n"
+                                        + "         <input id=" + multivalorados.get(i).colunas.get(w).nome + " type=text name=" + multivalorados.get(i).colunas.get(w).nome + "[] autofocus />\\n\\\n"
+                                        + "         <div id=mais_"+multivalorados.get(i).colunas.get(w).nome+"> </div> </p> \\n\\\n"
+                                        + "     <p> <input type=button class='button' value=+ onclick=adicionaCampo('"+multivalorados.get(i).colunas.get(w).nome+"','"+indice+"') />\\n\\\n"
+                                        + "         <input type=button class='button' value=- onclick=removeCampo('"+multivalorados.get(i).colunas.get(w).nome+"','"+indice+"') /></p>\\n\\\n"); 
+                                        indice++;
                                 }
-                            }    
-                            i++;              
-                        }             
+                            }
+                        }
                     }         
                 }
-           }
+            }
            
            bw.write( "     <p> <input type='submit' class='button' value='Cadastrar' name='enviar' >\\n\\\n"
                    + "         <input type='reset' class='button' value='Limpar' name='limpar' onclick='form_cad_" + tabela.nome + "();zerar()'></p>\\n\\\n"
@@ -216,7 +219,6 @@ public class CadFormGen {
                 + "}\n"
                 + "\n"
                 + "function adicionaCampo(campo, indice) {\n"
-                + "     if (i[indice] < 5){\n"
                 + "         var div = document.createElement('div');\n"
                 + "         var x = document.createElement('input');\n"
                 + "         var p = document.createElement('p');\n"
@@ -230,7 +232,6 @@ public class CadFormGen {
                 + "         document.getElementById(campo+i[indice]).appendChild(p);\n"
                 + "         document.getElementById(campo+i[indice]).appendChild(x).focus();\n"
                 + "         i[indice]++;\n"
-                + "     }\n"
                 + " }\n"
                 + "\n"
                 + "function removeCampo(campo, indice) {\n"
