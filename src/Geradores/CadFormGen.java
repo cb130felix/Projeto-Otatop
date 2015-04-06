@@ -186,15 +186,19 @@ public class CadFormGen {
                     for (int y=0; y<multivalorados.get(i).colunas.size(); y++) {
                         
                         if(mult_col.equals(multivalorados.get(i).colunas.get(y).fk_nome_coluna) && 
-                           mult_tab.equals(multivalorados.get(i).colunas.get(y).fk_nome_tabela) &&
-                           !multivalorados.get(i).colunas.get(y).auto_inc){
+                           mult_tab.equals(multivalorados.get(i).colunas.get(y).fk_nome_tabela)){
                             
-                                    bw.write( "     <p> <label for=" + multivalorados.get(i).colunas.get(y-1).nome + ">" + label.Fix(multivalorados.get(i).colunas.get(y-1).nome) + "</label>\\n\\\n"
-                                        + "         <input id=" + multivalorados.get(i).colunas.get(y-1).nome + " type=text name=" + multivalorados.get(i).colunas.get(y-1).nome + "[] autofocus />\\n\\\n"
-                                        + "         <div id=mais_"+multivalorados.get(i).colunas.get(y-1).nome+"> </div> </p> \\n\\\n"
-                                        + "     <p> <input type=button class='button' value=+ onclick=adicionaCampo('"+multivalorados.get(i).colunas.get(y-1).nome+"','"+indice+"') />\\n\\\n"
-                                        + "         <input type=button class='button' value=- onclick=removeCampo('"+multivalorados.get(i).colunas.get(y-1).nome+"','"+indice+"') /></p>\\n\\\n"); 
+                            for (int w=0; w<multivalorados.get(i).colunas.size(); w++) {
+                                if(!multivalorados.get(i).colunas.get(w).auto_inc && !multivalorados.get(i).colunas.get(w).fk){
+                                
+                                    bw.write( "     <p> <label for=" + multivalorados.get(i).colunas.get(w).nome + ">" + label.Fix(multivalorados.get(i).colunas.get(w).nome) + "</label>\\n\\\n"
+                                        + "         <input id=" + multivalorados.get(i).colunas.get(w).nome + " type=text name=" + multivalorados.get(i).colunas.get(w).nome + "[] autofocus />\\n\\\n"
+                                        + "         <div id=mais_"+multivalorados.get(i).colunas.get(w).nome+"> </div> </p> \\n\\\n"
+                                        + "     <p> <input type=button class='button' value=+ onclick=adicionaCampo('"+multivalorados.get(i).colunas.get(w).nome+"','"+indice+"') />\\n\\\n"
+                                        + "         <input type=button class='button' value=- onclick=removeCampo('"+multivalorados.get(i).colunas.get(w).nome+"','"+indice+"') /></p>\\n\\\n"); 
                                         indice++;
+                                }
+                            }
                         }
                     }
                 }
