@@ -149,8 +149,8 @@ public class CadFormGen {
         }
        
        for (Tabela tabela : modelor.tabelas) {
-          String mult_col=null;
-          String mult_tab=null;
+          String mult_col="";
+          String mult_tab="";
           
           if (tabela.campo_multi!=2){  
              
