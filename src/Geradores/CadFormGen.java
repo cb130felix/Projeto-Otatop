@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -181,23 +182,34 @@ public class CadFormGen {
                     }
                 }
                 
-                for (int i=0; i<multivalorados.size(); i++) {
-                    
-                    for (int y=0; y<multivalorados.get(i).colunas.size(); y++) {
+                Iterator<Tabela> i = multivalorados.iterator();
+                boolean check = false;
+                
+                while (i.hasNext()) {
+                Tabela multivalorado = i.next();
+                
+                    for (Coluna coluna : multivalorado.colunas) {
                         
-                        if(mult_col.equals(multivalorados.get(i).colunas.get(y).fk_nome_coluna) && 
-                           mult_tab.equals(multivalorados.get(i).colunas.get(y).fk_nome_tabela)){
+                        if(mult_col.equals(coluna.fk_nome_coluna) && 
+                           mult_tab.equals(coluna.fk_nome_tabela)){
                             
-                            for (int w=0; w<multivalorados.get(i).colunas.size(); w++) {
-                                if(!multivalorados.get(i).colunas.get(w).auto_inc && !multivalorados.get(i).colunas.get(w).fk){
-                                
-                                    bw.write( "     <p> <label for=" + multivalorados.get(i).colunas.get(w).nome + ">" + label.Fix(multivalorados.get(i).colunas.get(w).nome) + "</label>\\n\\\n"
-                                        + "         <input id=" + multivalorados.get(i).colunas.get(w).nome + " type=text name=" + multivalorados.get(i).colunas.get(w).nome + "[] autofocus />\\n\\\n"
-                                        + "         <div id=mais_"+multivalorados.get(i).colunas.get(w).nome+"> </div> </p> \\n\\\n"
-                                        + "     <p> <input type=button class='button' value=+ onclick=adicionaCampo('"+multivalorados.get(i).colunas.get(w).nome+"','"+indice+"') />\\n\\\n"
-                                        + "         <input type=button class='button' value=- onclick=removeCampo('"+multivalorados.get(i).colunas.get(w).nome+"','"+indice+"') /></p>\\n\\\n"); 
+                            for (Coluna checkCol : multivalorado.colunas) {
+                                if(!checkCol.auto_inc && !checkCol.fk){
+                                    
+                                    bw.write( "     <p> <label for=" + checkCol.nome + ">" + label.Fix(checkCol.nome) + "</label>\\n\\\n"
+                                        + "         <input id=" + checkCol.nome + " type=text name=" + checkCol.nome + "[] autofocus />\\n\\\n"
+                                        + "         <div id=mais_"+checkCol.nome+"> </div> </p> \\n\\\n"
+                                        + "     <p> <input type=button class='button' value=+ onclick=adicionaCampo('"+checkCol.nome+"','"+indice+"') />\\n\\\n"
+                                        + "         <input type=button class='button' value=- onclick=removeCampo('"+checkCol.nome+"','"+indice+"') /></p>\\n\\\n"); 
                                         indice++;
+                                        i.remove();
+                                        check = true;
+                                        break;
                                 }
+                            }
+                            if (check) { 
+                                check = false; 
+                                break; 
                             }
                         }
                     }
