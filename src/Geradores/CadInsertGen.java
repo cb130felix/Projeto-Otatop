@@ -108,8 +108,11 @@ public class CadInsertGen {
              
                 bw.newLine();
                 bw.newLine();
-                bw.write("  $result = mysqli_query($link2,$sql1.$sql2) or die(mysqli_error($link2)); ");
-                
+                bw.write("  $result = mysqli_query($link2,$sql1.$sql2) or die(mysqli_error($link2));\n ");
+                bw.write("\tif (!$result) {\n" +
+"		$flag = false;\n" +
+"		echo \"Error details: \" . mysqli_error($link2) . \".\";\n" +
+"	}");
                 
                 
             }//fim do primeiro if que verifica se é multivalorado ou não
@@ -263,7 +266,11 @@ public class CadInsertGen {
                        bw.newLine();
                        bw.newLine();
                       
-                       bw.write("    $result = mysqli_query($link2,$sql) or die(mysqli_error($link2)); ;");
+                       bw.write("    $result = mysqli_query($link2,$sql) or die(mysqli_error($link2)); \n");
+                       bw.write("\tif (!$result) {\n" +
+"		$flag = false;\n" +
+"		echo \"Error details: \" . mysqli_error($link2) . \".\";\n" +
+"	}");
                        bw.newLine();
                        bw.write("    }");
                        bw.newLine();
@@ -273,6 +280,15 @@ public class CadInsertGen {
                 
             }// achando uma tabela que tem multivalorado
                        bw.newLine();
+                       bw.write("\tif ($flag) {\n" +
+"		mysqli_commit($link2);\n" +
+"		echo \"\\nCadastro realizado com sucesso!\";\n" +
+"	} else {\n" +
+"		mysqli_rollback($link2);\n" +
+"		echo \"\\nErro no cadastro!\";\n" +
+"	}\n" +
+"\n" +
+"mysqli_close($link2);\n\n");
                        bw.write("?>");
                        
             
@@ -311,6 +327,8 @@ public class CadInsertGen {
                 bw.newLine();
                 
                 bw.write("  $link2 = mysqli_connect($hostname, $usuario, $senha, $banco) or die (\"Erro ao conectar!<br>\");");
+                bw.write("\n\n\tmysqli_autocommit($link2, false);\n" +
+"	$flag = true;");
                 bw.newLine();
                 
     
