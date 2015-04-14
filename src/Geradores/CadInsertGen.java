@@ -4,6 +4,7 @@ package Geradores;
 import ModeloRel.Coluna;
 import ModeloRel.ModeloR;
 import ModeloRel.Tabela;
+import ProjetoInfo.ProjetoInfo;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -20,10 +21,12 @@ public class CadInsertGen {
     
     ModeloR modelor;
     String caminho_dir;
+    ProjetoInfo info;
 
-    public CadInsertGen(ModeloR modelor, String caminho_dir) {
+    public CadInsertGen(ModeloR modelor, String caminho_dir, ProjetoInfo info) {
         this.modelor = modelor;
         this.caminho_dir = caminho_dir;
+        this.info = info;
     }
     
     /**
@@ -317,13 +320,13 @@ public class CadInsertGen {
                 bw.newLine();
                 bw.newLine();
                 
-                bw.write("  $banco = \""+nome_banco+"\";");
+                bw.write("  $banco = \""+this.info.banco_nome+"\";");
                 bw.newLine();
-                bw.write("  $usuario = \"root\";");
+                bw.write("  $usuario = \""+this.info.banco_usuario+"\";");
                 bw.newLine();
-                bw.write("  $senha = \"\";");
+                bw.write("  $senha = \""+this.info.banco_senha+"\";");
                 bw.newLine();
-                bw.write("  $hostname = \"localhost\";");
+                bw.write("  $hostname = \""+this.info.banco_servidor+"\";");
                 bw.newLine();
                 
                 bw.write("  $link2 = mysqli_connect($hostname, $usuario, $senha, $banco) or die (\"Erro ao conectar!<br>\");");

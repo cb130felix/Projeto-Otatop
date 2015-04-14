@@ -45,7 +45,7 @@ public class ProjetoGen {
         
         bancoGen = new BancoGen(this.modelor, caminho_dir);
         cadFormGen = new CadFormGen(this.modelor, caminho_dir);
-        cadInsertGen = new CadInsertGen(this.modelor, caminho_dir);
+        cadInsertGen = new CadInsertGen(this.modelor, caminho_dir, info);
         menuGen = new MenuGen(this.modelor, caminho_dir);
         pagNavGen = new PageNavGen(this.modelor, caminho_dir, info);
         jQueryGen = new JQueryGen(this.modelor, caminho_dir);
