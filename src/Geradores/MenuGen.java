@@ -491,7 +491,7 @@ public class MenuGen {
 "   echo \"\n" +
 "   \n" +
 "   <link rel=\\\"stylesheet\\\" href=\\\"../menu/style_menu.css\\\">\n" +
-"   <script src=\\\"http://code.jquery.com/jquery-latest.min.js\\\" type=\\\"text/javascript\\\"></script>\n" +
+"   <script src=\\\"../utilitarios/jquery-1.11.2.js\\\" type=\\\"text/javascript\\\"></script>\n" +
 "   <script src=\\\"../menu/script.js\\\"></script>\n" +
 "   <script src=\\\"../menu/menu.js\\\" type=\\\"text/javascript\\\"></script>\n" +
 "\n" +

@@ -2,7 +2,6 @@ e funcionario forte
 a funcionario nome normal string 50 false false false
 a funcionario telefone multivalorado string 50 false false false
 a funcionario email multivalorado string 50 false false false
-a funcionario nome normal string 50 false false false
 a funcionario cpf normal int 0 true false false
 
 e departamento forte
