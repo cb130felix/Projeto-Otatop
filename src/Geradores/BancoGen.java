@@ -89,8 +89,8 @@ public class BancoGen {
                       estrangeiro.add(tempfk);
                     }
                     
-                    if (!coluna.nullable){
-                      bw.write(" NOT NULL");
+                    if (coluna.nullable){
+                      bw.write(" NULL");
                     }
                     
                  if ((i < this.modelor.tabelas.get(w).colunas.size()) && (temppk.size()>=0)){ bw.write(","); }
