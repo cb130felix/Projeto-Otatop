@@ -82,7 +82,7 @@ public class ProjetoGen {
         
         new File(caminho_dir+"cadastro").mkdir();
         new File(caminho_dir+"cadastro/inserts").mkdir();
-        this.cadInsertGen.gerarCadInserir(this.info.nome_banco);
+        this.cadInsertGen.gerarCadInserir(this.info.banco_nome);
         
         
         new File(caminho_dir+"cadastro/forms").mkdir();
