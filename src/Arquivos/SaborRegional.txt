@@ -9,7 +9,7 @@ a cliente  telefone	multivalorado	string	    64	  false	true	false
 a cliente  id		    normal 		    int	    0	  true	false	true
 
 e venda	  forte
-a venda	    data	normal		date	0	false true false
+a venda	    data	normal		date	0	false false false
 a venda	    id		normal 		int	  0	true	false	true
 
 e produto forte
@@ -34,7 +34,7 @@ a ingrediente quantidade  normal	float	  0	  false	true	false
 a ingrediente id  	      normal 	int	    0	  true	false	true
 
 e compra forte
-a compra    data	normal		date	0	false true 	false
+a compra    data	normal		date	0	false false 	false
 a compra    id		normal 		int	  0	true	false	true
 
 e fornecedor forte

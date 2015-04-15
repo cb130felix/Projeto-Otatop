@@ -77,7 +77,7 @@ public class ModeloR {
                  this.tabelas.get(indice_tabela2).colunas.add( new Coluna(
                        pk,
                        false,
-                       true,
+                       false,
                        this.tabelas.get(indice_tabela1).nome + "_" + this.tabelas.get(indice_tabela1).colunas.get(i).nome,
                        this.tabelas.get(indice_tabela1).colunas.get(i).tipo,
                        this.tabelas.get(indice_tabela1).colunas.get(i).nome,

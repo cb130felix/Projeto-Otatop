@@ -93,6 +93,10 @@ public class BancoGen {
                       bw.write(" NULL");
                     }
                     
+                    else {
+                      bw.write(" NOT NULL");
+                    }
+                    
                  if ((i < this.modelor.tabelas.get(w).colunas.size()) && (temppk.size()>=0)){ bw.write(","); }
                 
                 bw.newLine();
