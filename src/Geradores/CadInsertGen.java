@@ -175,7 +175,7 @@ public class CadInsertGen {
 
                                 }
                             }
-                            if(modelor.tabelas.get(indices.get(z)).colunas.get(j).fk == false){
+                            if((modelor.tabelas.get(indices.get(z)).colunas.get(j).fk == false) && (modelor.tabelas.get(indices.get(z)).colunas.get(j).auto_inc == false)){
                              bw.write("   $"+modelor.tabelas.get(indices.get(z)).colunas.get(j).nome+" = $_POST['"+modelor.tabelas.get(indices.get(z)).colunas.get(j).nome+"'];\n");
                            
                              bw.write("   foreach($"+modelor.tabelas.get(indices.get(z)).colunas.get(j).nome+" as $item){");// TÁ MEIO BICHADO ESSE ITEM AÍ
@@ -213,7 +213,7 @@ public class CadInsertGen {
                                 
                                 for (int j = 0; j < modelor.tabelas.get(indices.get(z)).colunas.size(); j++) {
                                    
-                                    if(modelor.tabelas.get(indices.get(z)).colunas.get(j).fk == false){
+                                    if((modelor.tabelas.get(indices.get(z)).colunas.get(j).fk == false) && (modelor.tabelas.get(indices.get(z)).colunas.get(j).auto_inc == false)){
                                      
                                        // if(j < modelor.tabelas.get(indices.get(z)).colunas.size() - 2){
                                     
@@ -282,6 +282,8 @@ public class CadInsertGen {
                 
                 
             }// achando uma tabela que tem multivalorado
+            
+            
                        bw.newLine();
                        bw.write("\tif ($flag) {\n" +
 "		mysqli_commit($link2);\n" +

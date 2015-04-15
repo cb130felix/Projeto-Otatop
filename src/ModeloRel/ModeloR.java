@@ -364,8 +364,23 @@ public class ModeloR {
                     tabela_temp.campo_multi = 2;
                    
                     tabela_temp.nome = mer.entidades.get(i).atributos.get(j).nome + "_" + mer.entidades.get(i).atributos.get(j).nome_atb;
+                    
+                    //Acrescentando uma coluna pro Id da tabela
                     tabela_temp.colunas.add(new Coluna(
                             true,      
+                            true,
+                            false,
+                            "id_"+mer.entidades.get(i).atributos.get(j).nome_atb ,
+                            "int",
+                            null,
+                            null,
+                            0,
+                            false
+                    ));
+                    
+                    //Adicionando coluna do campo multivalorado
+                    tabela_temp.colunas.add(new Coluna(
+                            false,      
                             false,
                             mer.entidades.get(i).atributos.get(j).nullable,
                             mer.entidades.get(i).atributos.get(j).nome_atb ,
@@ -376,9 +391,11 @@ public class ModeloR {
                             false
                     ));
                     
+                    
+                    
                     this.tabelas.add(tabela_temp);
                     
-                    this.gerarFK(mer.entidades.get(i).nome, tabela_temp.nome, true);
+                    this.gerarFK(mer.entidades.get(i).nome, tabela_temp.nome, false);
                     int indexTbl = this.idTabela(mer.entidades.get(i).nome);
                     this.tabelas.get(indexTbl).campo_multi = 1;
                             

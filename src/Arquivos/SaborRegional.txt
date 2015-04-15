@@ -5,7 +5,7 @@ a cliente  endereco	normal		    string	128	false	true	false
 a cliente  bairro	  normal		    string	64	false	true	false
 a cliente  cidade	  normal		    string	64	false	true	false
 a cliente  email	  multivalorado		    string	128	false	true	false
-a cliente  telefone	multivalorado	string	    64	  false	true	false
+a cliente  telefone	multivalorado	string	    64	  false	false	false
 a cliente  id		    normal 		    int	    0	  true	false	true
 
 e venda	  forte
