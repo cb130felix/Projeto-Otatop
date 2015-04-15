@@ -4,6 +4,6 @@ baseado em um modelo Entidade Relacionamento escrito em um arquivo texto padoniz
 
 Se você quer saber mais sobre o projeto talvez queira dar uma conferida na nossa [wiki](https://github.com/cb130felix/Projeto-Otatop/wiki).
 
-O projeto está atualmente sendo desenvolvido pelos alunos da UPE do curso de Sistemas de informação: Renan felix, Arthur Flôr, Guto Leoni e Klismann Santos.
+O projeto está atualmente sendo desenvolvido pelos alunos da UPE do curso de Sistemas de informação- Renan Felix, Arthur Flôr, Guto Leoni e Klismann Santos- utilizando a linguagem Java para disciplina de POO(Projeto Orientado a Objeto).
 
 LET'S GET IT ON! \ >:C /
