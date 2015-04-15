@@ -1,4 +1,4 @@
-
+//Teste de commit
 import Auxiliares.FixString;
 import Geradores.ProjetoGen;
 import ProjetoInfo.ProjetoInfo;
