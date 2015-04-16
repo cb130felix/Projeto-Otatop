@@ -180,6 +180,7 @@ public class CadInsertGen {
                            
                              bw.write("   foreach($"+modelor.tabelas.get(indices.get(z)).colunas.get(j).nome+" as $item){");// TÁ MEIO BICHADO ESSE ITEM AÍ
                              bw.newLine();
+                             bw.write("\n if($item != ''){");
                              bw.write("    $sql = \"INSERT INTO "+modelor.tabelas.get(indices.get(z)).nome+"(");
 
 
@@ -275,7 +276,7 @@ public class CadInsertGen {
 "		echo \"Error details: \" . mysqli_error($link2) . \".\";\n" +
 "	}");
                        bw.newLine();
-                       bw.write("    }");
+                       bw.write(" }\n   }");
                        bw.newLine();
                        
                     }
