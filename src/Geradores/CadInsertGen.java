@@ -111,10 +111,10 @@ public class CadInsertGen {
              
                 bw.newLine();
                 bw.newLine();
-                bw.write("  $result = mysqli_query($link2,$sql1.$sql2) or die(mysqli_error($link2));\n ");
+                bw.write("  $result = mysqli_query($link2,$sql1.$sql2) or die(mysqli_error($link2));\n\n ");
                 bw.write("\tif (!$result) {\n" +
 "		$flag = false;\n" +
-"		echo \"Error details: \" . mysqli_error($link2) . \".\";\n" +
+"		echo \"Error details: \" . mysqli_error($link2) . \".\";\n\n" +
 "	}");
                 
                 
@@ -167,20 +167,20 @@ public class CadInsertGen {
                                 if(modelor.tabelas.get(modelor.idTabela(fk_nome_tabela)).colunas.get(modelor.idColuna(fk_nome_coluna, fk_nome_tabela)).auto_inc == true){ //Ok, isso foi uma obra de arte. Tô só checando se o campo dessa tabela multivalorada é gerada de um campo com auto_incremento
                                     String nomeCol = modelor.tabelas.get(indices.get(z)).colunas.get(j).nome;
                                     String nomeTab = modelor.tabelas.get(indices.get(z)).nome;
-                                    bw.write("$sqlConsulta = \"SELECT "+ fk_nome_coluna +" from "+ fk_nome_tabela +" ORDER BY "+ fk_nome_coluna +" DESC LIMIT 1\";\n" +
-                                    "	   $result = mysqli_query($link2, $sqlConsulta) or die(mysqli_error($link2)); ; //consulta\n" +
-                                    "	   if (mysqli_num_rows($result) > 0) {\n" +
-                                    "		while($row = mysqli_fetch_assoc($result)) { $"+fk_nome_coluna+" = $row[\""+fk_nome_coluna+"\"]; }\n" +
-                                    "	   }");
+                                    bw.write("    $sqlConsulta = \"SELECT "+ fk_nome_coluna +" from "+ fk_nome_tabela +" ORDER BY "+ fk_nome_coluna +" DESC LIMIT 1\";\n" +
+                                    "\n	$result = mysqli_query($link2, $sqlConsulta) or die(mysqli_error($link2)); ; //consulta\n" +
+                                    "\n	if (mysqli_num_rows($result) > 0) {\n" +
+                                    "\n		while($row = mysqli_fetch_assoc($result)) {\n            $"+fk_nome_coluna+" = $row[\""+fk_nome_coluna+"\"]; \n         }\n\n" +
+                                    "	   }\n\n");
 
                                 }
                             }
                             if((modelor.tabelas.get(indices.get(z)).colunas.get(j).fk == false) && (modelor.tabelas.get(indices.get(z)).colunas.get(j).auto_inc == false)){
                              bw.write("   $"+modelor.tabelas.get(indices.get(z)).colunas.get(j).nome+" = $_POST['"+modelor.tabelas.get(indices.get(z)).colunas.get(j).nome+"'];\n");
                            
-                             bw.write("   foreach($"+modelor.tabelas.get(indices.get(z)).colunas.get(j).nome+" as $item){");// TÁ MEIO BICHADO ESSE ITEM AÍ
+                             bw.write("\n   foreach($"+modelor.tabelas.get(indices.get(z)).colunas.get(j).nome+" as $item){");// TÁ MEIO BICHADO ESSE ITEM AÍ
                              bw.newLine();
-                             bw.write("\n if($item != ''){");
+                             bw.write("\n   if($item != ''){\n\n");
                              bw.write("    $sql = \"INSERT INTO "+modelor.tabelas.get(indices.get(z)).nome+"(");
 
 
@@ -252,10 +252,10 @@ public class CadInsertGen {
                                     //if(y < tab.colunas.size() - 1){
                                         bw.write("\n  if($"+tab.colunas.get(y).nome+"!= ''){  $sql = $sql.'\"'.$"+tab.colunas.get(y).nome+".'\"'; }else{ $sql = $sql.'NULL'; }\n");
                                         if(countPk < numPk-1){
-                                            bw.write("$sql = $sql.',';\n");
+                                            bw.write("\n  $sql = $sql.',';\n");
                                             
                                         }else if(countPk == numPk-1){
-                                            bw.write("$sql = $sql.')';\n");
+                                            bw.write("\n  $sql = $sql.')';\n");
                                       
                                         }
                                         countPk++;
@@ -270,13 +270,13 @@ public class CadInsertGen {
                        bw.newLine();
                        bw.newLine();
                       
-                       bw.write("    $result = mysqli_query($link2,$sql) or die(mysqli_error($link2)); \n");
+                       bw.write("     $result = mysqli_query($link2,$sql) or die(mysqli_error($link2)); \n\n");
                        bw.write("\tif (!$result) {\n" +
 "		$flag = false;\n" +
-"		echo \"Error details: \" . mysqli_error($link2) . \".\";\n" +
+"		echo \"Error details: \" . mysqli_error($link2) . \".\";\n\n" +
 "	}");
                        bw.newLine();
-                       bw.write(" }\n   }");
+                       bw.write("   }\n  }");
                        bw.newLine();
                        
                     }
