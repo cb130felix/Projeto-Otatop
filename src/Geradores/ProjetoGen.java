@@ -90,7 +90,7 @@ public class ProjetoGen {
         new File(caminho_dir+"Cadastro2").mkdir();
         new File(caminho_dir+"Cadastro2/Entidades").mkdir();
         new File(caminho_dir+"Cadastro2/Camadas").mkdir();
-        this.gc.gerarClassesEntidades(this.info.banco_nome);
+        this.gc.gerar(this.info.banco_nome);
         
         
         new File(caminho_dir+"cadastro/forms").mkdir();
