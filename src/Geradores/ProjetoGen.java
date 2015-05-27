@@ -25,6 +25,7 @@ public class ProjetoGen {
     PageNavGen pagNavGen;
     JQueryGen jQueryGen;
     
+    GerarClasses gc;
    
    
     /**
@@ -49,6 +50,8 @@ public class ProjetoGen {
         menuGen = new MenuGen(this.modelor, caminho_dir);
         pagNavGen = new PageNavGen(this.modelor, caminho_dir, info);
         jQueryGen = new JQueryGen(this.modelor, caminho_dir);
+        
+        gc = new GerarClasses(modelor, caminho_dir, info);
     }
     
     public ProjetoGen(){}
@@ -83,6 +86,11 @@ public class ProjetoGen {
         new File(caminho_dir+"cadastro").mkdir();
         new File(caminho_dir+"cadastro/inserts").mkdir();
         this.cadInsertGen.gerarCadInserir(this.info.banco_nome);
+        
+        new File(caminho_dir+"Cadastro2").mkdir();
+        new File(caminho_dir+"Cadastro2/Entidades").mkdir();
+        new File(caminho_dir+"Cadastro2/Camadas").mkdir();
+        this.gc.gerarClassesEntidades(this.info.banco_nome);
         
         
         new File(caminho_dir+"cadastro/forms").mkdir();
