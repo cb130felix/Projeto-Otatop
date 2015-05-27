@@ -75,7 +75,7 @@ public class ProjetoGen {
         
         new File(caminho_dir+"PageNav").mkdir();
         this.pagNavGen.gerarPagNav();
-        
+            
         
         new File(caminho_dir+"menu").mkdir();
         this.menuGen.gerarMenu();

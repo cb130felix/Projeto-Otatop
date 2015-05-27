@@ -1,4 +1,4 @@
-e teste forte
+
 
 e cliente forte
 a cliente  registro	normal		    string	    64	  false	true	false
