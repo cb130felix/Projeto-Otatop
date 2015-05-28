@@ -99,61 +99,57 @@ public class GerarClasses {
             
             }
         
-            for (int i = 0; i < 3; i++) {
-                
-                this.gerarCodigoCamadas(camadas.get(i));
-            
-            }
+        gerarCodigoFachada(camadas.get(0));
+        gerarCodigoRegraNegocio(camadas.get(1));
+        gerarCodigoPersistencia(camadas.get(2));
         
     
     }
     
-    /*
+   
     
-    
-    public void gerarCodigoFachada(){
-    
-    }
-    
-    
-    public void gerarCodigoRegraNegocio(){
-    
-    }
-    
-    
-    public void gerarCodigoPersistencia(){
-    
-    }
-    
-    
-    */
-    
-    
-    public void gerarCodigoCamadas(File arquivo) throws IOException{// fiquei muito em dúvida se eu podia fazer esse método, ou se teria um método pra gerar o código de cada camada
-    
+    public void gerarCodigoFachada(File arquivo) throws IOException{
+        
+        
         FileWriter fw = new FileWriter(arquivo);
         BufferedWriter bw = new BufferedWriter(fw);
         
-        
-        bw.write("<?php\n ");
-        bw.write(" Class "+arquivo.getName().substring(0,arquivo.getName().length()-4)+"{\n");
-        
-        
+        gerarInicioDaClasse(bw, arquivo);
         
         for (int x = 0; x < modelo.tabelas.size(); x++) {
             
-            //coloquei um "_" pra separar por que as tabelas começam com letra minuscula
-            bw.write("\n    public fuction Cadastrar_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+"){\n\n    }");
-            bw.write("\n    public fuction Listar_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+"){\n\n    }");
-            bw.write("\n    public fuction Atualizar_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+"){\n\n    }");
-            bw.write("\n    public fuction Deletar_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+"){\n\n    }\n\n\n");
+            
+            bw.write("public fuction");
+            
+            
         }
         
         
-        bw.write("\n\n  }\n?>");
         bw.close();
+    
     }
     
+    
+    public void gerarCodigoRegraNegocio(File arquivo){
+    
+    }
+    
+    
+    public void gerarCodigoPersistencia(File arquivo){
+    
+    }
+    
+    
+    
+    
+    public void gerarInicioDaClasse(BufferedWriter bw,File arquivo) throws IOException{
+    
+        
+        bw.write("<?php\n ");
+        bw.write(" Class "+arquivo.getName().substring(0,arquivo.getName().length()-4)+"{\n");
+    
+    
+    }
     
     
     public void criarConstrutor(Tabela tabela,BufferedWriter bw) throws IOException{
@@ -190,6 +186,37 @@ public class GerarClasses {
         
     
     }//fim do metodo criar construtores
+    
+    
+    
+    
+    /*
+    public void gerarCodigoCamadas(File arquivo) throws IOException{// fiquei muito em dúvida se eu podia fazer esse método, ou se teria um método pra gerar o código de cada camada
+    
+        FileWriter fw = new FileWriter(arquivo);
+        BufferedWriter bw = new BufferedWriter(fw);
+        
+        
+        bw.write("<?php\n ");
+        bw.write(" Class "+arquivo.getName().substring(0,arquivo.getName().length()-4)+"{\n");
+        
+        
+        
+        for (int x = 0; x < modelo.tabelas.size(); x++) {
+            
+            //coloquei um "_" pra separar por que as tabelas começam com letra minuscula
+            bw.write("\n    public fuction Cadastrar_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+"){\n\n    }");
+            bw.write("\n    public fuction Listar_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+"){\n\n    }");
+            bw.write("\n    public fuction Atualizar_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+"){\n\n    }");
+            bw.write("\n    public fuction Deletar_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+"){\n\n    }\n\n\n");
+        }
+        
+        
+        bw.write("\n\n  }\n?>");
+        bw.close();
+    }
+    
+    */
     
     
     
