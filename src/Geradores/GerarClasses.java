@@ -115,16 +115,18 @@ public class GerarClasses {
         BufferedWriter bw = new BufferedWriter(fw);
         
         gerarInicioDaClasse(bw, arquivo);
+        bw.write("\n   $regra_negocio = new RegraNegocio();\n");
         
-        for (int x = 0; x < modelo.tabelas.size(); x++) {
-            
-            
-            bw.write("public fuction");
-            
-            
-        }
+        bw.write("\n//MÉTODOS CADASTRAR");
+        gerarMetodosCRUD("cadastrar","regra_negocio", bw);// nome da função do CRUD, nome da camada que será chamada, BufferedWriter
+        bw.write("\n//MÉTODOS LISTAR");
+        gerarMetodosCRUD("listar","regra_negocio", bw);
+        bw.write("\n//MÉTODOS ATUALIZAR");
+        gerarMetodosCRUD("atualizar","regra_negocio", bw);
+        bw.write("\n//MÉTODOS DELETAR");
+        gerarMetodosCRUD("deletar","regra_negocio", bw);
         
-        
+        bw.write("\n\n  }\n?>");
         bw.close();
     
     }
@@ -187,7 +189,17 @@ public class GerarClasses {
     
     }//fim do metodo criar construtores
     
+    public void gerarMetodosCRUD(String funcao,String camada,BufferedWriter bw) throws IOException{
     
+        for (int x = 0; x < modelo.tabelas.size(); x++) {
+         
+            bw.write("\n   public fuction "+funcao+"_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+"){\n");
+            bw.write("\n     "+camada+"->"+funcao+"_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+");\n\n");
+            bw.write("   }\n");
+    
+        }
+    
+    }
     
     
     /*
