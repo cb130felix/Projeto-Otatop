@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Guto Leoni
+ * @author Guto Leoni e gay
  */
 public class GerarClasses {
     
