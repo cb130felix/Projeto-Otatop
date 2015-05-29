@@ -110,35 +110,80 @@ public class GerarClasses {
     
     public void gerarCodigoFachada(File arquivo) throws IOException{
         
-        
-        FileWriter fw = new FileWriter(arquivo);
+    FileWriter fw = new FileWriter(arquivo);
         BufferedWriter bw = new BufferedWriter(fw);
+        String camadaPos = new String("regra_negocio");
+        
         
         gerarInicioDaClasse(bw, arquivo);
-        bw.write("\n   $regra_negocio = new RegraNegocio();\n");
+        bw.write("\n   $"+camadaPos+" = new RegraNegocio();\n");
         
         bw.write("\n//MÉTODOS CADASTRAR");
-        gerarMetodosCRUD("cadastrar","regra_negocio", bw);// nome da função do CRUD, nome da camada que será chamada, BufferedWriter
+        gerarMetodosCRUD("cadastrar",camadaPos, bw);// nome da função do CRUD, nome da camada que será chamada, BufferedWriter
         bw.write("\n//MÉTODOS LISTAR");
-        gerarMetodosCRUD("listar","regra_negocio", bw);
+        gerarMetodosCRUD("listar",camadaPos, bw);
         bw.write("\n//MÉTODOS ATUALIZAR");
-        gerarMetodosCRUD("atualizar","regra_negocio", bw);
+        gerarMetodosCRUD("atualizar",camadaPos, bw);
         bw.write("\n//MÉTODOS DELETAR");
-        gerarMetodosCRUD("deletar","regra_negocio", bw);
+        gerarMetodosCRUD("deletar",camadaPos, bw);
         
         bw.write("\n\n  }\n?>");
         bw.close();
-    
+        
     }
     
     
-    public void gerarCodigoRegraNegocio(File arquivo){
+    public void gerarCodigoRegraNegocio(File arquivo) throws IOException{
     
+        
+        FileWriter fw = new FileWriter(arquivo);
+        BufferedWriter bw = new BufferedWriter(fw);
+        String camadaPos = new String("persistencia");
+        
+        
+        gerarInicioDaClasse(bw, arquivo);
+        bw.write("\n   $"+camadaPos+" = new Persistencia();\n");
+        
+        bw.write("\n//MÉTODOS CADASTRAR");
+        gerarMetodosCRUD("cadastrar",camadaPos, bw);// nome da função do CRUD, nome da camada que será chamada, BufferedWriter
+        bw.write("\n//MÉTODOS LISTAR");
+        gerarMetodosCRUD("listar",camadaPos, bw);
+        bw.write("\n//MÉTODOS ATUALIZAR");
+        gerarMetodosCRUD("atualizar",camadaPos, bw);
+        bw.write("\n//MÉTODOS DELETAR");
+        gerarMetodosCRUD("deletar",camadaPos, bw);
+        
+        bw.write("\n\n  }\n?>");
+        bw.close();
+        
+        
     }
     
     
-    public void gerarCodigoPersistencia(File arquivo){
+    public void gerarCodigoPersistencia(File arquivo) throws IOException{
     
+        FileWriter fw = new FileWriter(arquivo);
+        BufferedWriter bw = new BufferedWriter(fw);
+        String camadaPos = new String("banco");
+        
+        
+        gerarInicioDaClasse(bw, arquivo);
+        bw.write("\n   $"+camadaPos+" = new Banco();\n");
+        
+        bw.write("\n//MÉTODOS CADASTRAR");
+        gerarMetodosCRUD("cadastrar",camadaPos, bw);// nome da função do CRUD, nome da camada que será chamada, BufferedWriter
+        bw.write("\n//MÉTODOS LISTAR");
+        gerarMetodosCRUD("listar",camadaPos, bw);
+        bw.write("\n//MÉTODOS ATUALIZAR");
+        gerarMetodosCRUD("atualizar",camadaPos, bw);
+        bw.write("\n//MÉTODOS DELETAR");
+        gerarMetodosCRUD("deletar",camadaPos, bw);
+        
+        bw.write("\n\n  }\n?>");
+        bw.close();
+        
+        
+        
     }
     
     
@@ -194,7 +239,7 @@ public class GerarClasses {
         for (int x = 0; x < modelo.tabelas.size(); x++) {
          
             bw.write("\n   public fuction "+funcao+"_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+"){\n");
-            bw.write("\n     "+camada+"->"+funcao+"_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+");\n\n");
+            bw.write("\n     $"+camada+"->"+funcao+"_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+");\n\n");
             bw.write("   }\n");
     
         }
