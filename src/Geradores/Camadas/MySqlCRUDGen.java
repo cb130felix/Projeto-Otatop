@@ -1,6 +1,7 @@
 
 package Geradores.Camadas;
 
+import Auxiliares.FixString;
 import Geradores.BancoGen;
 import ModeloRel.ModeloR;
 import ProjetoInfo.ProjetoInfo;
@@ -23,6 +24,7 @@ public class MySqlCRUDGen {
     File arqFachada;
     FileWriter fw;
     BufferedWriter bw;
+    FixString fx = new FixString();
     
     public MySqlCRUDGen(ModeloR modelor, String caminho_dir, ProjetoInfo info) {
         this.modelor = modelor;

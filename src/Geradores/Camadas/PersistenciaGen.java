@@ -5,6 +5,7 @@
  */
 package Geradores.Camadas;
 
+import Auxiliares.FixString;
 import Geradores.BancoGen;
 import ModeloRel.ModeloR;
 import ProjetoInfo.ProjetoInfo;
@@ -27,6 +28,7 @@ public class PersistenciaGen {
     File arqFachada;
     FileWriter fw;
     BufferedWriter bw;
+    FixString fx = new FixString();
     
     public PersistenciaGen(ModeloR modelor, String caminho_dir, ProjetoInfo info) {
         this.modelor = modelor;

@@ -28,6 +28,7 @@ public class FachadaGen {
     File arqFachada;
     FileWriter fw;
     BufferedWriter bw;
+    FixString fx = new FixString();
     
     public FachadaGen(ModeloR modelor, String caminho_dir, ProjetoInfo info) {
         this.modelor = modelor;
@@ -118,15 +119,16 @@ public class FachadaGen {
     
     public boolean addCadastrar() throws IOException{
         
-        FixString fx = new FixString();
         
         bw.write("// MÉTODOS PARA CADASTRAR\n ");
         
         for (int x = 0; x < modelor.tabelas.size(); x++) {
             
-            String nome_metodo = fx.criarNomeMetodo("cadastrar", modelor.tabelas.get(x);
+            String nome_metodo = fx.criarNomeMetodo("cadastrar", modelor.tabelas.get(x).nome,'F');
             
-            bw.write("\n    public fuction "+, 'F'+);
+            bw.write("\n    public fuction "+nome_metodo+"(\n");
+            bw.write(nome_metodo);
+            
             
             
         }
