@@ -489,8 +489,8 @@ public class ModeloR {
   public int imprime(){
               
        for (int i=0;i<this.tabelas.size();i++) {
-                int multi = this.tabelas.get(i).campo_multi; 
-                System.out.println("Nome da tabela: " + this.tabelas.get(i).nome + " | CampoMulti: " + multi);
+                
+            System.out.println("Nome da tabela: " + this.tabelas.get(i).nome + " | CampoMulti: " + this.tabelas.get(i).campo_multi);
                 
             for (int w=0;w<this.tabelas.get(i).colunas.size();w++){
                 System.out.print(" | Nome: " + this.tabelas.get(i).colunas.get(w).nome);
