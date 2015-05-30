@@ -3,6 +3,7 @@ package Geradores.Camadas;
 
 import Auxiliares.FixString;
 import Geradores.BancoGen;
+import ModeloRel.Coluna;
 import ModeloRel.ModeloR;
 import ModeloRel.Tabela;
 import ProjetoInfo.ProjetoInfo;
@@ -141,12 +142,27 @@ public class MySqlCRUDGen {
                     
                     if((temp.colunas.get(i).fk == false)&&(temp.colunas.get(i).pk == false)){
                         
-                        bw.write("\n     foreach($"+tb.nome+"->"+temp.colunas.get(i).nome+
-                                " as $"+temp.colunas.get(i).nome+"){\n\n");
+                        Coluna temp_col = temp.colunas.get(i);
+                        
+                        bw.write("\n     foreach($"+tb.nome+"->"+temp_col.nome+
+                                " as $"+temp_col.nome+"){\n\n");
+                       
                     
                     }
                     
                 }// fim do for
+                
+                 bw.write("      $sql = INSERT INTO "+temp.nome+"(");
+                 escreveParenteses("", temp, "");
+                 bw.write(" VALUES (");
+                 
+                 for (int i = 0; i < temp.colunas.size(); i++) {
+                    
+                     
+                     
+                }
+                
+                
                 
                 bw.write("\n      }\n");
             }
