@@ -130,9 +130,13 @@ public class RegraNegGen {
             
             bw.write("\n      $result = mysqli_query($link2, $sqlConsulta) or die(mysqli_error($link2));\n");
             
+            bw.write("      $"+modelor.tabelas.get(x).nome+"->"+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome+
+                    " = $result+1;\n\n");
+            
+            
             fechaConexao();
             
-            bw.write("\n     }");
+            bw.write("\n     }\n");
             }// fim do if
             
             else{
