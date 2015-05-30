@@ -83,7 +83,28 @@ public class FachadaGen {
      //---------- Parte de Renan (inicio)-------------------
      //------------------------------------------------------
     
-    public boolean addListar(){return true;}
+    public boolean addListar(){
+    
+        
+        //bate forte o tambor
+        //eu quero é tic tic
+        
+        //eu quero é tic tic
+        
+        //eu quero é tic tic
+        
+        //eu quero é tic tic
+        
+        //eu quero é tic tic
+        
+        //eu quero é tic tic
+        
+        //eu quero é tic tic
+        
+        //taaaaaaaaaaaaaaaaaaaa
+        return true;
+    
+    }
 
     //------------------------------------------------------
     //---------- Parte de Renan (fim)----------------------
