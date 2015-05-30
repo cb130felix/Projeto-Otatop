@@ -128,6 +128,8 @@ public class RegraNegGen {
                     " FROM "+modelor.tabelas.get(x).nome+" ORDER BY "+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome+
                     "DESC LIMIT 1\";\n");
             
+            bw.write("\n      $result = mysqli_query($link2, $sqlConsulta) or die(mysqli_error($link2));\n");
+            
             fechaConexao();
             
             bw.write("\n     }");
@@ -177,7 +179,7 @@ public class RegraNegGen {
     
     public void fechaConexao() throws IOException{
     
-        bw.write("      mysqli_close($link2);\n");
+        bw.write("\n      mysqli_close($link2);\n");
     
     }
     
