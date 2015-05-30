@@ -92,40 +92,97 @@ public class MySqlCRUDGen {
     
     public boolean addCadastrar() throws IOException{
         
-        int autoI = 0;
         
         for (int x = 0; x < modelor.tabelas.size(); x++) {
-            
-            if(modelor.tabelas.get(x).campo_multi == 0){
-            
-            iniciarMetodo(modelor.tabelas.get(x).nome);
-            criaConexao();
-            
-            
-            bw.write("      $sql = INSERT INTO "+modelor.tabelas.get(x).nome+" (");
-            
-            
                 
-                    
-                    
-                
-                
+            if(modelor.tabelas.get(x).campo_multi != 2){
             
+                criaScriptCadatrar(modelor.tabelas.get(x));
+                
+                }    
             
-            fechaConexao();
             
             }
             
             
             
-        }
-        
-        
-        
-        
         
         return true;}
     
+    
+    public void criaScriptCadatrar(Tabela tabela) throws IOException{
+    
+        Tabela tb = tiraAutoIncremento(tabela);
+        
+        
+        iniciarMetodo(tb.nome);
+        criaConexao();
+        bw.write("      $sql = \"INSERT INTO "+tb.nome+"(");
+        
+        escreveParenteses("", tb, "");
+        
+        bw.write("VALUES (");
+        
+    }
+    
+    /**
+     * Método que remove as colunas autoIncremento de uma tabela
+     * @param tb    é a tabela que srá removida as colunas autoIncremento
+     * @return  retorna a tabela sem nenhum mautoIncremento
+     */
+    public Tabela tiraAutoIncremento(Tabela tb){
+    
+    Tabela temp = new Tabela();
+    
+    
+        temp.campo_multi = tb.campo_multi;
+        temp.nome = tb.nome;
+    
+        for (int x = 0; x < tb.colunas.size(); x++) {
+            
+            if(tb.colunas.get(x).auto_inc != true){
+                
+                temp.colunas.add(tb.colunas.get(x));
+            
+            }
+            
+            
+        }
+    
+    
+    
+    
+    
+    
+    return temp;
+    }
+    
+    public void escreveParenteses(String pre,Tabela tb,String pos) throws IOException{
+    
+            for (int x = 0; x < tb.colunas.size(); x++) {
+            
+            if(x<tb.colunas.size() - 1){
+                
+                bw.write(pre+tb.colunas.get(x).nome+",");
+            
+            }
+            
+            else{
+            
+              bw.write(tb.colunas.get(x).nome+")"+pos);
+            }
+            
+            
+        }
+        
+    
+    }
+    
+    
+    /**
+     * Método que escreve em um arquivo um scrpit em PHP que conecta com o banco de dados
+     * @throws IOException 
+     */
     public void criaConexao() throws IOException{
     
         bw.write("\n\n      $banco = \""+info.banco_nome+"\";\n");
@@ -137,6 +194,11 @@ public class MySqlCRUDGen {
     
     }
     
+    /**
+     * Método que escreve em um arquivo um scrpit em PHP que fecha a conexão com o banco de dados
+     * @throws IOException 
+     */
+    
     public void fechaConexao() throws IOException{
     
         bw.write("\n      mysqli_close($link2);\n");
@@ -145,7 +207,7 @@ public class MySqlCRUDGen {
     
      public void iniciarMetodo(String nome) throws IOException{
     
-            String nome_metodo = fx.criarNomeMetodo("cadastrar",nome,'R');
+            String nome_metodo = fx.criarNomeMetodo("cadastrar",nome,'R');// nome é o nome da tabela
             
             bw.write("\n     public function "+nome_metodo+"(");
             bw.write("$"+nome+"){\n");
