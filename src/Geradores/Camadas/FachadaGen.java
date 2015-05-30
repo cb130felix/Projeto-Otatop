@@ -121,16 +121,9 @@ public class FachadaGen {
         
         bw.write("// MÉTODOS PARA CADASTRAR\n ");
         
-        System.out.println("");
-        // rjguguee
+        bw.write("\n    public");
         
         
-        // rola, rola, rola
-        
-        // BUCETA == CAIXÃO
-        // LALALALA
-        
-        ///girngintgnr
         return true;}
     
     //-------------------------------------------------------
