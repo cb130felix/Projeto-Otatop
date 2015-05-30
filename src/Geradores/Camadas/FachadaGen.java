@@ -59,7 +59,6 @@ public class FachadaGen {
                 "	 }\n" +
                 "	 \n");
     
-        //bw.close();
         return true;
         
         
@@ -67,8 +66,7 @@ public class FachadaGen {
     
     boolean fecharArquivo() throws IOException{
     
-        fw = new FileWriter(arqFachada,true);
-        bw = new BufferedWriter(fw);
+        
         
         bw.write("}\n"
                 + "?>");
@@ -102,14 +100,11 @@ public class FachadaGen {
     public boolean addCadastrar() throws IOException{
         
         
-        //fw = new FileWriter(arqFachada,true); // esse true é pra escrever no final do arquivo
-        //bw = new BufferedWriter(fw);
         
-       // bw.write("// MÉTODOS PARA CADASTRAR\n ");
+        bw.write("// MÉTODOS PARA CADASTRAR\n ");
         
         
         
-        //bw.close();
         return true;}
     
     //-------------------------------------------------------
