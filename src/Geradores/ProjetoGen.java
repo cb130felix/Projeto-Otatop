@@ -1,6 +1,9 @@
 
 package Geradores;
 
+import Geradores.Camadas.CamadasGen;
+import Geradores.Camadas.ClassEntGen;
+import Geradores.Camadas.FachadaGen;
 import ModeloER.MER;
 import ModeloRel.ModeloR;
 import ProjetoInfo.ProjetoInfo;
@@ -25,8 +28,7 @@ public class ProjetoGen {
     PageNavGen pagNavGen;
     JQueryGen jQueryGen;
     
-    GerarClasses gc;
-   
+    CamadasGen camadasGen;
    
     /**
      *  Lê um arquivo com as especificações do modeloER sugerido e o converte para um modelo Relacional.
@@ -51,7 +53,8 @@ public class ProjetoGen {
         pagNavGen = new PageNavGen(this.modelor, caminho_dir, info);
         jQueryGen = new JQueryGen(this.modelor, caminho_dir);
         
-        gc = new GerarClasses(modelor, caminho_dir, info);
+        camadasGen = new CamadasGen(modelor, caminho_dir, info);
+        
     }
     
     public ProjetoGen(){}
@@ -73,6 +76,15 @@ public class ProjetoGen {
     
     public void gerarProjeto() throws IOException{
         
+         /*
+        Cadastro antigo, sem divisão em camadas
+        new File(caminho_dir+"cadastro").mkdir();
+        new File(caminho_dir+"cadastro/inserts").mkdir();
+        this.cadInsertGen.gerarCadInserir(this.info.banco_nome);
+        new File(caminho_dir+"cadastro/forms").mkdir();
+        this.cadFormGen.gerarFormCad();
+        */
+        
         new File(caminho_dir).mkdir();
         this.bancoGen.gerarSQL();
         
@@ -83,21 +95,15 @@ public class ProjetoGen {
         new File(caminho_dir+"menu").mkdir();
         this.menuGen.gerarMenu();
         
-        new File(caminho_dir+"cadastro").mkdir();
-        new File(caminho_dir+"cadastro/inserts").mkdir();
-        this.cadInsertGen.gerarCadInserir(this.info.banco_nome);
+        new File(caminho_dir+"CRUD").mkdir();
+        new File(caminho_dir+"CRUD/Entidades").mkdir();
+        new File(caminho_dir+"CRUD/Camadas").mkdir();
         
-        new File(caminho_dir+"Cadastro2").mkdir();
-        new File(caminho_dir+"Cadastro2/Entidades").mkdir();
-        new File(caminho_dir+"Cadastro2/Camadas").mkdir();
-        this.gc.gerar(this.info.banco_nome);
-        
-        
-        new File(caminho_dir+"cadastro/forms").mkdir();
-        this.cadFormGen.gerarFormCad();
-        
+        this.camadasGen.gerar();
+      
         new File(caminho_dir+"utilitarios").mkdir();
         this.jQueryGen.gerarJQuery();
+        
         
         
     

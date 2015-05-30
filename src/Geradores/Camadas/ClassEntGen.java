@@ -1,5 +1,5 @@
 
-package Geradores;
+package Geradores.Camadas;
 
 import ModeloRel.ModeloR;
 import ModeloRel.Tabela;
@@ -14,34 +14,34 @@ import java.util.ArrayList;
  *
  * @author Guto Leoni
  */
-public class GerarClasses {
+public class ClassEntGen {
     
     ModeloR modelo;
     String diretorio;
     ProjetoInfo projeto;
 
-    public GerarClasses(ModeloR modelo, String diretorio, ProjetoInfo projeto) {
+    public ClassEntGen(ModeloR modelo, String diretorio, ProjetoInfo projeto) {
         this.modelo = modelo;
         this.diretorio = diretorio;
         this.projeto = projeto;
     }
     
-    public void gerar(String nomeBanco) throws IOException{
+    public void gerar() throws IOException{
     
-        gerarClassesEntidades(nomeBanco);
-        gerarCamadas();
+        gerarClassesEntidades();
+       // gerarCamadas();
     
     
     }
     
     
-    public void gerarClassesEntidades(String nomeBanco) throws IOException{// Fiquei em dúvida se a essa string como parametro é necessária, na dúvida deixei =]
+    public void gerarClassesEntidades() throws IOException{// Fiquei em dúvida se a essa string como parametro é necessária, na dúvida deixei =]
     
         for (int x = 0; x < modelo.tabelas.size(); x++) {
          
             if(modelo.tabelas.get(x).campo_multi != 2){
             
-            File arquivo = new File (diretorio+"Cadastro2/Entidades/"+modelo.tabelas.get(x).nome+".php");
+            File arquivo = new File (diretorio+"CRUD/Entidades/"+modelo.tabelas.get(x).nome+".php");
             
             
         if (!arquivo.exists()) {
@@ -76,11 +76,13 @@ public class GerarClasses {
     
     }// fim do método de gerar as classes das entidades
     
+    // ---->>  ATENÇÃO!!! <<----- 
+    //O código abaixo não será mais usados por enquanto
     public void gerarCamadas() throws IOException{
         
         ArrayList <File> camadas = new ArrayList<File>();
         
-        String caminho = diretorio+"Cadastro2/Camadas/";
+        String caminho = diretorio+"CRUD/Camadas/";
         File fachada = new File(caminho+"Fachada.php");
         File Regra = new File(caminho+"RegraNegocio.php");
         File Persistencia = new File (caminho+"Persistencia.php");
