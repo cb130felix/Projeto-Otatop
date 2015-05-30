@@ -45,7 +45,13 @@ public class FixString {
         return temp;
     }
     
-    
+    /**
+     * método que, dadas as palavras passadas como parametro, retorna uma string que será o nome do método
+     * @param acao é o nome da ação que será realizada (cadastrar, listar..)
+     * @param nomeTabela nome da tabela que será realizada a ação
+     * @param LetraFachada primeira letra da fachada que está trabalhando (tem que estar maiuscula)
+     * @return 
+     */
     public String criarNomeMétodo(String acao, String nomeTabela, char LetraFachada){
     
     String primeiraLetra = nomeTabela.substring(0,1).toUpperCase();
