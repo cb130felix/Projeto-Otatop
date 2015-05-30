@@ -91,6 +91,10 @@ public class FachadaGen {
         //temos que pegar eu sei
         //pega-los eu tentarei
         //POKEMON
+        //vai ser grande a emossaaaaaaunz
+        //po-ke-maaaaaaun
+        
+        //eita porra ta foda
         return true;
     
     }
