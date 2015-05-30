@@ -52,7 +52,7 @@ public class FixString {
      * @param LetraFachada primeira letra da fachada que está trabalhando (tem que estar maiuscula)
      * @return 
      */
-    public String criarNomeMétodo(String acao, String nomeTabela, char LetraFachada){
+    public String criarNomeMetodo(String acao, String nomeTabela, char LetraFachada){
     
     String primeiraLetra = nomeTabela.substring(0,1).toUpperCase();
     

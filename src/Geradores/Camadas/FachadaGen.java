@@ -5,6 +5,7 @@
  */
 package Geradores.Camadas;
 
+import Auxiliares.FixString;
 import Geradores.BancoGen;
 import ModeloRel.ModeloR;
 import ProjetoInfo.ProjetoInfo;
@@ -117,11 +118,20 @@ public class FachadaGen {
     
     public boolean addCadastrar() throws IOException{
         
-        
+        FixString fx = new FixString();
         
         bw.write("// MÉTODOS PARA CADASTRAR\n ");
         
-        bw.write("\n    public fuction cadastrar");
+        for (int x = 0; x < modelor.tabelas.size(); x++) {
+            
+            String nome_metodo = fx.criarNomeMetodo("cadastrar", modelor.tabelas.get(x);
+            
+            bw.write("\n    public fuction "+, 'F'+);
+            
+            
+        }
+        
+        
         
         
         return true;}
