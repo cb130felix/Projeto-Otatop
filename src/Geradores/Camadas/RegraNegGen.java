@@ -95,7 +95,13 @@ public class RegraNegGen {
      //---------- Parte de Guto (inicio)-------------------
      //-------------------------------------------------------
     
-    public boolean addCadastrar(){return true;}
+    public boolean addCadastrar(){
+        
+        
+        
+        
+        
+        return true;}
     
     //-------------------------------------------------------
      //---------- Parte de Guto (fim)-------------------
