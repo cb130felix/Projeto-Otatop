@@ -92,6 +92,12 @@ public class FachadaGen {
         
         */
         
+        /*
+        
+        comentário 2
+        
+        */
+        
         
         return true;
     
