@@ -121,7 +121,7 @@ public class FachadaGen {
         
         bw.write("// MÉTODOS PARA CADASTRAR\n ");
         
-        bw.write("\n    public");
+        bw.write("\n    public fuction cadastrar");
         
         
         return true;}

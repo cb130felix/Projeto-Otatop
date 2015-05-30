@@ -53,7 +53,7 @@ public class ClassEntGen {
         BufferedWriter bw = new BufferedWriter(fw);
            
         bw.write("<?php\n");
-        bw.write("  \nClass "+modelo.tabelas.get(x).nome+"{\n");
+        bw.write("  \nclass "+modelo.tabelas.get(x).nome+"{\n");
         bw.write("\n    //atributes");
         
                 for (int i = 0; i < modelo.tabelas.get(x).colunas.size(); i++) {
