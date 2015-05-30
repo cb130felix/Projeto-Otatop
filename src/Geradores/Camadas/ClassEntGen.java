@@ -62,6 +62,28 @@ public class ClassEntGen {
                     
                     
                 }
+                //Adicionando os atributos multivalorados
+                if(modelo.tabelas.get(x).campo_multi == 1){
+                    
+                    ArrayList<Tabela> tblMulti = modelo.tabelas.get(x).acharTabelasMultivaloradas(modelo.tabelas);
+                    
+                    for (int i = 0; i < tblMulti.size(); i++) {
+                        for (int j = 0; j < tblMulti.get(i).colunas.size(); j++) {
+                            
+                            if(tblMulti.get(i).colunas.get(j).fk == false && tblMulti.get(i).colunas.get(j).pk == false){
+                            
+                                bw.write("\n    public $"+tblMulti.get(i).colunas.get(j).nome+"[];");
+                    
+                                
+                            }
+                            
+                            
+                        }
+                    }
+                    
+                    
+                }
+                    
         
         bw.write("\n\n    //methods");
         criarConstrutor(modelo.tabelas.get(x), bw);
@@ -208,15 +230,43 @@ public class ClassEntGen {
         
         for (int x = 0; x < tabela.colunas.size(); x++) {
             
+            bw.write("$"+tabela.colunas.get(x).nome);
             
             if(x < tabela.colunas.size()-1){
                 
-                bw.write("$"+tabela.colunas.get(x).nome+",");
+                bw.write(",");
+                
                 
             }
             else{
             
-               bw.write("$"+tabela.colunas.get(x).nome+"){\n"); 
+                if(tabela.campo_multi == 1){
+                    
+                    ArrayList<Tabela> tblMulti = tabela.acharTabelasMultivaloradas(modelo.tabelas);
+                    
+                    for (int i = 0; i < tblMulti.size(); i++) {
+                        if(i < tblMulti.size()){
+                                     bw.write(",");
+                        }
+                        for (int j = 0; j < tblMulti.get(i).colunas.size(); j++) {
+                            
+                            if(tblMulti.get(i).colunas.get(j).fk == false && tblMulti.get(i).colunas.get(j).pk == false){
+                            
+                                bw.write("$"+tblMulti.get(i).colunas.get(j).nome+"[]");
+                                
+                                
+                            }
+                            
+                            
+                            
+                        }
+                        
+                    }
+                    
+                    
+                }
+                
+               bw.write("){\n"); 
             
             }
             
@@ -227,9 +277,35 @@ public class ClassEntGen {
         for (int x = 0; x < tabela.colunas.size(); x++) {
         
             bw.write("\n     $this->"+tabela.colunas.get(x).nome+" = $"+tabela.colunas.get(x).nome+";\n");
-        
+            
         
         }
+        
+        if(tabela.campo_multi == 1){
+                    
+                    ArrayList<Tabela> tblMulti = tabela.acharTabelasMultivaloradas(modelo.tabelas);
+                    
+                    for (int i = 0; i < tblMulti.size(); i++) {
+                        
+                        for (int j = 0; j < tblMulti.get(i).colunas.size(); j++) {
+                            
+                            if(tblMulti.get(i).colunas.get(j).fk == false && tblMulti.get(i).colunas.get(j).pk == false){
+                            
+                                bw.write("\n     $this->"+tblMulti.get(i).colunas.get(j).nome+"[] = $"+tblMulti.get(i).colunas.get(j).nome+"[];\n");
+            
+                                                              
+                                
+                            }
+                            
+                            
+                            
+                        }
+                        
+                    }
+                    
+                    
+                }
+        
         
         bw.write("\n     }");
         
