@@ -112,15 +112,6 @@ public class FachadaGen {
         
         bw.write("// MÉTODOS PARA CADASTRAR\n ");
         
-        // rola, buceta, caralho, minha rolaa
-        // rola de klisman
-        // rola rola rola
-        
-        
-        
-        //aaaaaaa
-        //aaakakajaj
-        
         
         return true;}
     
