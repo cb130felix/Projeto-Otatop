@@ -101,25 +101,86 @@ public class RegraNegGen {
         
         
         bw.write("// MÉTODOS PARA CADASTRAR\n ");
+        int indice_coluna_pk = 0;
         
         for (int x = 0; x < modelor.tabelas.size(); x++) {
             
-            String nome_metodo = fx.criarNomeMetodo("cadastrar", modelor.tabelas.get(x).nome,'R');
             
-            bw.write("\n     public fuction "+nome_metodo+"(");
-            bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
+            iniciarMetodo(modelor.tabelas.get(x).nome);
             
-            nome_metodo = fx.criarNomeMetodo("cadastrar", modelor.tabelas.get(x).nome,'P');
+            
+            
+            if(modelor.tabelas.get(x).campo_multi == 1){
+            
+                for (int i = 0; i < modelor.tabelas.get(x).colunas.size(); i++) {
+                    
+                    if(modelor.tabelas.get(x).colunas.get(i).pk == true){
+                    
+                        indice_coluna_pk = i;
+                        break;
+                    
+                    }
+                    
+                }
+                
+            criaConexao();
+            bw.write("      $sql_consulta = \"SELECT "+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome+
+                    " FROM "+modelor.tabelas.get(x).nome+" ORDER BY "+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome+
+                    "DESC LIMIT 1\";\n");
+            
+            fechaConexao();
+            
+            bw.write("\n     }");
+            }// fim do if
+            
+            else{
+            
+            String nome_metodo = fx.criarNomeMetodo("cadastrar", modelor.tabelas.get(x).nome,'P');
             
             bw.write("\n     $persistencia->"+nome_metodo+"(");
             bw.write("$"+modelor.tabelas.get(x).nome+");\n");
             bw.write("\n     }\n");
             
             
+            }
+            
+            
+            
         }
         
         
         return true;}
+    
+    
+    public void iniciarMetodo(String nome) throws IOException{
+    
+            String nome_metodo = fx.criarNomeMetodo("cadastrar",nome,'R');
+            
+            bw.write("\n     public fuction "+nome_metodo+"(");
+            bw.write("$"+nome+"){\n");
+    
+    
+    }
+    
+    
+    
+    public void criaConexao() throws IOException{
+    
+        bw.write("\n\n      $banco = \""+info.banco_nome+"\";\n");
+        bw.write("      $usuario = \""+info.banco_usuario+"\";\n");
+        bw.write("      $senha = \""+info.banco_senha+"\";\n");
+        bw.write("      $hostname = \""+info.banco_servidor+"\";\n");
+        bw.write("      $link2 = mysqli_connect($hostname, $usuario, $senha, $banco) or die (\"Erro ao conectar!<br>\");\n\n");
+                
+    
+    }
+    
+    public void fechaConexao() throws IOException{
+    
+        bw.write("      mysqli_close($link2);\n");
+    
+    }
+    
     
     //-------------------------------------------------------
      //---------- Parte de Guto (fim)-------------------
