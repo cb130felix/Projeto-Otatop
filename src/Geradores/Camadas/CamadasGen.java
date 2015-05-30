@@ -5,6 +5,7 @@
  */
 package Geradores.Camadas;
 
+
 import ModeloRel.ModeloR;
 import ProjetoInfo.ProjetoInfo;
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class CamadasGen {
     RegraNegGen rng;
     PersistenciaGen pg;
     MySqlCRUDGen mysql;
+    
     
     public CamadasGen(ModeloR modelo, String diretorio, ProjetoInfo projeto){
    

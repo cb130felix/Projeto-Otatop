@@ -46,4 +46,20 @@ public class FixString {
     }
     
     
+    public String criarNomeMétodo(String acao, String nomeTabela, char LetraFachada){
+    
+    String primeiraLetra = nomeTabela.substring(0,1).toUpperCase();
+    
+    String nomeMetodo = null;
+    
+    nomeMetodo = acao + primeiraLetra + nomeTabela.substring(1, nomeTabela.length())+LetraFachada;
+    
+    
+    return nomeMetodo;
+    }
+    
+    
+    
+    
+    
 }
