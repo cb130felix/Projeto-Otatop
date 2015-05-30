@@ -54,7 +54,7 @@ public class PersistenciaGen {
         bw.write("<?php\n"
                 + "include 'bancodedados.php';\n"
                 + "class Persistencia {\n"
-                + "     var $bancodedados;\n"
+                        + "     var $bancodedados;\n"
                 + "	 function __construct(){\n" 
                 + "		$this->bancodedados = new BancoDeDados();\n" 
                 + "	 }\n"); 
@@ -96,7 +96,30 @@ public class PersistenciaGen {
      //---------- Parte de Guto (inicio)-------------------
      //-------------------------------------------------------
     
-    public boolean addCadastrar(){return true;}
+    public boolean addCadastrar() throws IOException{
+        
+         bw.write("// MÉTODOS PARA CADASTRAR\n ");
+        
+        for (int x = 0; x < modelor.tabelas.size(); x++) {
+            
+            String nome_metodo = fx.criarNomeMetodo("cadastrar", modelor.tabelas.get(x).nome,'P');
+            
+            bw.write("\n     public fuction "+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
+            
+            nome_metodo = fx.criarNomeMetodo("cadastrar", modelor.tabelas.get(x).nome,'B');
+            
+            bw.write("\n     $bancodedados->"+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+");\n");
+            bw.write("\n     }\n");
+            
+            
+        }
+        
+        
+        
+        
+        return true;}
     
     //-------------------------------------------------------
      //---------- Parte de Guto (fim)-------------------

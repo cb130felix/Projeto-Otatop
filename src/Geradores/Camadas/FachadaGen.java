@@ -126,9 +126,14 @@ public class FachadaGen {
             
             String nome_metodo = fx.criarNomeMetodo("cadastrar", modelor.tabelas.get(x).nome,'F');
             
-            bw.write("\n    public fuction "+nome_metodo+"(\n");
-            bw.write(nome_metodo);
+            bw.write("\n     public fuction "+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
             
+            nome_metodo = fx.criarNomeMetodo("cadastrar", modelor.tabelas.get(x).nome,'R');
+            
+            bw.write("\n     $regra_negocio->"+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+");\n");
+            bw.write("\n     }\n");
             
             
         }
