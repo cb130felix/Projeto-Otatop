@@ -136,19 +136,19 @@ public class RegraNegGen {
             
             fechaConexao();
             
-            bw.write("\n     }\n");
+           
             }// fim do if
             
-            else{
+            
             
             String nome_metodo = fx.criarNomeMetodo("cadastrar", modelor.tabelas.get(x).nome,'P');
             
-            bw.write("\n     $persistencia->"+nome_metodo+"(");
+            bw.write("\n      $persistencia->"+nome_metodo+"(");
             bw.write("$"+modelor.tabelas.get(x).nome+");\n");
             bw.write("\n     }\n");
             
             
-            }
+            
             
             
             
@@ -162,7 +162,7 @@ public class RegraNegGen {
     
             String nome_metodo = fx.criarNomeMetodo("cadastrar",nome,'R');
             
-            bw.write("\n     public fuction "+nome_metodo+"(");
+            bw.write("\n     public function "+nome_metodo+"(");
             bw.write("$"+nome+"){\n");
     
     

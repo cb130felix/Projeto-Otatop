@@ -4,6 +4,7 @@ package Geradores.Camadas;
 import Auxiliares.FixString;
 import Geradores.BancoGen;
 import ModeloRel.ModeloR;
+import ModeloRel.Tabela;
 import ProjetoInfo.ProjetoInfo;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -89,7 +90,35 @@ public class MySqlCRUDGen {
      //---------- Parte de Guto (inicio)-------------------
      //-------------------------------------------------------
     
-    public boolean addCadastrar(){
+    public boolean addCadastrar() throws IOException{
+        
+        int autoI = 0;
+        
+        for (int x = 0; x < modelor.tabelas.size(); x++) {
+            
+            if(modelor.tabelas.get(x).campo_multi == 0){
+            
+            iniciarMetodo(modelor.tabelas.get(x).nome);
+            criaConexao();
+            
+            
+            bw.write("      $sql = INSERT INTO "+modelor.tabelas.get(x).nome+" (");
+            
+            
+                
+                    
+                    
+                
+                
+            
+            
+            fechaConexao();
+            
+            }
+            
+            
+            
+        }
         
         
         
@@ -97,6 +126,48 @@ public class MySqlCRUDGen {
         
         return true;}
     
+    public void criaConexao() throws IOException{
+    
+        bw.write("\n\n      $banco = \""+info.banco_nome+"\";\n");
+        bw.write("      $usuario = \""+info.banco_usuario+"\";\n");
+        bw.write("      $senha = \""+info.banco_senha+"\";\n");
+        bw.write("      $hostname = \""+info.banco_servidor+"\";\n");
+        bw.write("      $link2 = mysqli_connect($hostname, $usuario, $senha, $banco) or die (\"Erro ao conectar!<br>\");\n\n");
+                
+    
+    }
+    
+    public void fechaConexao() throws IOException{
+    
+        bw.write("\n      mysqli_close($link2);\n");
+    
+    }
+    
+     public void iniciarMetodo(String nome) throws IOException{
+    
+            String nome_metodo = fx.criarNomeMetodo("cadastrar",nome,'R');
+            
+            bw.write("\n     public function "+nome_metodo+"(");
+            bw.write("$"+nome+"){\n");
+    
+    
+    }
+    
+    
+    public void inserTabelasNormais(Tabela tb) throws IOException{
+    
+        for (int x = 0; x < tb.colunas.size(); x++) {
+            
+            
+            
+            
+        }
+    
+        bw.write("VALUES \"\n");
+        
+    }
+     
+     
     //-------------------------------------------------------
      //---------- Parte de Guto (fim)-------------------
      //-------------------------------------------------------
