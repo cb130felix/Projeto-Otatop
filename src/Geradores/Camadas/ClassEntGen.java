@@ -72,7 +72,7 @@ public class ClassEntGen {
                             
                             if(tblMulti.get(i).colunas.get(j).fk == false && tblMulti.get(i).colunas.get(j).pk == false){
                             
-                                bw.write("\n    public $"+tblMulti.get(i).colunas.get(j).nome+"[];");
+                                bw.write("\n    public $"+tblMulti.get(i).colunas.get(j).nome+"; // array");
                     
                                 
                             }
@@ -226,7 +226,7 @@ public class ClassEntGen {
     public void criarConstrutor(Tabela tabela,BufferedWriter bw) throws IOException{
     
         
-        bw.write("\n     fuction __construct(");
+        bw.write("\n     function __construct(");
         
         for (int x = 0; x < tabela.colunas.size(); x++) {
             
@@ -252,7 +252,7 @@ public class ClassEntGen {
                             
                             if(tblMulti.get(i).colunas.get(j).fk == false && tblMulti.get(i).colunas.get(j).pk == false){
                             
-                                bw.write("$"+tblMulti.get(i).colunas.get(j).nome+"[]");
+                                bw.write("$"+tblMulti.get(i).colunas.get(j).nome+"");
                                 
                                 
                             }
@@ -291,7 +291,7 @@ public class ClassEntGen {
                             
                             if(tblMulti.get(i).colunas.get(j).fk == false && tblMulti.get(i).colunas.get(j).pk == false){
                             
-                                bw.write("\n     $this->"+tblMulti.get(i).colunas.get(j).nome+"[] = $"+tblMulti.get(i).colunas.get(j).nome+"[];\n");
+                                bw.write("\n     $this->"+tblMulti.get(i).colunas.get(j).nome+" = $"+tblMulti.get(i).colunas.get(j).nome+";\n");
             
                                                               
                                 
@@ -316,7 +316,7 @@ public class ClassEntGen {
     
         for (int x = 0; x < modelo.tabelas.size(); x++) {
          
-            bw.write("\n   public fuction "+funcao+"_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+"){\n");
+            bw.write("\n   public function "+funcao+"_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+"){\n");
             bw.write("\n     $"+camada+"->"+funcao+"_"+modelo.tabelas.get(x).nome+"($"+modelo.tabelas.get(x).nome+");\n\n");
             bw.write("   }\n");
     
