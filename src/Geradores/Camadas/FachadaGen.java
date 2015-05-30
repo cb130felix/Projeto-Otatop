@@ -86,22 +86,11 @@ public class FachadaGen {
     public boolean addListar(){
     
         
-        //bate forte o tambor
-        //eu quero é tic tic
-        
-        //eu quero é tic tic
-        
-        //eu quero é tic tic
-        
-        //eu quero é tic tic
-        
-        //eu quero é tic tic
-        
-        //eu quero é tic tic
-        
-        //eu quero é tic tic
-        
-        //taaaaaaaaaaaaaaaaaaaa
+        //Que bagulho loko cara
+        //pokemon
+        //temos que pegar eu sei
+        //pega-los eu tentarei
+        //POKEMON
         return true;
     
     }
