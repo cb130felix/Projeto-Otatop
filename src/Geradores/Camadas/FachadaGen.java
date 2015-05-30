@@ -122,6 +122,9 @@ public class FachadaGen {
         bw.write("// MÉTODOS PARA CADASTRAR\n ");
         
         System.out.println("");
+        // rjguguee
+        
+        ///girngintgnr
         return true;}
     
     //-------------------------------------------------------
