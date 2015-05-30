@@ -86,7 +86,7 @@ public class FachadaGen {
     public boolean addListar(){
     
         
-        //Que bagulho loko cara
+        
         //pokemon
         //temos que pegar eu sei
         //pega-los eu tentarei
@@ -94,7 +94,7 @@ public class FachadaGen {
         //vai ser grande a emossaaaaaaunz
         //po-ke-maaaaaaun
         
-        //eita porra ta foda
+        
         return true;
     
     }
