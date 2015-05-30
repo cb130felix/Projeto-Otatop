@@ -97,7 +97,7 @@ public class MySqlCRUDGen {
                 
             if(modelor.tabelas.get(x).campo_multi != 2){
             
-                criaScriptCadatrar(modelor.tabelas.get(x));
+                criaScriptCadastrar(modelor.tabelas.get(x));
                 
                 }    
             
@@ -110,7 +110,7 @@ public class MySqlCRUDGen {
         return true;}
     
     
-    public void criaScriptCadatrar(Tabela tabela) throws IOException{
+    public void criaScriptCadastrar(Tabela tabela) throws IOException{
     
         Tabela tb = tiraAutoIncremento(tabela);
         
@@ -121,8 +121,43 @@ public class MySqlCRUDGen {
         
         escreveParenteses("", tb, "");
         
-        bw.write("VALUES (");
+        bw.write(" VALUES (");
         
+        escreveParenteses("$"+tb.nome+"->", tb, "\";\n");
+        
+        
+        bw.write("      $result = mysqli_query($link2,$sql) or die(mysqli_error($link2));\n");
+        
+        
+        if(tb.campo_multi == 1){
+            
+            ArrayList<Tabela> multivaloradas = tb.acharTabelasMultivaloradas(modelor.tabelas);
+            
+            for (int x = 0; x < multivaloradas.size(); x++) {
+                
+                Tabela temp = tiraAutoIncremento(multivaloradas.get(x));
+                
+                for (int i = 0; i < temp.colunas.size(); i++) {
+                    
+                    if((temp.colunas.get(i).fk == false)&&(temp.colunas.get(i).pk == false)){
+                        
+                        bw.write("\n     foreach($"+tb.nome+"->"+temp.colunas.get(i).nome+
+                                " as $"+temp.colunas.get(i).nome+"){\n\n");
+                    
+                    }
+                    
+                }// fim do for
+                
+                bw.write("\n      }\n");
+            }
+            
+            
+                   
+        
+        }
+        
+        fechaConexao();
+        bw.write("\n     }\n");
     }
     
     /**
@@ -169,7 +204,7 @@ public class MySqlCRUDGen {
             
             else{
             
-              bw.write(tb.colunas.get(x).nome+")"+pos);
+              bw.write(pre+tb.colunas.get(x).nome+")"+pos);
             }
             
             
@@ -216,18 +251,7 @@ public class MySqlCRUDGen {
     }
     
     
-    public void inserTabelasNormais(Tabela tb) throws IOException{
     
-        for (int x = 0; x < tb.colunas.size(); x++) {
-            
-            
-            
-            
-        }
-    
-        bw.write("VALUES \"\n");
-        
-    }
      
      
     //-------------------------------------------------------
