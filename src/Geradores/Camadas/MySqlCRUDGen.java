@@ -122,17 +122,30 @@ public class MySqlCRUDGen {
         
         escreveParenteses("", tb, "");
         
-        bw.write(" VALUES (");
+        bw.write(" VALUES (\"");
         
-        escreveParenteses("$"+tb.nome+"->", tb, "\";\n");
+        escreveParenteses2(".$"+tb.nome+"->", tb, "\";\n");
         
         
         bw.write("      $result = mysqli_query($link2,$sql) or die(mysqli_error($link2));\n");
         
         
         if(tb.campo_multi == 1){
-            
+        
+            Coluna temp_col = new Coluna();
+            Coluna PK = new Coluna();
             ArrayList<Tabela> multivaloradas = tb.acharTabelasMultivaloradas(modelor.tabelas);
+            
+            for (int i = 0; i < tabela.colunas.size(); i++) {
+                
+                if(tabela.colunas.get(i).pk == true){
+                
+                    PK = tabela.colunas.get(i);
+                    
+                }
+                
+            }
+            
             
             for (int x = 0; x < multivaloradas.size(); x++) {
                 
@@ -142,27 +155,27 @@ public class MySqlCRUDGen {
                     
                     if((temp.colunas.get(i).fk == false)&&(temp.colunas.get(i).pk == false)){
                         
-                        Coluna temp_col = temp.colunas.get(i);
+                        temp_col = temp.colunas.get(i);
                         
                         bw.write("\n     foreach($"+tb.nome+"->"+temp_col.nome+
                                 " as $"+temp_col.nome+"){\n\n");
-                       
                     
                     }
                     
+                    
+                    
                 }// fim do for
                 
-                 bw.write("      $sql = INSERT INTO "+temp.nome+"(");
+                
+                
+                 bw.write("      $sql = \"INSERT INTO "+temp.nome+"(");
                  escreveParenteses("", temp, "");
-                 bw.write(" VALUES (");
+                 bw.write(" VALUES (\"");
                  
-                 for (int i = 0; i < temp.colunas.size(); i++) {
-                    
-                     
-                     
-                }
-                
-                
+                 bw.write(".$"+temp_col.nome+".\",\".$"+tb.nome+"->"+PK.nome+".\")\";");
+                 
+                 bw.write("\n      $result = mysqli_query($link2,$sql) or die(mysqli_error($link2));\n");
+                 
                 
                 bw.write("\n      }\n");
             }
@@ -228,6 +241,29 @@ public class MySqlCRUDGen {
         
     
     }
+    
+    
+    public void escreveParenteses2(String pre,Tabela tb,String pos) throws IOException{
+    
+            for (int x = 0; x < tb.colunas.size(); x++) {
+            
+            if(x<tb.colunas.size() - 1){
+                
+                bw.write(pre+tb.colunas.get(x).nome+".\",\"");
+            
+            }
+            
+            else{
+            
+              bw.write(pre+tb.colunas.get(x).nome+".\")"+pos);
+            }
+            
+            
+        }
+        
+    
+    }
+    
     
     
     /**
