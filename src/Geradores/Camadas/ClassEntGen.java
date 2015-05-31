@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Guto Leoni
+ * @author Arthur, Guto, Renan
  */
 public class ClassEntGen {
     
@@ -29,11 +29,43 @@ public class ClassEntGen {
     public void gerar() throws IOException{
     
         gerarClassesEntidades();
+        gerarClasseEntidadePai();
        // gerarCamadas();
     
     
     }
     
+    public void gerarClasseEntidadePai() throws IOException{
+        
+           
+        File arquivo = new File (diretorio+"CRUD/Entidades/entidades.php");
+    
+        if (!arquivo.exists()) {
+          
+          arquivo.createNewFile();
+          
+        }
+        
+        FileWriter fw = new FileWriter(arquivo);
+        BufferedWriter bw = new BufferedWriter(fw);
+        
+        bw.write("<?php\n");
+         for (int x = 0; x < modelo.tabelas.size(); x++) {
+         
+            if(modelo.tabelas.get(x).campo_multi != 2){
+            
+             bw.write("include '"+modelo.tabelas.get(x).nome+".php';\n");
+        
+            }
+            
+        }
+        
+        bw.write("?>\n");    
+        
+        bw.close();
+        fw.close();
+        
+    }
     
     public void gerarClassesEntidades() throws IOException{// Fiquei em dúvida se a essa string como parametro é necessária, na dúvida deixei =]
     

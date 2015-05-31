@@ -2,7 +2,6 @@
 package Geradores.Camadas;
 
 import Auxiliares.FixString;
-import Geradores.BancoGen;
 import ModeloRel.Coluna;
 import ModeloRel.ModeloR;
 import ModeloRel.Tabela;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Renan
+ * @author Arthur, Guto, Renan
  */
 public class MySqlCRUDGen {
     
@@ -77,7 +76,30 @@ public class MySqlCRUDGen {
      //---------- Parte de Renan (inicio)-------------------
      //------------------------------------------------------
     
-    public boolean addListar(){return true;}
+    public boolean addListar() throws IOException{
+    
+        
+        bw.write("// MÉTODOS PARA LISTAR\n ");
+        
+        for (int x = 0; x < modelor.tabelas.size(); x++) {
+            
+            String nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'B');
+            
+            bw.write("\n     public function "+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
+            
+          
+            bw.write("\n     echo 'teste';");
+          
+            bw.write("\n     }\n");
+            
+            
+        }
+        
+        
+        return true;
+    
+    }
 
     //------------------------------------------------------
     //---------- Parte de Renan (fim)----------------------

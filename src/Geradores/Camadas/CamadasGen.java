@@ -12,7 +12,7 @@ import java.io.IOException;
 
 /**
  *
- * @author Renan
+ * @author Arthur, Guto, Renan
  */
 public class CamadasGen {
     
