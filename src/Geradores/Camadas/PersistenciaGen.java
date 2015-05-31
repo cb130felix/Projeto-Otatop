@@ -120,6 +120,12 @@ public class PersistenciaGen {
      //---------- Parte de Guto (inicio)-------------------
      //-------------------------------------------------------
     
+    
+    /**
+     * Método que cria o Scrpit PHP da funções de cadastrar da camada persistência
+     * @return
+     * @throws IOException 
+     */
     public boolean addCadastrar() throws IOException{
         
          bw.write("// MÉTODOS PARA CADASTRAR\n ");

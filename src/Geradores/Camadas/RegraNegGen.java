@@ -118,6 +118,12 @@ public class RegraNegGen {
      //---------- Parte de Guto (inicio)-------------------
      //-------------------------------------------------------
     
+    /**
+     * Método que cria o Scrpit PHP da funções de cadastrar da camada regra de negócio
+     * @return
+     * @throws IOException 
+     */
+    
     public boolean addCadastrar() throws IOException{
         
         
@@ -188,6 +194,11 @@ public class RegraNegGen {
         return true;}
     
     
+     /**
+     * método que escreve o início do método de cadastro em PHP
+     * @param nome é o nome da tabela que será inserida
+     * @throws IOException 
+    */
     public void iniciarMetodo(String nome) throws IOException{
     
             String nome_metodo = fx.criarNomeMetodo("cadastrar",nome,'R');
@@ -199,7 +210,10 @@ public class RegraNegGen {
     }
     
     
-    
+    /**
+     * Método que escreve em um arquivo um scrpit em PHP que conecta com o banco de dados
+     * @throws IOException 
+     */
     public void criaConexao() throws IOException{
     
         bw.write("\n\n      $banco = \""+info.banco_nome+"\";\n");
@@ -211,6 +225,11 @@ public class RegraNegGen {
     
     }
     
+    
+/**
+     * Método que escreve em um arquivo um scrpit em PHP que fecha a conexão com o banco de dados
+     * @throws IOException 
+     */
     public void fechaConexao() throws IOException{
     
         bw.write("\n      mysqli_close($link2);\n");

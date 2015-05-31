@@ -91,6 +91,11 @@ public class MySqlCRUDGen {
      //---------- Parte de Guto (inicio)-------------------
      //-------------------------------------------------------
     
+    /**
+     * Método que cria o Scrpit PHP da funções de cadastrar no banco de dados MySql
+     * @return
+     * @throws IOException 
+     */
     public boolean addCadastrar() throws IOException{
         
         
@@ -110,7 +115,11 @@ public class MySqlCRUDGen {
         
         return true;}
     
-    
+    /**
+     * Método que escreve todo o Scrpit PHP que insere no banco de dados (nele é criado também a conexão com o banco e o encerramento desta conexão).
+     * @param tabela é a tabela do banco de dados que os dados serão inseridos
+     * @throws IOException 
+     */
     public void criaScriptCadastrar(Tabela tabela) throws IOException{
     
         Tabela tb = tiraAutoIncremento(tabela);
@@ -221,6 +230,14 @@ public class MySqlCRUDGen {
     return temp;
     }
     
+    
+    /**
+     * método que escreve os campos entre parenteses que existem no script de inserção de dados numa tabela em SQL
+     * @param pre prefixo que será adicionado antes do nome do atributo
+     * @param tb  tabela que contem as colunas que serão os atributos
+     * @param pos posfixo que será adicionado depois do nome do atributo
+     * @throws IOException 
+     */
     public void escreveParenteses(String pre,Tabela tb,String pos) throws IOException{
     
             for (int x = 0; x < tb.colunas.size(); x++) {
@@ -243,6 +260,13 @@ public class MySqlCRUDGen {
     }
     
     
+    /**
+     * variação do método que escreve os campos entre parenteses que existem no script de inserção de dados numa tabela em SQL
+     * @param pre prefixo que será adicionado antes do nome do atributo
+     * @param tb  tabela que contem as colunas que serão os atributos
+     * @param pos posfixo que será adicionado depois do nome do atributo
+     * @throws IOException 
+     */
     public void escreveParenteses2(String pre,Tabela tb,String pos) throws IOException{
     
             for (int x = 0; x < tb.colunas.size(); x++) {
@@ -285,14 +309,19 @@ public class MySqlCRUDGen {
      * Método que escreve em um arquivo um scrpit em PHP que fecha a conexão com o banco de dados
      * @throws IOException 
      */
-    
     public void fechaConexao() throws IOException{
     
         bw.write("\n      mysqli_close($link2);\n");
     
     }
     
-     public void iniciarMetodo(String nome) throws IOException{
+    
+    /**
+     * método que escreve o início do método de cadastro em PHP
+     * @param nome é o nome da tabela que será inserida
+     * @throws IOException 
+     */
+    public void iniciarMetodo(String nome) throws IOException{
     
             String nome_metodo = fx.criarNomeMetodo("cadastrar",nome,'B');// nome é o nome da tabela
             

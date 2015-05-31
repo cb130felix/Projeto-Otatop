@@ -121,7 +121,11 @@ public class FachadaGen {
     //-------------------------------------------------------
      //---------- Parte de Guto (inicio)-------------------
      //-------------------------------------------------------
-    
+    /**
+     * Método que cria o Scrpit PHP da funções de cadastrar da camada fachada
+     * @return
+     * @throws IOException 
+     */
     public boolean addCadastrar() throws IOException{
         
         
