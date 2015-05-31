@@ -133,7 +133,7 @@ public class PersistenciaGen {
             
             nome_metodo = fx.criarNomeMetodo("cadastrar", modelor.tabelas.get(x).nome,'B');
             
-            bw.write("\n     $bancodedados->"+nome_metodo+"(");
+            bw.write("\n     $this->bancodedados->"+nome_metodo+"(");
             bw.write("$"+modelor.tabelas.get(x).nome+");\n");
             bw.write("\n     }\n");
             
@@ -171,7 +171,7 @@ public class PersistenciaGen {
       
         abrirArquivo();
         
-        //addCadastrar();
+        addCadastrar();
         addListar();
         addDeletar();
         addAtualizar();

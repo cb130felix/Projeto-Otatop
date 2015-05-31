@@ -136,7 +136,7 @@ public class FachadaGen {
             
             nome_metodo = fx.criarNomeMetodo("cadastrar", modelor.tabelas.get(x).nome,'R');
             
-            bw.write("\n     $regra_negocio->"+nome_metodo+"(");
+            bw.write("\n     $this->regra_negocio->"+nome_metodo+"(");
             bw.write("$"+modelor.tabelas.get(x).nome+");\n");
             bw.write("\n     }\n");
             
@@ -174,7 +174,7 @@ public class FachadaGen {
       
         abrirArquivo();
         
-        //addCadastrar();
+        addCadastrar();
         addListar();
         addDeletar();
         addAtualizar();

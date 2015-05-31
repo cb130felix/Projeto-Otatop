@@ -164,7 +164,7 @@ public class RegraNegGen {
             
             String nome_metodo = fx.criarNomeMetodo("cadastrar", modelor.tabelas.get(x).nome,'P');
             
-            bw.write("\n      $persistencia->"+nome_metodo+"(");
+            bw.write("\n      $this->persistencia->"+nome_metodo+"(");
             bw.write("$"+modelor.tabelas.get(x).nome+");\n");
             bw.write("\n     }\n");
             
@@ -235,7 +235,7 @@ public class RegraNegGen {
       
         abrirArquivo();
         
-        //addCadastrar();
+        addCadastrar();
         addListar();
         addDeletar();
         addAtualizar();
