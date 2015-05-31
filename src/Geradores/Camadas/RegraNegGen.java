@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Geradores.Camadas;
 
 import Auxiliares.FixString;
-import Geradores.BancoGen;
 import ModeloRel.ModeloR;
 import ProjetoInfo.ProjetoInfo;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  *
@@ -34,7 +28,7 @@ public class RegraNegGen {
         this.modelor = modelor;
         this.caminho_dir = caminho_dir;
         this.info = info;
-        arq = new File (caminho_dir+"CRUD/camadas/regranegocio.php");
+        arq = new File (caminho_dir+"CRUD/Camadas/regranegocio.php");
         
     }
     
@@ -183,11 +177,6 @@ public class RegraNegGen {
             bw.write("$"+modelor.tabelas.get(x).nome+");\n");
             bw.write("\n     }\n");
             
-            
-            
-            
-            
-            
         }
         
         
@@ -243,19 +232,28 @@ public class RegraNegGen {
     
 
 
-    //------------------------------------------------------
-    //---------- Parte de Arthur (fim)----------------------
+    //-------------------------------------------------------
+    //---------- Parte de Arthur (inicio)--------------------
     //-------------------------------------------------------
        
-    public boolean addDeletar(){return true;}
+    public boolean addDeletar(){
+        
+        
+        return true;
+    }
     
-    //-------------------------------------------------------
-     //---------- Parte de Arthur (inicio)-------------------
-     //-------------------------------------------------------
     
 
     
-    public boolean addAtualizar(){return true;}
+    public boolean addAtualizar(){
+        
+        
+        return true;
+    }
+    
+    //-------------------------------------------------------
+    //---------- Parte de Arthur (fim)-----------------------
+    //-------------------------------------------------------
     
     
     //Essa método gera o arquivo completo

@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Geradores.Camadas;
 
 import Auxiliares.FixString;
-import Geradores.BancoGen;
 import ModeloRel.ModeloR;
 import ProjetoInfo.ProjetoInfo;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  *
@@ -34,7 +28,7 @@ public class PersistenciaGen {
         this.modelor = modelor;
         this.caminho_dir = caminho_dir;
         this.info = info;
-        arqFachada = new File (caminho_dir+"CRUD/camadas/persistencia.php");
+        arqFachada = new File (caminho_dir+"CRUD/Camadas/persistencia.php");
         
     }
     

@@ -32,7 +32,7 @@ public class MySqlCRUDGen {
         this.modelor = modelor;
         this.caminho_dir = caminho_dir;
         this.info = info;
-        arqFachada = new File (caminho_dir+"CRUD/camadas/bancodedados.php");
+        arqFachada = new File (caminho_dir+"CRUD/Camadas/bancodedados.php");
         
     }
     
