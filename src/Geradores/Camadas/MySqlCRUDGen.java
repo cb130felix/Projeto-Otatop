@@ -122,9 +122,9 @@ public class MySqlCRUDGen {
         
         escreveParenteses("", tb, "");
         
-        bw.write(" VALUES (\"");
+        bw.write(" VALUES (");
         
-        escreveParenteses2(".$"+tb.nome+"->", tb, "\";\n");
+        escreveParenteses2("'$"+tb.nome+"->", tb, "\";\n");
         
         
         bw.write("      $result = mysqli_query($link2,$sql) or die(mysqli_error($link2));\n");
@@ -170,9 +170,9 @@ public class MySqlCRUDGen {
                 
                  bw.write("      $sql = \"INSERT INTO "+temp.nome+"(");
                  escreveParenteses("", temp, "");
-                 bw.write(" VALUES (\"");
+                 bw.write(" VALUES (");
                  
-                 bw.write(".$"+temp_col.nome+".\",\".$"+tb.nome+"->"+PK.nome+".\")\";");
+                 bw.write("'$"+temp_col.nome+"',$"+tb.nome+"->"+PK.nome+")\";");
                  
                  bw.write("\n      $result = mysqli_query($link2,$sql) or die(mysqli_error($link2));\n");
                  
@@ -249,13 +249,13 @@ public class MySqlCRUDGen {
             
             if(x<tb.colunas.size() - 1){
                 
-                bw.write(pre+tb.colunas.get(x).nome+".\",\"");
+                bw.write(pre+tb.colunas.get(x).nome+"',");
             
             }
             
             else{
             
-              bw.write(pre+tb.colunas.get(x).nome+".\")"+pos);
+              bw.write(pre+tb.colunas.get(x).nome+"')"+pos);
             }
             
             
@@ -294,7 +294,7 @@ public class MySqlCRUDGen {
     
      public void iniciarMetodo(String nome) throws IOException{
     
-            String nome_metodo = fx.criarNomeMetodo("cadastrar",nome,'R');// nome é o nome da tabela
+            String nome_metodo = fx.criarNomeMetodo("cadastrar",nome,'B');// nome é o nome da tabela
             
             bw.write("\n     public function "+nome_metodo+"(");
             bw.write("$"+nome+"){\n");
@@ -332,7 +332,7 @@ public class MySqlCRUDGen {
       
         abrirArquivo();
         
-        //addCadastrar();
+        addCadastrar();
         addListar();
         addDeletar();
         addAtualizar();

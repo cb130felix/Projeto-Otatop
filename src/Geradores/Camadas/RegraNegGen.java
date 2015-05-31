@@ -147,12 +147,21 @@ public class RegraNegGen {
             criaConexao();
             bw.write("      $sql_consulta = \"SELECT "+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome+
                     " FROM "+modelor.tabelas.get(x).nome+" ORDER BY "+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome+
-                    "DESC LIMIT 1\";\n");
+                    " DESC LIMIT 1\";\n");
             
-            bw.write("\n      $result = mysqli_query($link2, $sqlConsulta) or die(mysqli_error($link2));\n");
+            bw.write("\n      $result = mysqli_query($link2, $sql_consulta) or die(mysqli_error($link2));\n");
             
-            bw.write("      $"+modelor.tabelas.get(x).nome+"->"+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome+
-                    " = $result+1;\n\n");
+            bw.write("\n      if (mysqli_num_rows($result) > 0) {\n");
+            bw.write("         while($row = mysqli_fetch_assoc($result)) {\n\n");
+            bw.write("                $"+modelor.tabelas.get(x).nome+"->"+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome+
+                    " = $row[\""+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome+"\"];\n");
+            bw.write("          }\n      }\n");
+            
+            bw.write("\n      $"+modelor.tabelas.get(x).nome+"->"+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome+
+                    " = "+"$"+modelor.tabelas.get(x).nome+"->"+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome+" + 1;\n");
+            
+            /*bw.write("      $"+modelor.tabelas.get(x).nome+"->"+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome+
+                    " = $result+1;\n\n");*/
             
             
             fechaConexao();
