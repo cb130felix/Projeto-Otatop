@@ -2,8 +2,6 @@
 package Geradores;
 
 import Geradores.Camadas.CamadasGen;
-import Geradores.Camadas.ClassEntGen;
-import Geradores.Camadas.FachadaGen;
 import ModeloER.MER;
 import ModeloRel.ModeloR;
 import ProjetoInfo.ProjetoInfo;
