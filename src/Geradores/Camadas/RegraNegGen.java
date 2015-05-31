@@ -83,7 +83,28 @@ public class RegraNegGen {
      //---------- Parte de Renan (inicio)-------------------
      //------------------------------------------------------
     
-    public boolean addListar(){return true;}
+    public boolean addListar() throws IOException{
+        
+        
+        for (int x = 0; x < modelor.tabelas.size(); x++) {
+            
+            String nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'R');
+            
+            bw.write("\n     public function "+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
+            
+            nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'P');
+            
+            bw.write("\n     $this->persistencia->"+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+");\n");
+            bw.write("\n     }\n");
+            
+            
+        }
+        
+        return true;
+    
+    }
 
     //------------------------------------------------------
     //---------- Parte de Renan (fim)----------------------
@@ -214,7 +235,7 @@ public class RegraNegGen {
       
         abrirArquivo();
         
-        addCadastrar();
+        //addCadastrar();
         addListar();
         addDeletar();
         addAtualizar();

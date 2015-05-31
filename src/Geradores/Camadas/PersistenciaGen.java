@@ -82,7 +82,31 @@ public class PersistenciaGen {
      //---------- Parte de Renan (inicio)-------------------
      //------------------------------------------------------
     
-    public boolean addListar(){return true;}
+    public boolean addListar() throws IOException{
+        
+        bw.write("// MÉTODOS PARA CADASTRAR\n ");
+        
+        for (int x = 0; x < modelor.tabelas.size(); x++) {
+            
+            String nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'P');
+            
+            bw.write("\n     public function "+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
+            
+            nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'B');
+            
+            bw.write("\n     $this->bancodedados->"+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+");\n");
+            bw.write("\n     }\n");
+            
+            
+        }
+        
+        
+        
+        return true;
+    
+    }
 
     //------------------------------------------------------
     //---------- Parte de Renan (fim)----------------------
@@ -147,7 +171,7 @@ public class PersistenciaGen {
       
         abrirArquivo();
         
-        addCadastrar();
+        //addCadastrar();
         addListar();
         addDeletar();
         addAtualizar();

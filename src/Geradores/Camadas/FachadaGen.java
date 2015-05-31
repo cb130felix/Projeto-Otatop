@@ -54,10 +54,10 @@ public class FachadaGen {
         bw.write("<?php\n" +
                 "include 'regranegocio.php';\n" +
                 "class Fachada {\n" +
-                "     var $regra_de_negocio;\n" +
+                "     var $regra_negocio;\n" +
                 "	 \n" +
                 "	 function __construct(){\n" +
-                "		$this->regra_de_negocio = new RegraDeNegocio();\n" +
+                "		$this->regra_negocio = new RegraDeNegocio();\n" +
                 "	 }\n" +
                 "	 \n");
     
@@ -85,20 +85,25 @@ public class FachadaGen {
      //---------- Parte de Renan (inicio)-------------------
      //------------------------------------------------------
     
-    public boolean addListar(){
+    public boolean addListar() throws IOException{
     
-        /*
+        bw.write("// MÉTODOS PARA LISTAR\n ");
         
-        bate forte o tambor
-        eu quero é tic tic tic tic tic tic tic ta
-        
-        */
-        
-        /*
-        
-        comentário 2
-        
-        */
+        for (int x = 0; x < modelor.tabelas.size(); x++) {
+            
+            String nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'F');
+            
+            bw.write("\n     public function "+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
+            
+            nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'R');
+            
+            bw.write("\n     $this->regra_negocio->"+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+");\n");
+            bw.write("\n     }\n");
+            
+            
+        }
         
         
         return true;
@@ -169,7 +174,7 @@ public class FachadaGen {
       
         abrirArquivo();
         
-        addCadastrar();
+        //addCadastrar();
         addListar();
         addDeletar();
         addAtualizar();

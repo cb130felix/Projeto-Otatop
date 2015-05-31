@@ -332,7 +332,7 @@ public class MySqlCRUDGen {
       
         abrirArquivo();
         
-        addCadastrar();
+        //addCadastrar();
         addListar();
         addDeletar();
         addAtualizar();
