@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Geradores.Camadas;
 
 import Auxiliares.FixString;
-import Geradores.BancoGen;
 import ModeloRel.ModeloR;
 import ProjetoInfo.ProjetoInfo;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  *
@@ -34,16 +28,14 @@ public class FachadaGen {
         this.modelor = modelor;
         this.caminho_dir = caminho_dir;
         this.info = info;
-        arqFachada = new File (caminho_dir+"CRUD/camadas/fachada.php");
+        arqFachada = new File (caminho_dir+"CRUD/Camadas/fachada.php");
         
     }
-    
-    
     
     boolean abrirArquivo() throws IOException{
     
         if (!arqFachada.exists()) {
-           arqFachada.createNewFile();  
+            arqFachada.createNewFile();  
         }
         
         fw = new FileWriter(arqFachada);
@@ -158,24 +150,72 @@ public class FachadaGen {
     
 
 
-    //------------------------------------------------------
-    //---------- Parte de Arthur (fim)----------------------
     //-------------------------------------------------------
-       
-    public boolean addDeletar(){return true;}
-    
+    //---------- Parte de Arthur (inicio)--------------------
     //-------------------------------------------------------
-     //---------- Parte de Arthur (inicio)-------------------
-     //-------------------------------------------------------
-    
-
-    
-    public boolean addAtualizar(){return true;}
-    
-    
-    //Essa método gera o arquivo completo
-    public void gerar() throws IOException {
       
+    /**
+     * Método que cria o Scrpit PHP das funções de deletar da camada fachada
+     * @return Valor booleano
+     * @throws IOException 
+     * @author Arthur
+     */
+    public boolean addDeletar() throws IOException{
+    
+        bw.write("\n// MÉTODO PARA DELETAR\n ");
+        
+        for (int x=0; x<modelor.tabelas.size(); x++) {
+            
+            String nome_metodo = fx.criarNomeMetodo("deletar", modelor.tabelas.get(x).nome,'F');
+            
+            bw.write("\n     public function "+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
+            
+            nome_metodo = fx.criarNomeMetodo("deletar", modelor.tabelas.get(x).nome,'R');
+            
+            bw.write("\n     $this->regra_negocio->"+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+");\n");
+            bw.write("\n     }\n");
+        }
+        
+        return true;
+    }
+    
+    /**
+     * Método que cria o Scrpit PHP das funções de atualizar da camada fachada
+     * @return Valor booleano
+     * @throws IOException 
+     * @author Arthur
+     */
+    public boolean addAtualizar() throws IOException{
+    
+        bw.write("\n// MÉTODO PARA ATUALIZAR\n ");
+        
+        for (int x=0; x<modelor.tabelas.size(); x++) {
+            
+            String nome_metodo = fx.criarNomeMetodo("atualizar", modelor.tabelas.get(x).nome,'F');
+            
+            bw.write("\n     public function "+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
+            
+            nome_metodo = fx.criarNomeMetodo("atualizar", modelor.tabelas.get(x).nome,'R');
+            
+            bw.write("\n     $this->regra_negocio->"+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+");\n");
+            bw.write("\n     }\n");
+        }
+        
+        return true;
+    }
+    
+    //-------------------------------------------------------
+    //---------- Parte de Arthur (fim)-----------------------
+    //-------------------------------------------------------
+    
+    
+    //Esse método gera o arquivo completo
+    public void gerar() throws IOException {
+        
         abrirArquivo();
         
         addCadastrar();
