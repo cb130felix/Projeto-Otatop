@@ -90,8 +90,11 @@ public class FachadaGen {
             
             nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'R');
             
-            bw.write("\n     $this->regra_negocio->"+nome_metodo+"(");
+            bw.write("\n     $resultado = $this->regra_negocio->"+nome_metodo+"(");
             bw.write("$"+modelor.tabelas.get(x).nome+");\n");
+            
+            
+            bw.write("\n     return $resultado;\n");
             bw.write("\n     }\n");
             
             

@@ -49,10 +49,26 @@ public class MySqlCRUDGen {
      
         
         bw.write("<?php\n" +
-                 "class BancoDeDados {\n"
-                + "function teste(){\n"
-                + "     echo\"Eu funciono! :D \";\n"
-                + "}\n");
+                "class BancoDeDados {\n" +
+                "    private $link;\n" +
+                "    private $banco;\n" +
+                "    private $usuario;\n" +
+                "    private $senha;\n" +
+                "    private $hostname;\n\n"
+                + "\n"
+                + "	function __construct(){\n" +
+                "	  \n" +
+                "               $this->banco = '"+this.info.banco_nome+"';\n" +
+                "               $this->usuario = '"+this.info.banco_usuario+"';\n" +
+                "               $this->senha = '"+this.info.banco_senha+"';\n" +
+                "               $this->hostname = '"+this.info.banco_servidor+"';\n" +
+                "			   $this->link = @mysqli_connect($this->hostname, $this->usuario, $this->senha, $this->banco);\n" +
+                "               if($this->link == false) throw new Exception('Erro de conexão com o banco de dados...');" +
+                "	  \n" +
+                "	}\n\n"
+                + "     function teste(){\n"
+                + "         echo\"Eu funciono! :D \";\n"
+                + "     }\n");
     
         return true;
         
@@ -89,8 +105,10 @@ public class MySqlCRUDGen {
             bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
             
           
-            bw.write("\n     echo 'teste';");
-          
+            bw.write("\n     $resultado = 'teste';");
+            
+            bw.write("\n     return $resultado;\n");
+            
             bw.write("\n     }\n");
             
             

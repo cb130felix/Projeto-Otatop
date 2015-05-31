@@ -89,8 +89,10 @@ public class RegraNegGen {
             
             nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'P');
             
-            bw.write("\n     $this->persistencia->"+nome_metodo+"(");
+            bw.write("\n     $resultado = $this->persistencia->"+nome_metodo+"(");
             bw.write("$"+modelor.tabelas.get(x).nome+");\n");
+            
+            bw.write("\n     return $resultado;\n");
             bw.write("\n     }\n");
             
             
