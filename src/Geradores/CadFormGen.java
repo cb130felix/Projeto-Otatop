@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- *
+ * Classe responsável por gerar formulário de cadastro de todas as tabelas
  * @author Arthur
  */
 
@@ -28,6 +28,10 @@ public class CadFormGen {
     
     }
     
+    /**
+     * Método que gera o formulário e seu layout
+     * @throws IOException 
+     */
     public void gerarFormCadStyle() throws IOException{
     
         File arquivo = new File (caminho_dir+"cadastro/forms/formCadStyle.css");

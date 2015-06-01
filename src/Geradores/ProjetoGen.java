@@ -27,15 +27,8 @@ public class ProjetoGen {
     JQueryGen jQueryGen;
     
     CamadasGen camadasGen;
-   
-    /**
-     *  Lê um arquivo com as especificações do modeloER sugerido e o converte para um modelo Relacional.
-     * @param nomeArq nome do Arquivo com as especificações do modelo ER
-     * @param imprimir true pra imprimir uma prévia das tabelas geradas pela conversão de modeloER para modelo Relacional
-     * @throws FileNotFoundException
-     * @throws IOException 
-     */
     
+    // Chama métodos gerados e diretórios
     public ProjetoGen(ProjetoInfo info){
         this.info = info;
         this.caminho_dir = "src/../../ProjetosGerados[GEN]/";
@@ -57,6 +50,11 @@ public class ProjetoGen {
     
     public ProjetoGen(){}
     
+    /**
+     * Lê um arquivo com as especificações do modeloER sugerido e o converte para um modelo Relacional.
+     * @param nomeArq nome do Arquivo com as especificações do modelo ER
+     * @param imprimir true pra imprimir uma prévia das tabelas geradas pela conversão de modeloER para modelo Relacional
+     */
     public void lerArquivo(String nomeArq, boolean imprimir) throws FileNotFoundException, IOException{
     
        
@@ -102,9 +100,6 @@ public class ProjetoGen {
         new File(caminho_dir+"utilitarios").mkdir();
         this.jQueryGen.gerarJQuery();
         
-        
-        
-    
     }
     
     

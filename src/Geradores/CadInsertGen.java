@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe responsável por inserir os dados no banco de dados
  * @author Renan
  */
 public class CadInsertGen {
@@ -31,7 +31,7 @@ public class CadInsertGen {
     
     /**
      * Gerador do código PHP que irá inserir dados no banco de dados.
-     * @param O nome do banco de dados com qual o programa irá trabalhar
+     * @param nome_banco nome do banco de dados com qual o programa irá trabalhar
      * @throws IOException 
      */
     
@@ -313,8 +313,8 @@ public class CadInsertGen {
 	
 	/**
          * Método que escreve no arquivo o script que conect com o banco de dados.
-         * @param construtor que recebe como argumento o objeto do tipo FileWriter
-         * @param string com o nome do banco de dados.
+         * @param bw construtor que recebe como argumento o objeto do tipo FileWriter
+         * @param nome_banco string com o nome do banco de dados.
          * @throws IOException 
          */
 	public void gerarConexao(BufferedWriter bw, String nome_banco) throws IOException{
@@ -342,8 +342,8 @@ public class CadInsertGen {
         
         /**
          * Médoto para escrever o nome de uma coluna em um arquivo. 
-         * @param construtor que recebe como argumento o objeto do tipo FileWriter
-         * @param string que será escrita (no caso, o nome da coluna) 
+         * @param bw construtor que recebe como argumento o objeto do tipo FileWriter
+         * @param s string que será escrita (no caso, o nome da coluna) 
          */
         public void escreverColuna(BufferedWriter bw,String s){
             

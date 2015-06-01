@@ -9,10 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- *
+ * Classe responsável por gerar arquivos de navegação do sistema
  * @author Renan
  */
-
 
 public class PageNavGen {
     

@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- *
+ * Classe responsável por gerar menu, layout do sistema
  * @author Renan
  */
 public class MenuGen {
@@ -22,9 +22,6 @@ public class MenuGen {
         this.modelor = modelor;
         this.caminho_dir = caminho_dir;
     }
-    
-    
-    
     
     int gerarCss() throws IOException{
         
@@ -363,6 +360,7 @@ public class MenuGen {
         fw.close();
     return 0;
     }
+    
     int gerarMenuJs() throws IOException{
     
         File arquivo = new File (caminho_dir+"menu/script.js");
@@ -501,6 +499,7 @@ public class MenuGen {
         fw.close();
         return 0;
     }
+    
     int gerarAddDropCad() throws IOException{
          File arquivo = new File (caminho_dir+"menu/add_menu_drop_cad.php");
         

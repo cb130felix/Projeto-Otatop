@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- *
+ * Classe responsável por gerar script do banco de dados
  * @author Arthur
  */
 public class BancoGen {
@@ -25,7 +25,6 @@ public class BancoGen {
     }
     
     
-    
    class Estrangeiro {
     
     public String tabela_pk;
@@ -36,7 +35,7 @@ public class BancoGen {
    
     /**
      * Gera um arquivo com código mysql de acordo com o modeloR carregado.
-     * @return
+     * @return retorna um inteiro (0 ou 1)
      * @throws IOException 
      */
     
