@@ -52,11 +52,11 @@ public class ClassEntGen {
         bw.write("<?php\n");
          for (int x = 0; x < modelo.tabelas.size(); x++) {
          
-            if(modelo.tabelas.get(x).campo_multi != 2){
+            
             
              bw.write("include '"+modelo.tabelas.get(x).nome+".php';\n");
         
-            }
+            
             
         }
         
@@ -71,7 +71,7 @@ public class ClassEntGen {
     
         for (int x = 0; x < modelo.tabelas.size(); x++) {
          
-            if(modelo.tabelas.get(x).campo_multi != 2){
+            if(modelo.tabelas.get(x).campo_multi != 3){
             
             File arquivo = new File (diretorio+"CRUD/Entidades/"+modelo.tabelas.get(x).nome+".php");
             

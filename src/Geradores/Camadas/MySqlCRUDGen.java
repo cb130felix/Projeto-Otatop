@@ -92,22 +92,21 @@ public class MySqlCRUDGen {
      //---------- Parte de Renan (inicio)-------------------
      //------------------------------------------------------
     
-    public boolean addListar() throws IOException{
+    public boolean addCodigoListar(Tabela tabela) throws IOException{
     
+        ArrayList<Coluna> colunas_pk = new ArrayList<Coluna>();
         
-        bw.write("// MÉTODOS PARA LISTAR\n ");
         
-        for (int x = 0; x < modelor.tabelas.size(); x++) {
             
-            ArrayList<Coluna> colunas_pk = new ArrayList<Coluna>();
-            String nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'B');
+        String nome_metodo = fx.criarNomeMetodo("listar", tabela.nome,'B');
             
-            bw.write("\n     public function "+nome_metodo+"(");
-            bw.write("$str){\n");
+        bw.write("\n     function "+nome_metodo+"(");
+        bw.write("$str){\n");
             //Aqui começa o código da função
-          
-            bw.write("\t $sql1 = 'SELECT * FROM " + modelor.tabelas.get(x).nome + " ';\n");
-            bw.write("\t $query = $this->link->query($sql1);\n\n");
+        
+        bw.write("\t $sql1 = 'SELECT * FROM " + tabela.nome + " ';\n");
+        bw.write("\t $sql1 = $sql1.' where '.$str;\n");
+        bw.write("\t $query = $this->link->query($sql1);\n\n");
             
             
             //Pegando valores normais da tabela
@@ -115,25 +114,40 @@ public class MySqlCRUDGen {
                     "\t if ($query->num_rows > 0) {\n" +
                     "\t\t $indice = 0;\n" +
                     "\t\t while($row = $query->fetch_assoc()) {\n" +
-                    "\t\t\t $resultado[$indice] = new "+modelor.tabelas.get(x).nome+"();\n");
+                    "\t\t\t $resultado[$indice] = new "+tabela.nome+"();\n");
                     //pegando os valores das colunas da tabela
-                    for (int i = 0; i < modelor.tabelas.get(x).colunas.size(); i++) {
+                    for (int i = 0; i < tabela.colunas.size(); i++) {
                         
-                        if(modelor.tabelas.get(x).colunas.get(i).pk == true){
-                            colunas_pk.add(modelor.tabelas.get(x).colunas.get(i));
+                        if(tabela.colunas.get(i).pk == true){
+                            colunas_pk.add(tabela.colunas.get(i));
                         }
-                        bw.write("\t\t\t $resultado[$indice]->"+modelor.tabelas.get(x).colunas.get(i).nome+" = $row['"+modelor.tabelas.get(x).colunas.get(i).nome+"'];\n");
+                        bw.write("\t\t\t $resultado[$indice]->"+tabela.colunas.get(i).nome+" = $row['"+tabela.colunas.get(i).nome+"'];\n");
                 
                     }
                     //Pegando os valores das tabelas multivaloradas
                     //String nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'B');
-                    ArrayList<Tabela> tabelas_multi = modelor.tabelas.get(x).acharTabelasMultivaloradas(modelor.tabelas);
+                    ArrayList<Tabela> tabelas_multi = tabela.acharTabelasMultivaloradas(modelor.tabelas);
                     
                     for (int i = 0; i < tabelas_multi.size(); i++) {
                         for (int j = 0; j < tabelas_multi.get(i).colunas.size(); j++) {
                             if(tabelas_multi.get(i).colunas.get(j).pk == false && tabelas_multi.get(i).colunas.get(j).fk == false){
                                 String metodo_chamado = fx.criarNomeMetodo("listar", tabelas_multi.get(i).nome,'B');
-                                bw.write("\t\t\t $"+tabelas_multi.get(i).colunas.get(j).nome+"_temp = "+metodo_chamado+"("+'a'+");\n");
+                                bw.write("\t\t\t $resultado[$indice]->"+tabelas_multi.get(i).colunas.get(j).nome+" = $this->"+metodo_chamado+"(\" ");
+                                // Parametros da pesquisa de valores multivalorados
+                                
+                                for (int k = 0; k < colunas_pk.size(); k++) {
+                                    
+                                    bw.write( tabela.nome+"_"+colunas_pk.get(k).nome + " = {$resultado[$indice]->"+colunas_pk.get(k).nome+"}" ); 
+                                    
+                                    if(k <= colunas_pk.size() - 2){
+                                    
+                                        bw.write(        " AND "); 
+                                    
+                                    }
+                                }
+                                
+                                
+                                bw.write("\");\n");
                             }
                         }
                     }
@@ -147,10 +161,30 @@ public class MySqlCRUDGen {
 
                     "\t return $resultado;\n");
             
-
+            
             //Aqui termina o código da função
             bw.write("\n     }\n");
             
+        return true;
+        
+    }
+    
+    public boolean addListar() throws IOException{
+    
+        
+        bw.write("// MÉTODOS PARA LISTAR\n ");
+        
+        for (int x = 0; x < modelor.tabelas.size(); x++) {
+  
+            if(modelor.tabelas.get(x).campo_multi == 1){
+                ArrayList<Tabela> tabelas_multi = modelor.tabelas.get(x).acharTabelasMultivaloradas(modelor.tabelas);
+                for (Tabela tbm : tabelas_multi) {
+                    addCodigoListar(tbm);
+                }
+            addCodigoListar(modelor.tabelas.get(x));
+            }else if(modelor.tabelas.get(x).campo_multi != 2){
+                addCodigoListar(modelor.tabelas.get(x));
+            }
             
         }
         
