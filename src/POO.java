@@ -24,7 +24,7 @@ public class POO {
         FixString fix = new FixString();
         String arquivo = "SaborRegional.txt";
         String arquivoFix = arquivo.substring(0,arquivo.length()-4); //Tratando a String pra ficar bonitinha
-        ProjetoInfo info = new ProjetoInfo(fix.Fix(arquivoFix), "database", "localhost", "123", "root");
+        ProjetoInfo info = new ProjetoInfo(fix.Fix(arquivoFix), "database", "localhost", "", "root");
         ProjetoGen gen = new ProjetoGen(info);
         gen.lerArquivo("src/Arquivos/"+arquivo, true);
         
