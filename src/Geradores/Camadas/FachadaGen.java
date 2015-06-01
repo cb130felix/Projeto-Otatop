@@ -200,12 +200,12 @@ public class FachadaGen {
             String nome_metodo = fx.criarNomeMetodo("atualizar", modelor.tabelas.get(x).nome,'F');
             
             bw.write("\n     public function "+nome_metodo+"(");
-            bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
+            bw.write("$"+modelor.tabelas.get(x).nome+", $"+modelor.tabelas.get(x).nome+"NOVO){\n");
             
             nome_metodo = fx.criarNomeMetodo("atualizar", modelor.tabelas.get(x).nome,'R');
             
             bw.write("\n     $this->regra_negocio->"+nome_metodo+"(");
-            bw.write("$"+modelor.tabelas.get(x).nome+");\n");
+            bw.write("$"+modelor.tabelas.get(x).nome+", $"+modelor.tabelas.get(x).nome+"NOVO);\n");
             bw.write("\n     }\n");
         }
         
