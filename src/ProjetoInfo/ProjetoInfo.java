@@ -2,7 +2,7 @@
 package ProjetoInfo;
 
 /**
- *
+ * Classe com informações padrões de um sistema Otatop
  * @author Renan
  */
 public class ProjetoInfo {
