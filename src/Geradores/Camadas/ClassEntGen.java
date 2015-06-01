@@ -118,7 +118,7 @@ public class ClassEntGen {
                     
         
         bw.write("\n\n    //methods");
-        //criarConstrutor(modelo.tabelas.get(x), bw);
+        criarConstrutor(modelo.tabelas.get(x), bw);
             
         bw.write("\n\n  }\n?>");
         bw.close();
