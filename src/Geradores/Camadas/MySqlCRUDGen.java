@@ -99,6 +99,7 @@ public class MySqlCRUDGen {
         
         for (int x = 0; x < modelor.tabelas.size(); x++) {
             
+            ArrayList<Coluna> colunas_pk = new ArrayList<Coluna>();
             String nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'B');
             
             bw.write("\n     public function "+nome_metodo+"(");
@@ -118,9 +119,25 @@ public class MySqlCRUDGen {
                     //pegando os valores das colunas da tabela
                     for (int i = 0; i < modelor.tabelas.get(x).colunas.size(); i++) {
                         
+                        if(modelor.tabelas.get(x).colunas.get(i).pk == true){
+                            colunas_pk.add(modelor.tabelas.get(x).colunas.get(i));
+                        }
                         bw.write("\t\t\t $resultado[$indice]->"+modelor.tabelas.get(x).colunas.get(i).nome+" = $row['"+modelor.tabelas.get(x).colunas.get(i).nome+"'];\n");
                 
                     }
+                    //Pegando os valores das tabelas multivaloradas
+                    //String nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'B');
+                    ArrayList<Tabela> tabelas_multi = modelor.tabelas.get(x).acharTabelasMultivaloradas(modelor.tabelas);
+                    
+                    for (int i = 0; i < tabelas_multi.size(); i++) {
+                        for (int j = 0; j < tabelas_multi.get(i).colunas.size(); j++) {
+                            if(tabelas_multi.get(i).colunas.get(j).pk == false && tabelas_multi.get(i).colunas.get(j).fk == false){
+                                String metodo_chamado = fx.criarNomeMetodo("listar", tabelas_multi.get(i).nome,'B');
+                                bw.write("\t\t\t $"+tabelas_multi.get(i).colunas.get(j).nome+"_temp = "+metodo_chamado+"("+'a'+");\n");
+                            }
+                        }
+                    }
+                    
             bw.write("" +
                     "\t\t\t $indice++;\n" +
                     "\t\t }\n" +
