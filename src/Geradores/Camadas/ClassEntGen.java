@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- *
+ * Classe para gerar as classes das entidades (tabelas do modelo relacional)
  * @author Arthur, Guto, Renan
  */
 public class ClassEntGen {

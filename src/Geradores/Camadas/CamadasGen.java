@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Geradores.Camadas;
 
+package Geradores.Camadas;
 
 import ModeloRel.ModeloR;
 import ProjetoInfo.ProjetoInfo;
 import java.io.IOException;
 
 /**
- *
+ * Classe para chamadas dos geradores das camadas
  * @author Arthur, Guto, Renan
  */
 public class CamadasGen {

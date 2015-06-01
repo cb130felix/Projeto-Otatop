@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- *
+ * Classe que gera os métodos CRUD do banco de dados
  * @author Arthur, Guto, Renan
  */
 public class MySqlCRUDGen {
@@ -156,7 +156,7 @@ public class MySqlCRUDGen {
     
     /**
      * Método que cria o Scrpit PHP da funções de cadastrar no banco de dados MySql
-     * @return
+     * @return retorna valor booleano
      * @throws IOException 
      */
     public boolean addCadastrar() throws IOException{
@@ -172,9 +172,6 @@ public class MySqlCRUDGen {
             
             
             }
-            
-            
-            
         
         return true;}
     
@@ -263,8 +260,8 @@ public class MySqlCRUDGen {
     
     /**
      * Método que remove as colunas autoIncremento de uma tabela
-     * @param tb    é a tabela que srá removida as colunas autoIncremento
-     * @return  retorna a tabela sem nenhum mautoIncremento
+     * @param tb é a tabela que srá removida as colunas autoIncremento
+     * @return retorna a tabela sem nenhum mautoIncremento
      */
     public Tabela tiraAutoIncremento(Tabela tb){
     
@@ -284,11 +281,6 @@ public class MySqlCRUDGen {
             
             
         }
-    
-    
-    
-    
-    
     
     return temp;
     }
@@ -410,7 +402,7 @@ public class MySqlCRUDGen {
      
     /**
      * método que escreve os métodos de deletar referentes à classe banco de dados
-     * @return Valor booleano
+     * @return retorna valor booleano
      * @throws IOException 
      * @author Arthur
      */

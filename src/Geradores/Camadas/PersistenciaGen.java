@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- *
+ * Classe que gera os métodos referentes a camada de persistência
  * @author Arthur, Guto, Renan
  */
 public class PersistenciaGen {
@@ -119,7 +119,7 @@ public class PersistenciaGen {
     
     /**
      * Método que cria o Scrpit PHP da funções de cadastrar da camada persistência
-     * @return
+     * @return retorna valor booleano
      * @throws IOException 
      */
     public boolean addCadastrar() throws IOException{
@@ -159,7 +159,7 @@ public class PersistenciaGen {
     
     /**
      * Método que cria o Scrpit PHP das funções de deletar da camada persistência
-     * @return Valor booleano
+     * @return retorna valor booleano
      * @throws IOException
      * @author Arthur
      */
@@ -187,7 +187,7 @@ public class PersistenciaGen {
     
     /**
      * Método que cria o Scrpit PHP das funções de atualizar da camada persistência
-     * @return Valor booleano
+     * @return retorna valor booleano
      * @throws IOException
      * @author Arthur
      */

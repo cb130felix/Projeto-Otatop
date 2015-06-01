@@ -10,7 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- *
+ * Classe referente a fachada do sistema
+ * Gerador de métodos da fachada
  * @author Arthur, Guto, Renan
  */
 public class FachadaGen {
@@ -119,7 +120,7 @@ public class FachadaGen {
      //-------------------------------------------------------
     /**
      * Método que cria o Scrpit PHP da funções de cadastrar da camada fachada
-     * @return
+     * @return retorna valor booleano
      * @throws IOException 
      */
     public boolean addCadastrar() throws IOException{
@@ -160,7 +161,7 @@ public class FachadaGen {
       
     /**
      * Método que cria o Scrpit PHP das funções de deletar da camada fachada
-     * @return Valor booleano
+     * @return retorna valor booleano
      * @throws IOException 
      * @author Arthur
      */
@@ -187,7 +188,7 @@ public class FachadaGen {
     
     /**
      * Método que cria o Scrpit PHP das funções de atualizar da camada fachada
-     * @return Valor booleano
+     * @return retorna valor booleano
      * @throws IOException 
      * @author Arthur
      */

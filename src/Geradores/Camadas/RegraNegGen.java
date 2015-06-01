@@ -12,7 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- *
+ * Classe que gerar os métodos referentes a cama regra de negócio
  * @author Arthur, Guto, Renan
  */
 public class RegraNegGen {
@@ -118,7 +118,7 @@ public class RegraNegGen {
     
     /**
      * Método que cria o Scrpit PHP da funções de cadastrar da camada regra de negócio
-     * @return
+     * @return retorna valor booleano
      * @throws IOException 
      */
     
@@ -242,7 +242,7 @@ public class RegraNegGen {
     
     /**
      * Método que escreve no arquivo regranegocio.php os métodos de deletar referentes a camada regra de negócio
-     * @return Valor booleano
+     * @return retorna valor booleano
      * @throws IOException 
      * @author Arthur
      */
@@ -320,8 +320,15 @@ public class RegraNegGen {
         return true;
     }
 
-    
-    public boolean addAtualizar(){
+    /**
+     * Método que escreve no arquivo regranegocio.php os métodos de atualizar referentes a camada regra de negócio
+     * @return retorna valor booleano
+     * @throws IOException 
+     * @author Arthur
+     */
+    public boolean addAtualizar() throws IOException{
+        
+        
         
         
         return true;
