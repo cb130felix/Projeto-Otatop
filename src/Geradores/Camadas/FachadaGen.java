@@ -44,7 +44,8 @@ public class FachadaGen {
      
         
         bw.write("<?php\n" +
-                "include 'regranegocio.php';\n" +
+                "include 'regranegocio.php';\n"
+                + "include '../Entidades/entidades.php';\n" +
                 "class Fachada {\n" +
                 "     var $regra_negocio;\n" +
                 "	 \n" +

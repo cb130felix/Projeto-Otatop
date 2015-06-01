@@ -62,7 +62,7 @@ public class MySqlCRUDGen {
                 "               $this->usuario = '"+this.info.banco_usuario+"';\n" +
                 "               $this->senha = '"+this.info.banco_senha+"';\n" +
                 "               $this->hostname = '"+this.info.banco_servidor+"';\n" +
-                "			   $this->link = @mysqli_connect($this->hostname, $this->usuario, $this->senha, $this->banco);\n" +
+                "               $this->link = @mysqli_connect($this->hostname, $this->usuario, $this->senha, $this->banco);\n" +
                 "               if($this->link == false) throw new Exception('Erro de conexão com o banco de dados...');" +
                 "	  \n" +
                 "	}\n\n"
@@ -102,13 +102,36 @@ public class MySqlCRUDGen {
             String nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'B');
             
             bw.write("\n     public function "+nome_metodo+"(");
-            bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
-            
+            bw.write("$str){\n");
+            //Aqui começa o código da função
           
-            bw.write("\n     $resultado = 'teste';");
+            bw.write("\t $sql1 = 'SELECT * FROM " + modelor.tabelas.get(x).nome + " ';\n");
+            bw.write("\t $query = $this->link->query($sql1);\n\n");
             
-            bw.write("\n     return $resultado;\n");
             
+            //Pegando valores normais da tabela
+            bw.write("\t //Pegando valores normais da tabela\n"+
+                    "\t if ($query->num_rows > 0) {\n" +
+                    "\t\t $indice = 0;\n" +
+                    "\t\t while($row = $query->fetch_assoc()) {\n" +
+                    "\t\t\t $resultado[$indice] = new "+modelor.tabelas.get(x).nome+"();\n");
+                    //pegando os valores das colunas da tabela
+                    for (int i = 0; i < modelor.tabelas.get(x).colunas.size(); i++) {
+                        
+                        bw.write("\t\t\t $resultado[$indice]->"+modelor.tabelas.get(x).colunas.get(i).nome+" = $row['"+modelor.tabelas.get(x).colunas.get(i).nome+"'];\n");
+                
+                    }
+            bw.write("" +
+                    "\t\t\t $indice++;\n" +
+                    "\t\t }\n" +
+                    "\t }else{\n" +
+                    "\t\t $resultado = null;\n" +
+                    "\t }\n" +
+
+                    "\t return $resultado;\n");
+            
+
+            //Aqui termina o código da função
             bw.write("\n     }\n");
             
             

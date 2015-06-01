@@ -118,7 +118,7 @@ public class ClassEntGen {
                     
         
         bw.write("\n\n    //methods");
-        criarConstrutor(modelo.tabelas.get(x), bw);
+        //criarConstrutor(modelo.tabelas.get(x), bw);
             
         bw.write("\n\n  }\n?>");
         bw.close();
@@ -257,9 +257,9 @@ public class ClassEntGen {
     
     public void criarConstrutor(Tabela tabela,BufferedWriter bw) throws IOException{
     
-        
+     
         bw.write("\n     function __construct(");
-        
+       
         for (int x = 0; x < tabela.colunas.size(); x++) {
             
             bw.write("$"+tabela.colunas.get(x).nome);
@@ -301,7 +301,7 @@ public class ClassEntGen {
                bw.write("){\n"); 
             
             }
-            
+           
             
         }
     

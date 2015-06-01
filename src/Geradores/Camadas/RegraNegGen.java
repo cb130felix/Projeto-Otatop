@@ -46,7 +46,7 @@ public class RegraNegGen {
      
         
         bw.write("<?php\n" +
-                "include 'persistencia.php';\n" +
+                "include 'persistencia.php';\n"+
                 "class RegraDeNegocio {\n" +
                 "     var $persistencia;\n" +
                 "	 \n" +
