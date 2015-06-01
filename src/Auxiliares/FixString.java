@@ -63,9 +63,4 @@ public class FixString {
     
     return nomeMetodo;
     }
-    
-    
-    
-    
-    
 }
