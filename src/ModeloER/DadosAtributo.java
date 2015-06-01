@@ -2,7 +2,7 @@
 package ModeloER;
 
 /**
- *
+ * Classe de atributos
  * @author Guto Leoni
  */
 public class DadosAtributo {

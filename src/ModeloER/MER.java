@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
+ * Classe de leitura do txt informado. Pega informações referente ao modeloER do futuro sistema
  * @author Guto Leoni
  */
 public class MER {

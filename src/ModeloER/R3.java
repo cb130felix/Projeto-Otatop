@@ -4,7 +4,7 @@ package ModeloER;
 import java.util.ArrayList;
 
 /**
- *
+ * Classe para relações ternárias
  * @author Guto Leoni
  */
 public class R3 {

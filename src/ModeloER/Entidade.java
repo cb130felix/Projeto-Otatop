@@ -4,7 +4,7 @@ package ModeloER;
 import java.util.ArrayList;
 
 /**
- *
+ * Classe de entidades
  * @author Guto Leoni
  */
 public class Entidade{

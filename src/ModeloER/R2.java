@@ -4,7 +4,7 @@ package ModeloER;
 import java.util.ArrayList;
 
 /**
- *
+ * Classe para relações binárias
  * @author Guto Leoni
  */
 public class R2 {
