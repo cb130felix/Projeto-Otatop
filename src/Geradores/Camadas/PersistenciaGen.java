@@ -158,7 +158,7 @@ public class PersistenciaGen {
     //-------------------------------------------------------
     
     /**
-     * Método que cria o Scrpit PHP da funções de deletar da camada persistência
+     * Método que cria o Scrpit PHP das funções de deletar da camada persistência
      * @return Valor booleano
      * @throws IOException
      * @author Arthur
@@ -185,8 +185,30 @@ public class PersistenciaGen {
         return true;
     }
     
-    
-    public boolean addAtualizar(){
+    /**
+     * Método que cria o Scrpit PHP das funções de atualizar da camada persistência
+     * @return Valor booleano
+     * @throws IOException
+     * @author Arthur
+     */
+    public boolean addAtualizar() throws IOException{
+        
+        bw.write("\n// MÉTODOS PARA ATUALIZAR\n ");
+        
+        for (int x=0; x<modelor.tabelas.size(); x++) {
+            
+            String nome_metodo = fx.criarNomeMetodo("atualizar", modelor.tabelas.get(x).nome,'P');
+            
+            bw.write("\n     public function "+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+", $"+modelor.tabelas.get(x).nome+"NOVO){\n");
+            
+            nome_metodo = fx.criarNomeMetodo("atualizar", modelor.tabelas.get(x).nome,'B');
+            
+            bw.write("\n     $this->bancodedados->"+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+", $"+modelor.tabelas.get(x).nome+"NOVO);\n");
+            bw.write("\n     }\n");   
+            
+        }
         
         return true;
     }
