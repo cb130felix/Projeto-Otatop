@@ -153,21 +153,50 @@ public class PersistenciaGen {
     
 
 
-    //------------------------------------------------------
-    //---------- Parte de Arthur (fim)----------------------
     //-------------------------------------------------------
-       
-    public boolean addDeletar(){return true;}
+    //---------- Parte de Arthur (inicio)--------------------
+    //-------------------------------------------------------
+    
+    /**
+     * Método que cria o Scrpit PHP da funções de deletar da camada persistência
+     * @return Valor booleano
+     * @throws IOException
+     * @author Arthur
+     */
+    public boolean addDeletar() throws IOException{
+        
+        bw.write("\n// MÉTODOS PARA DELETAR\n ");
+        
+        for (int x=0; x<modelor.tabelas.size(); x++) {
+            
+            String nome_metodo = fx.criarNomeMetodo("deletar", modelor.tabelas.get(x).nome,'P');
+            
+            bw.write("\n     public function "+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
+            
+            nome_metodo = fx.criarNomeMetodo("deletar", modelor.tabelas.get(x).nome,'B');
+            
+            bw.write("\n     $this->bancodedados->"+nome_metodo+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+");\n");
+            bw.write("\n     }\n");   
+            
+        } 
+        
+        return true;
+    }
+    
+    
+    public boolean addAtualizar(){
+        
+        return true;
+    }
+    
     
     //-------------------------------------------------------
-     //---------- Parte de Arthur (inicio)-------------------
-     //-------------------------------------------------------
+    //---------- Parte de Arthur (fim)-----------------------
+    //-------------------------------------------------------
     
 
-    
-    public boolean addAtualizar(){return true;}
-    
-    
     //Essa método gera o arquivo completo
     public void gerar() throws IOException {
       
