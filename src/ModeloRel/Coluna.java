@@ -2,7 +2,7 @@
 package ModeloRel;
 
 /**
- *
+ * Classe de informações das colunas
  * @author Renan
  */
 public class Coluna {

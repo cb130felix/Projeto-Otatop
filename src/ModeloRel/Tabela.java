@@ -1,4 +1,4 @@
-//Teste
+
 package ModeloRel;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Tabela {
     
     public String nome;
-    /**
+    /*
      * 0 = Não tem campo multi;
      * 1 = Tem campo multi;
      * 2 = É campo multi de alguém.
@@ -21,7 +21,7 @@ public class Tabela {
     
     /**
      * @param tabelas vetor de tabelas a ser procurado as tabelas multivaloradas da tabela atual
-     * @return ArrayList<Tabela>, uma lista com as tabelas que são valores multivalorados dessa tabela 
+     * @return ArrayList uma lista com as tabelas que são valores multivalorados dessa tabela 
      */
     public ArrayList<Tabela> acharTabelasMultivaloradas(ArrayList<Tabela> tabelas){
         
@@ -49,7 +49,4 @@ public class Tabela {
         return tabelas_multi;
         
     }
-    
-    
-    
 }

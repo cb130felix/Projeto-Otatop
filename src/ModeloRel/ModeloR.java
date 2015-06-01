@@ -4,7 +4,7 @@ import ModeloER.MER;
 import java.util.ArrayList;
 
 /**
- *
+ * Classe responsável por normalizar todo o modeloER, passando assim para um modelo relacional normalizado
  * @author Renan
  */
 public class ModeloR {
@@ -12,7 +12,6 @@ public class ModeloR {
    public ArrayList<Tabela> tabelas = new ArrayList<Tabela>();
   
    /**
-    * 
     * @param nome Nome da tabela a ser procurada
     * @return Indice de uma tabela no vetor "Tabelas" dessa classe.
     */
@@ -48,12 +47,11 @@ public class ModeloR {
    
     /**
     * Cria uma chave estrangeira na tabela 2 para a tabela 1
-    * @param nome_tabela1
-    * @param nome_tabela2
-    * @return 
-    */
-   
-   
+    * @param nome_tabela1 nome de tabela
+    * @param nome_tabela2 nome de tabela
+    * @param pk booleano de chave estrangeira
+    * @return retorna um inteiro
+    */ 
    int gerarFK(String nome_tabela1, String nome_tabela2, boolean pk){
        
        int indice_tabela1=0, indice_tabela2=0;
@@ -96,13 +94,11 @@ public class ModeloR {
    }
    
    /**
-    *  Preenche o vetor de tabelas de acordo com os atributos forte do MER passado
+    * Preenche o vetor de tabelas de acordo com os atributos forte do MER passado
     * @param mer
-    * @return 0 caso sucesso
+    * @return retorna um inteiro, 0 caso sucesso.
     */
-   int passo1(MER mer){
-          
-      
+   int passo1(MER mer){      
 
        for(int a = 0; a < mer.entidades.size(); a++){
             Tabela tabela_temp = new Tabela();
@@ -134,7 +130,7 @@ public class ModeloR {
    /**
     * Cria uma chave estrangeira nas tabelas derivadas de entidades fracas para sua tabela derivada de entidade forte
     * @param mer
-    * @return 
+    * @return retorna um inteiro
     */
    int passo2(MER mer){
    boolean pk;
@@ -200,12 +196,11 @@ public class ModeloR {
    
    }
 
-/**
- * Adiciona uma chave primária nas tabelas ligadas por relações 1:1. A entidade 1 da relação é dada como entidade com participação total.
- * @param mer
- * @return 
- */
-
+    /**
+     * Adiciona uma chave primária nas tabelas ligadas por relações 1:1. A entidade 1 da relação é dada como entidade com participação total.
+     * @param mer
+     * @return retorna um inteiro
+     */
    int passo3(MER mer){
    
        for(int i = 0; i < mer.relacoes2.size(); i++){
@@ -242,7 +237,7 @@ public class ModeloR {
    /**
     * Adiciona uma chave primária nas tabelas ligadas por relações 1:N. A entidade 1 da relação é dada como entidade com participação total.
     * @param mer
-    * @return 
+    * @return retorna um inteiro
     */
    
    int passo4(MER mer){
@@ -295,7 +290,7 @@ public class ModeloR {
    /**
     * Cria uma tabela nova derivada de relações N:N
     * @param mer
-    * @return 
+    * @return retorna um inteiro
     */
    
    int passo5(MER mer){
@@ -349,7 +344,7 @@ public class ModeloR {
    /**
     * Cria uma tabela com os atributos multivalorados das entidades. Tabelas com valores multivalorados recebem o valor 1 no atributo campo_multi. Tabela que é um campo multivalorado de outra tabela recebe o valor 2 no mesmo atributo.
     * @param mer
-    * @return 
+    * @return retorna um inteiro
     */
    
    int passo6(MER mer){
@@ -415,7 +410,7 @@ public class ModeloR {
    /**
     * Cria uma tabela para as relações ternárias no modelo MER
     * @param mer
-    * @return 
+    * @return retorna um inteiro
     */
    
    int passo7(MER mer){
@@ -481,11 +476,9 @@ public class ModeloR {
        
        return erro;
    
-   } 
-    
+   }
   
-  
-   
+  // método de imprimir informações de todas as tabelas 
   public int imprime(){
               
        for (int i=0;i<this.tabelas.size();i++) {
@@ -507,7 +500,4 @@ public class ModeloR {
         }
      return 0;
    }
-
-   
-    
 }
