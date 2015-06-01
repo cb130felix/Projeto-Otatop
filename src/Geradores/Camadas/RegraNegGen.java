@@ -239,7 +239,13 @@ public class RegraNegGen {
     //-------------------------------------------------------
     //---------- Parte de Arthur (inicio)--------------------
     //-------------------------------------------------------
-       
+    
+    /**
+     * Método que escreve no arquivo regranegocio.php os métodos de deletar referentes a camada regra de negócio
+     * @return Valor booleano
+     * @throws IOException 
+     * @author Arthur
+     */
     public boolean addDeletar() throws IOException{
         
         bw.write("\n// MÉTODOS PARA DELETAR\n ");
@@ -264,8 +270,9 @@ public class RegraNegGen {
                     break;
                 }
             }  
-
-            bw.write("      $mysqli->autocommit(FALSE);\n");
+            
+            criaConexao();
+            bw.write("      mysqli_autocommit($link2,FALSE);\n");
                 
                 if (modelor.tabelas.get(x).campo_multi == 1){
                     
@@ -293,11 +300,12 @@ public class RegraNegGen {
                 
             for (int i=0; i<=tab; i++){
                     
-                bw.write("\n      mysqli_query($this->link, $sql_deleta"+i+");");   
+                bw.write("\n      mysqli_query($link2, $sql_deleta"+i+");");   
             }
                 
-            bw.write("\n\n      $mysqli->rollback();\n");
-            bw.write("      mysqli_close($this->link);\n");
+            bw.write("\n\n      mysqli_rollback($link2);\n");
+            bw.write("      mysqli_autocommit($link2,TRUE);\n");
+            fechaConexao();
                 
             String nome_metodo = fx.criarNomeMetodo("deletar", modelor.tabelas.get(x).nome,'P');
             
@@ -311,8 +319,6 @@ public class RegraNegGen {
         
         return true;
     }
-    
-    
 
     
     public boolean addAtualizar(){
