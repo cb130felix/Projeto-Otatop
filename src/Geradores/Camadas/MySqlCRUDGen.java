@@ -591,8 +591,50 @@ public class MySqlCRUDGen {
     }
 
     
-    public boolean addAtualizar(){
+    public boolean addAtualizar() throws IOException{
         
+         bw.write("\n// MÉTODOS PARA ATUALIZAR\n ");
+        
+        for (int x=0; x<modelor.tabelas.size(); x++) {
+            
+            int tab=0;
+            String metodoR = fx.criarNomeMetodo("atualizar",modelor.tabelas.get(x).nome,'B');
+            
+            bw.write("\n     public function "+metodoR+"($str, $obj){\n\n");
+            
+            //criando string dos valores normais
+            
+            bw.write("          $sql = 'UPDATE "+modelor.tabelas.get(x).nome+" set ';\n" +
+                    "		//montando string para atualização dos atributos normais\n" +
+                    "		$propriedades = get_object_vars($obj);\n" +
+                    "		$index = 0;\n" +
+                    "		$index_max = count($propriedades);\n" +
+                    "		$check = false;\n" +
+                    "		foreach($propriedades  as $key => $val){\n" +
+                    "			\n" +
+                    "			if(($val != null) && (is_array($val) == false)){\n" +
+                    "				\n" +
+                    "				if(($check == true) && ($index < $index_max)) $sql = $sql . ', ';\n" +
+                    "				$sql = $sql . \"$key = '$val'\";\n" +
+                    "				$check = true;\n" +
+                    "			}\n" +
+                    "			$index++;\n" +
+                    "		}\n" +
+                    "	 \n" +
+                    "		$sql = $sql . \" where \" . $str;\n" +
+                    "		if ($this->link->query($sql) === TRUE) {\n" +
+                    "			return true;\n" +
+                    "		} else {\n" +
+                    "			return false;\n" +
+                    "		}\n" +
+                    "		echo $sql;\n"
+                    + "");
+            
+           bw.write("\n\n   }");
+            
+        }
+        
+
         return true;
     }
     

@@ -199,13 +199,12 @@ public class PersistenciaGen {
             
             String nome_metodo = fx.criarNomeMetodo("atualizar", modelor.tabelas.get(x).nome,'P');
             
-            bw.write("\n     public function "+nome_metodo+"(");
-            bw.write("$"+modelor.tabelas.get(x).nome+", $"+modelor.tabelas.get(x).nome+"NOVO){\n");
+            bw.write("\n     public function "+nome_metodo+"($str, $obj){\n\n");
             
             nome_metodo = fx.criarNomeMetodo("atualizar", modelor.tabelas.get(x).nome,'B');
             
-            bw.write("\n     $this->bancodedados->"+nome_metodo+"(");
-            bw.write("$"+modelor.tabelas.get(x).nome+", $"+modelor.tabelas.get(x).nome+"NOVO);\n");
+            bw.write("\n     $resultado = $this->bancodedados->"+nome_metodo+"($str, $obj);\n"
+                    + "      return $resultado;\n ");
             bw.write("\n     }\n");   
             
         }
