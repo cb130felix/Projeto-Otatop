@@ -461,37 +461,114 @@ public class MySqlCRUDGen {
         
         bw.write("\n// MÉTODOS PARA DELETAR\n ");
         
+        bw.write("\n      function condicoes($tabela, $vetor){\n" +
+                    "	\n" +
+                    "		if (!empty($vetor)){\n" +
+                    "\n" +
+                    "			$temp = \"\";\n" +
+                    "			$array = array();\n" +
+                    "			$cond = \"\";			\n" +
+                    "\n" +
+                    "			for($i=0; $i<strlen($vetor); $i++){\n" +
+                    "\n" +
+                    "		   		if ($vetor[$i]!=\"=\" && $vetor[$i]!=\",\" && $vetor[$i]!=\"'\" && $vetor[$i]!=\" \"){\n" +
+                    "					$temp = $temp . $vetor[$i];	\n" +
+                    "				}\n" +
+                    "			\n" +
+                    "				else if ($vetor[$i]==\"'\"){\n" +
+                    "					$temp = $temp . \"\\\"\";\n" +
+                    "					$i++;\n" +
+                    "\n" +
+                    "					while (true){\n" +
+                    "						if ($vetor[$i]!=\"'\"){\n" +
+                    "						  $temp = $temp . $vetor[$i];\n" +
+                    "						  $i++;\n" +
+                    "						}\n" +
+                    "					\n" +
+                    "						else {\n" +
+                    "						  $temp = $temp . \"\\\"\";\n" +
+                    "						  break;\n" +
+                    "						}\n" +
+                    "					\n" +
+                    "					}\n" +
+                    "				}			\n" +
+                    "	\n" +
+                    "				if ($vetor[$i]==\"=\" || $vetor[$i]==\",\" || $i==strlen($vetor)-1){\n" +
+                    "					array_push($array, $temp);\n" +
+                    "					$temp=\"\";\n" +
+                    "				\n" +
+                    "				}\n" +
+                    "				\n" +
+                    "	    		}\n" +
+                    "\n" +
+                    "			foreach($array as $i=>$value){\n" +
+                    "				if ($i%2==0){\n" +
+                    "					$cond = $cond . \" \" . $tabela . \".\" . $value . \"=\";\n" +
+                    "				}\n" +
+                    "				else{\n" +
+                    "					$cond = $cond . $value;\n" +
+                    "\n" +
+                    "					if ($i<count($array)-1){\n" +
+                    "						$cond = $cond . \" and \";\n" +
+                    "					}				\n" +
+                    "				}\n" +
+                    "	\n" +
+                    "			}\n" +
+                    "		\n" +
+                    "		}	\n" +
+                    "		return $cond;      \n" +
+                    "	}\n");
+        
+        bw.write("          function chave_primaria($tabela, $tabela_mult, $vetor){\n" +
+                    "\n" +
+                    "		$key = \"\";\n" +
+                    "\n" +
+                    "		$sql_consulta = \"SHOW KEYS FROM \".$tabela.\" WHERE Key_name = 'PRIMARY'\";\n" +
+                    "		$result = mysqli_query($this->link, $sql_consulta);\n" +
+                    "\n" +
+                    "		if (mysqli_num_rows($result) > 0) {\n" +
+                    "		   while($row = mysqli_fetch_assoc($result)) {\n" +
+                    "\n" +
+                    "		           $aux = $row[\"Column_name\"];\n" +
+                    "			     $temp = $tabela_mult.\".\".$tabela.\"_\".$aux; \n" +
+                    "\n" +
+                    "			     $sql_consulta2 = \"SELECT \".$tabela.\".\".$aux.\" FROM \".$tabela.\" WHERE \".$vetor;\n" +
+                    "	\n" +
+                    "			     $result2 = mysqli_query($this->link, $sql_consulta2);\n" +
+                    "\n" +
+                    "				if (mysqli_num_rows($result2) > 0) {\n" +
+                    "		   		  while($row2 = mysqli_fetch_assoc($result2)) {	\n" +
+                    "					\n" +
+                    "					$key = $row2[$aux];	\n" +
+                    "				  }\n" +
+                    "				}\n" +
+                    "		    }\n" +
+                    "		}\n" +
+                    "\n" +
+                    "		return $key;\n" +
+                    "	}\n\n");
+        
+        
         for (int x=0; x<modelor.tabelas.size(); x++) {
             
             int tab=0;
             String metodoR = fx.criarNomeMetodo("deletar",modelor.tabelas.get(x).nome,'B');
             
             bw.write("\n     public function "+metodoR+"(");
-            bw.write("$"+modelor.tabelas.get(x).nome+"){\n");          
-                
-            int indice_coluna_pk=0;
-                    
-            for (int i=0; i<modelor.tabelas.get(x).colunas.size(); i++) {
-
-                if(modelor.tabelas.get(x).colunas.get(i).pk == true){
-
-                    indice_coluna_pk=i;
-                    break;
-                }
-            }
+            bw.write("$"+modelor.tabelas.get(x).nome+"){\n\n");
                 
                 if (modelor.tabelas.get(x).campo_multi == 1){
+                    bw.write("      $key = \"\";\n");
+                    bw.write("      $cond = \"\";\n");
+                    bw.write("      $cond = $this->condicoes(\""+modelor.tabelas.get(x).nome+"\", "+"$"+modelor.tabelas.get(x).nome+");\n\n");
                     
                     for (Tabela tabelas : modelor.tabelas) {
                         if (tabelas.campo_multi==2){
                             
                             for (Coluna colunas : tabelas.colunas) {
                                 if (colunas.fk && colunas.fk_nome_tabela.equals(modelor.tabelas.get(x).nome)){
-                                    
-                                    bw.write("      $sql_deleta"+tab+"=(\"DELETE FROM "+tabelas.nome+" WHERE "
-                                            +tabelas.nome+"."+colunas.nome+"="+"$"+modelor.tabelas.get(x).nome
-                                            //+"->"+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome
-                                            +"\");\n");
+                                    bw.write("      $key = $this->chave_primaria(\""+modelor.tabelas.get(x).nome+"\", \""+tabelas.nome+"\", "+"$cond);\n");
+                                    bw.write("      $sql_deleta"+tab+"=(\"DELETE FROM "+tabelas.nome+" WHERE "+tabelas.nome+"."+colunas.nome+" = $key\");\n\n");
                                     tab++;
                                 }
                             }   
@@ -499,10 +576,7 @@ public class MySqlCRUDGen {
                     }
                 }
                 
-            bw.write("      $sql_deleta"+tab+"=(\"DELETE FROM "+ modelor.tabelas.get(x).nome+" WHERE "
-                    +modelor.tabelas.get(x).nome+"."+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome+" = "+"$"+modelor.tabelas.get(x).nome
-                    //+"->"+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome
-                    +"\");\n");  
+            bw.write("      $sql_deleta"+tab+"=(\"DELETE FROM "+modelor.tabelas.get(x).nome+" WHERE $cond\");\n");         
                 
             for (int i=0; i<=tab; i++){
                     
