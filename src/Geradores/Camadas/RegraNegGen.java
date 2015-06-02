@@ -252,60 +252,21 @@ public class RegraNegGen {
         
         for (int x=0; x<modelor.tabelas.size(); x++) {
             
-            int tab=0;
             String metodoR = fx.criarNomeMetodo("deletar",modelor.tabelas.get(x).nome,'R');
             
             bw.write("\n     public function "+metodoR+"(");
             bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
             
-            bw.write("      try{\n");           
-                
-            int indice_coluna_pk=0;
-                    
-            for (int i=0; i<modelor.tabelas.get(x).colunas.size(); i++) {
-
-                if(modelor.tabelas.get(x).colunas.get(i).pk == true){
-
-                    indice_coluna_pk=i;
-                    break;
-                }
-            }  
             
-            criaConexao();
-            bw.write("      mysqli_autocommit($link2,FALSE);\n");
-                
-                if (modelor.tabelas.get(x).campo_multi == 1){
-                    
-                    for (Tabela tabelas : modelor.tabelas) {
-                        if (tabelas.campo_multi==2){
-                            
-                            for (Coluna colunas : tabelas.colunas) {
-                                if (colunas.fk && colunas.fk_nome_tabela.equals(modelor.tabelas.get(x).nome)){
-                                    
-                                    bw.write("      $sql_deleta"+tab+"=(\"DELETE FROM "+tabelas.nome+" WHERE "
-                                            +tabelas.nome+"."+colunas.nome+"="+"$"+modelor.tabelas.get(x).nome
-                                            //+"->"+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome
-                                            +"\");\n");
-                                    tab++;
-                                }
-                            }   
-                        }
-                    }
-                }
-                
-            bw.write("      $sql_deleta"+tab+"=(\"DELETE FROM "+ modelor.tabelas.get(x).nome+" WHERE "
-                    +modelor.tabelas.get(x).nome+"."+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome+" = "+"$"+modelor.tabelas.get(x).nome
-                    //+"->"+modelor.tabelas.get(x).colunas.get(indice_coluna_pk).nome
-                    +"\");\n");  
-                
-            for (int i=0; i<=tab; i++){
-                    
-                bw.write("\n      mysqli_query($link2, $sql_deleta"+i+");");   
-            }
-                
-            bw.write("\n\n      mysqli_rollback($link2);\n");
-            bw.write("      mysqli_autocommit($link2,TRUE);\n");
-            fechaConexao();
+            String listar = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'R');
+            
+            bw.write("\n     $resultado = $this->"+listar+"(");
+            bw.write("$"+modelor.tabelas.get(x).nome+");\n");
+            
+            bw.write("\n     if($resultado!=null){\n");
+            
+            bw.write("\n      try{");
+            
                 
             String nome_metodo = fx.criarNomeMetodo("deletar", modelor.tabelas.get(x).nome,'P');
             
@@ -315,6 +276,7 @@ public class RegraNegGen {
                 
             bw.write("\n      } catch (PDOException $e){    }\n\n");
             bw.write("      }\n");
+            bw.write("    }\n");
         }
         
         return true;
