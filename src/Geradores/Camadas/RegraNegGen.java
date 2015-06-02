@@ -90,13 +90,11 @@ public class RegraNegGen {
             
             String nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'R');
             
-            bw.write("\n     public function "+nome_metodo+"(");
-            bw.write("$"+modelor.tabelas.get(x).nome+"){\n");
+            bw.write("\n     public function "+nome_metodo+"($str){\n");
             
             nome_metodo = fx.criarNomeMetodo("listar", modelor.tabelas.get(x).nome,'P');
-            
-            bw.write("\n     $resultado = $this->persistencia->"+nome_metodo+"(");
-            bw.write("$"+modelor.tabelas.get(x).nome+");\n");
+            bw.write("\n     $str_tratada =  str_replace(\",\",\" and \",$str);\n");
+            bw.write("\n     $resultado = $this->persistencia->"+nome_metodo+"($str_tratada);\n");
             
             bw.write("\n     return $resultado;\n");
             bw.write("\n     }\n");
@@ -340,8 +338,8 @@ public class RegraNegGen {
             bw.write("\n     public function "+nome_metodo+"($str, $obj){");
             
             nome_metodo = fx.criarNomeMetodo("atualizar", modelor.tabelas.get(x).nome,'P');
-            
-            bw.write("\n     $resultado = $this->persistencia->"+nome_metodo+"($str, $obj);");
+            bw.write("\n     $str_tratada =  str_replace(\",\",\"and\",$str);\n");
+            bw.write("\n     $resultado = $this->persistencia->"+nome_metodo+"($str_tratada, $obj);");
             
             bw.write("\n     return $resultado;\n");
             bw.write("\n     }\n");
