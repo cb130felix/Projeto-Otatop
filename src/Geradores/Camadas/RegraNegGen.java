@@ -78,7 +78,11 @@ public class RegraNegGen {
      //-------------------------------------------------------
      //---------- Parte de Renan (inicio)-------------------
      //------------------------------------------------------
-    
+    /**
+     *  Método que cria o Scrpit PHP da funções de listar da camada regra de negócio
+     * @return true se a operação foi concluída com sucesso
+     * @throws IOException 
+     */
     public boolean addListar() throws IOException{
         
         
@@ -329,7 +333,21 @@ public class RegraNegGen {
     public boolean addAtualizar() throws IOException{
         
         
-        
+        for (int x = 0; x < modelor.tabelas.size(); x++) {
+            
+            String nome_metodo = fx.criarNomeMetodo("atualizar", modelor.tabelas.get(x).nome,'R');
+            
+            bw.write("\n     public function "+nome_metodo+"($str, $obj){");
+            
+            nome_metodo = fx.criarNomeMetodo("atualizar", modelor.tabelas.get(x).nome,'P');
+            
+            bw.write("\n     $resultado = $this->persistencia->"+nome_metodo+"($str, $obj);");
+            
+            bw.write("\n     return $resultado;\n");
+            bw.write("\n     }\n");
+            
+            
+        }
         
         return true;
     }
