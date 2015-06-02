@@ -558,8 +558,7 @@ public class MySqlCRUDGen {
             bw.write("$"+modelor.tabelas.get(x).nome+"){\n\n");
                 
                 if (modelor.tabelas.get(x).campo_multi == 1){
-                    bw.write("      $key = \"\";\n");
-                    bw.write("      $cond = \"\";\n");
+                    
                     bw.write("      $cond = $this->condicoes(\""+modelor.tabelas.get(x).nome+"\", "+"$"+modelor.tabelas.get(x).nome+");\n\n");
                     
                     for (Tabela tabelas : modelor.tabelas) {
