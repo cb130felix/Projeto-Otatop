@@ -33,7 +33,11 @@ public class PersistenciaGen {
     }
     
     
-    
+    /**
+     * Abre o arquivo de persistencia para escrita
+     * @return
+     * @throws IOException 
+     */
     boolean abrirArquivo() throws IOException{
     
         if (!arqFachada.exists()) {
@@ -58,7 +62,11 @@ public class PersistenciaGen {
         
         
     }
-    
+    /**
+     * Fecha o arquivo criado da camada de persistencia
+     * @return
+     * @throws IOException 
+     */
     boolean fecharArquivo() throws IOException{
     
         bw.write("}\n"
@@ -75,7 +83,11 @@ public class PersistenciaGen {
      //-------------------------------------------------------
      //---------- Parte de Renan (inicio)-------------------
      //------------------------------------------------------
-    
+     /**
+     * Método que cria o Scrpit PHP das funções de listar da camada persistência
+     * @return true se tudo ocorrer bem
+     * @throws IOException caso ocorra algum erro
+     */
     public boolean addListar() throws IOException{
         
         bw.write("// MÉTODOS PARA CADASTRAR\n ");

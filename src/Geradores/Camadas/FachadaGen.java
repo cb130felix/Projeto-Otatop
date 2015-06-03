@@ -32,7 +32,11 @@ public class FachadaGen {
         arqFachada = new File (caminho_dir+"CRUD/Camadas/fachada.php");
         
     }
-    
+    /**
+     * Abre o arquivo de fachada para escrita
+     * @return
+     * @throws IOException 
+     */
     boolean abrirArquivo() throws IOException{
     
         if (!arqFachada.exists()) {
@@ -60,6 +64,12 @@ public class FachadaGen {
         
     }
     
+    
+    /**
+     * Fecha o arquivo criado da camada de fachada
+     * @return
+     * @throws IOException 
+     */
     boolean fecharArquivo() throws IOException{
     
         
@@ -79,6 +89,11 @@ public class FachadaGen {
      //---------- Parte de Renan (inicio)-------------------
      //------------------------------------------------------
     
+    /**
+     * Método que cria o Scrpit PHP das funções de listar da camada fachada
+     * @return true se tudo ocorrer bem
+     * @throws IOException caso ocorra algum erro
+     */
     public boolean addListar() throws IOException{
     
         bw.write("// MÉTODOS PARA LISTAR\n ");

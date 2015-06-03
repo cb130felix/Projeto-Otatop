@@ -36,7 +36,11 @@ public class MySqlCRUDGen {
     }
     
     
-    
+    /**
+     * Abre o arquivo de banco de dados para escrita
+     * @return
+     * @throws IOException 
+     */
     boolean abrirArquivo() throws IOException{
     
         if (!arqFachada.exists()) {
@@ -75,6 +79,11 @@ public class MySqlCRUDGen {
         
     }
     
+    /**
+     * Fecha o arquivo criado da camada de banco de dados
+     * @return
+     * @throws IOException 
+     */
     boolean fecharArquivo() throws IOException{
     
         bw.write("}\n"
@@ -168,6 +177,12 @@ public class MySqlCRUDGen {
         return true;
         
     }
+    
+     /**
+     * Método que cria o Scrpit PHP das funções de listar da camada de banco de dados
+     * @return true se tudo ocorrer bem
+     * @throws IOException caso ocorra algum erro
+     */
     
     public boolean addListar() throws IOException{
     
@@ -589,6 +604,11 @@ public class MySqlCRUDGen {
         return true;
     }
 
+     /**
+     * Método que escreve no arquivo bancodedados.php os métodos de atualizar referentes a camada banco de dados
+     * @return retorna valor booleano
+     * @throws IOException 
+     */
     
     public boolean addAtualizar() throws IOException{
         

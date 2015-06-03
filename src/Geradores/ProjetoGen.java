@@ -72,14 +72,13 @@ public class ProjetoGen {
     
     public void gerarProjeto() throws IOException{
         
-         /*
-        Cadastro antigo, sem divisão em camadas
+         
         new File(caminho_dir+"cadastro").mkdir();
         new File(caminho_dir+"cadastro/inserts").mkdir();
         this.cadInsertGen.gerarCadInserir(this.info.banco_nome);
         new File(caminho_dir+"cadastro/forms").mkdir();
         this.cadFormGen.gerarFormCad();
-        */
+      
         
         new File(caminho_dir).mkdir();
         this.bancoGen.gerarSQL();

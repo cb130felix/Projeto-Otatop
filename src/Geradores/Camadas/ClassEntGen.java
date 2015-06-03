@@ -26,6 +26,10 @@ public class ClassEntGen {
         this.projeto = projeto;
     }
     
+    /**
+     * Gera as classes da entidade do sistema em PHP.
+     * @throws IOException caso o arquivo não possa ser gerado.
+     */
     public void gerar() throws IOException{
     
         gerarClassesEntidades();
@@ -35,6 +39,10 @@ public class ClassEntGen {
     
     }
     
+    /**
+     * Gera um arquivo que contém todas as classes das entidades já geradas
+     * @throws IOException 
+     */
     public void gerarClasseEntidadePai() throws IOException{
         
            
@@ -67,6 +75,10 @@ public class ClassEntGen {
         
     }
     
+    /**
+     * Gera as classes entidades em PHP.
+     * @throws IOException 
+     */
     public void gerarClassesEntidades() throws IOException{// Fiquei em dúvida se a essa string como parametro é necessária, na dúvida deixei =]
     
         for (int x = 0; x < modelo.tabelas.size(); x++) {

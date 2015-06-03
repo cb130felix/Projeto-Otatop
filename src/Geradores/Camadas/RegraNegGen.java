@@ -35,7 +35,11 @@ public class RegraNegGen {
     }
     
     
-    
+    /**
+     * Abre o arquivo de regra de negócio para escrita
+     * @return
+     * @throws IOException 
+     */
     boolean abrirArquivo() throws IOException{
     
         if (!arq.exists()) {
@@ -62,6 +66,11 @@ public class RegraNegGen {
         
     }
     
+    /**
+     * Fecha o arquivo criado da camada de regra de negócios
+     * @return
+     * @throws IOException 
+     */
     boolean fecharArquivo() throws IOException{
     
         bw.write("}\n"

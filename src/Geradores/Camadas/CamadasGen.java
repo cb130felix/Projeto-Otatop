@@ -28,6 +28,15 @@ public class CamadasGen {
         
     }
     
+    
+    /**
+     * Gera as classes responsáveis pelo sistema de CRUD do sistema. Esse método
+     * as classes relacionadas a entidades do modelor que está sendo trabalhado, além 
+     * de divdir as funcionalidades CRUD em camadas: Fachada, Regra de Negócio e Persistência. Por padrão
+     * a linguagem do código gerado é PHP.
+     * @return true se a opreção for concluída com sucesso
+     * @throws IOException 
+     */
     public boolean gerar() throws IOException{
     
         ceg.gerar();
@@ -36,7 +45,7 @@ public class CamadasGen {
         pg.gerar();
         mysql.gerar();
         
-        return false;
+        return true;
         
         
     
