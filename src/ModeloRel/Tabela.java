@@ -16,7 +16,7 @@ public class Tabela {
      * 1 = Tem campo multi;
      * 2 = É campo multi de alguém.
      */
-    public char campo_multi = 0; 
+    public byte campo_multi = 0; 
     public ArrayList<Coluna> colunas = new ArrayList<Coluna>();
     
     /**

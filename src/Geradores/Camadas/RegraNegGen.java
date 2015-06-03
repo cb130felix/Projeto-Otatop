@@ -309,7 +309,7 @@ public class RegraNegGen {
             bw.write("\n     public function "+nome_metodo+"($str, $obj){");
             
             nome_metodo = fx.criarNomeMetodo("atualizar", modelor.tabelas.get(x).nome,'P');
-            bw.write("\n     $str_tratada =  str_replace(\",\",\"and\",$str);\n");
+            bw.write("\n     $str_tratada =  str_replace(\",\",\" and \",$str);\n");
             bw.write("\n     $resultado = $this->persistencia->"+nome_metodo+"($str_tratada, $obj);");
             
             bw.write("\n     return $resultado;\n");

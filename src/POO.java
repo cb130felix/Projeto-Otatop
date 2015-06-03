@@ -2,7 +2,9 @@
 import Auxiliares.FixString;
 import Geradores.ProjetoGen;
 import ProjetoInfo.ProjetoInfo;
+import java.io.Console;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Otatop, sistema gerador de CRUD.
@@ -22,6 +24,8 @@ public class POO {
     public static void main(String[] args) throws IOException {
         
         FixString fix = new FixString();
+       
+        
         String arquivo = "SaborRegional.txt";
         String arquivoFix = arquivo.substring(0,arquivo.length()-4); //Tratando a String pra ficar bonitinha
         ProjetoInfo info = new ProjetoInfo(fix.Fix(arquivoFix), "database", "localhost", "", "root");

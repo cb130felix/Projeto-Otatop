@@ -66,8 +66,8 @@ public class MySqlCRUDGen {
                 "               $this->usuario = '"+this.info.banco_usuario+"';\n" +
                 "               $this->senha = '"+this.info.banco_senha+"';\n" +
                 "               $this->hostname = '"+this.info.banco_servidor+"';\n" +
-                "               $this->link = @mysqli_connect($this->hostname, $this->usuario, $this->senha, $this->banco);\n" +
-                "               if($this->link == false) throw new Exception('Erro de conexão com o banco de dados...');" +
+               // "               $this->link = @mysqli_connect($this->hostname, $this->usuario, $this->senha, $this->banco);\n" +
+               // "               if($this->link == false) throw new Exception('Erro de conexão com o banco de dados...');" +
                 "	  \n" +
                 "	}\n\n"
                 + "     function teste(){\n"
@@ -110,12 +110,14 @@ public class MySqlCRUDGen {
         String nome_metodo = fx.criarNomeMetodo("listar", tabela.nome,'B');
             
         bw.write("\n     function "+nome_metodo+"(");
-        bw.write("$str){\n");
+        bw.write("$str){\n"
+                + "\t $link = @mysqli_connect($this->hostname, $this->usuario, $this->senha, $this->banco);\n" +
+                  "\t if($link == false) throw new Exception('Erro de conexão com o banco de dados...');\n\n");
             //Aqui começa o código da função
         
         bw.write("\t $sql1 = 'SELECT * FROM " + tabela.nome + " ';\n");
         bw.write("\t $sql1 = $sql1.' where '.$str;\n");
-        bw.write("\t $query = $this->link->query($sql1);\n\n");
+        bw.write("\t $query = $link->query($sql1);\n\n");
             
             
             //Pegando valores normais da tabela
@@ -168,7 +170,8 @@ public class MySqlCRUDGen {
                     "\t\t $resultado = null;\n" +
                     "\t }\n" +
 
-                    "\t return $resultado;\n");
+                    "\t return $resultado;\n"
+                    + "\t mysqli_close($link);\n");
             
             
             //Aqui termina o código da função
@@ -476,7 +479,7 @@ public class MySqlCRUDGen {
         
         bw.write("\n// MÉTODOS PARA DELETAR\n ");
         
-        bw.write("\n      function condicoes($tabela, $vetor){\n" +
+        /*bw.write("\n      function condicoes($tabela, $vetor){\n" +
                     "	\n" +
                     "		if (!empty($vetor)){\n" +
                     "\n" +
@@ -532,14 +535,14 @@ public class MySqlCRUDGen {
                     "		\n" +
                     "		}	\n" +
                     "		return $cond;      \n" +
-                    "	}\n");
+                    "	}\n"); */
         
-        bw.write("          function chave_primaria($tabela, $tabela_mult, $vetor){\n" +
-                    "\n" +
-                    "		$key = \"\";\n" +
+        bw.write(   "\n    function chave_primaria($tabela, $tabela_mult, $vetor){\n"
+                  + "        $link = @mysqli_connect($this->hostname, $this->usuario, $this->senha, $this->banco);\n" +
+                    "        if($link == false) throw new Exception('Erro de conexão com o banco de dados...');\n" +
                     "\n" +
                     "		$sql_consulta = \"SHOW KEYS FROM \".$tabela.\" WHERE Key_name = 'PRIMARY'\";\n" +
-                    "		$result = mysqli_query($this->link, $sql_consulta);\n" +
+                    "		$result = mysqli_query($link, $sql_consulta);\n" +
                     "\n" +
                     "		if (mysqli_num_rows($result) > 0) {\n" +
                     "		   while($row = mysqli_fetch_assoc($result)) {\n" +
@@ -549,7 +552,7 @@ public class MySqlCRUDGen {
                     "\n" +
                     "			     $sql_consulta2 = \"SELECT \".$tabela.\".\".$aux.\" FROM \".$tabela.\" WHERE \".$vetor;\n" +
                     "	\n" +
-                    "			     $result2 = mysqli_query($this->link, $sql_consulta2);\n" +
+                    "			     $result2 = mysqli_query($link, $sql_consulta2);\n" +
                     "\n" +
                     "				if (mysqli_num_rows($result2) > 0) {\n" +
                     "		   		  while($row2 = mysqli_fetch_assoc($result2)) {	\n" +
@@ -570,11 +573,16 @@ public class MySqlCRUDGen {
             String metodoR = fx.criarNomeMetodo("deletar",modelor.tabelas.get(x).nome,'B');
             
             bw.write("\n     public function "+metodoR+"(");
-            bw.write("$"+modelor.tabelas.get(x).nome+"){\n\n");
+            bw.write("$"+modelor.tabelas.get(x).nome+"){\n\n"
+                    + ""
+                    + "      $link = @mysqli_connect($this->hostname, $this->usuario, $this->senha, $this->banco);\n" +
+                      "      if($link == false) throw new Exception('Erro de conexão com o banco de dados...');\n\n");
                 
                 if (modelor.tabelas.get(x).campo_multi == 1){
                     
-                    bw.write("      $cond = $this->condicoes(\""+modelor.tabelas.get(x).nome+"\", "+"$"+modelor.tabelas.get(x).nome+");\n\n");
+                    //bw.write("      $cond = $this->condicoes(\""+modelor.tabelas.get(x).nome+"\", "+"$"+modelor.tabelas.get(x).nome+");\n\n");
+                    bw.write("      $cond =  str_replace(\",\",\" and "+modelor.tabelas.get(x).nome+".\", $"+modelor.tabelas.get(x).nome+");\n"
+                           + "      $cond = \""+modelor.tabelas.get(x).nome+".\" . $cond; \n\n");
                     
                     for (Tabela tabelas : modelor.tabelas) {
                         if (tabelas.campo_multi==2){
@@ -594,10 +602,10 @@ public class MySqlCRUDGen {
                 
             for (int i=0; i<=tab; i++){
                     
-                bw.write("\n      mysqli_query($this->link, $sql_deleta"+i+");");   
+                bw.write("\n      mysqli_query($link, $sql_deleta"+i+");");   
             }    
             
-            bw.write("\n      mysqli_close($this->link);\n");
+            bw.write("\n      mysqli_close($link);\n");
             bw.write("      }\n");
         }
         
@@ -619,7 +627,10 @@ public class MySqlCRUDGen {
             int tab=0;
             String metodoR = fx.criarNomeMetodo("atualizar",modelor.tabelas.get(x).nome,'B');
             
-            bw.write("\n     public function "+metodoR+"($str, $obj){\n\n");
+            bw.write("\n     public function "+metodoR+"($str, $obj){\n\n"
+                    + "\n"
+                    + "\t $link = @mysqli_connect($this->hostname, $this->usuario, $this->senha, $this->banco);\n" +
+                      "\t if($link == false) throw new Exception('Erro de conexão com o banco de dados...');\n");
             
             //criando string dos valores normais
             
@@ -641,12 +652,14 @@ public class MySqlCRUDGen {
                     "		}\n" +
                     "	 \n" +
                     "		$sql = $sql . \" where \" . $str;\n" +
-                    "		if ($this->link->query($sql) === TRUE) {\n" +
+                    "		if ($link->query($sql) === TRUE) {\n"
+                  + "                   mysqli_close($link);" +
                     "			return true;\n" +
-                    "		} else {\n" +
+                    "		} else {\n"
+                  + "                   mysqli_close($link);\n" +
                     "			return false;\n" +
                     "		}\n" +
-                    "		echo $sql;\n"
+                    "		;\n"
                     + "");
             
            bw.write("\n\n   }");
